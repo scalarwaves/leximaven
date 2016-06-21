@@ -1,0 +1,13 @@
+prefix
+            str     ::
+            style   bold.magenta
+text
+            style   bold.yellow
+content
+            style   white
+suffix
+            str     ::
+            style   bold.magenta
+connector
+            str     |||
+            style   bold.yellow

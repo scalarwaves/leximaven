@@ -1,0 +1,57 @@
+anagram
+  case  1
+  lang  english
+  linenum  false
+  list  false
+  limit  10
+  minletter  1
+  maxletter  50
+  maxword  10
+  repeat  false
+combine
+  lang  en
+  max  5
+define
+  canon  false
+  defdict  all
+  limit  5
+  part  ||
+dmuse
+  max  5
+example
+  canon  false
+  limit  5
+  skip  0
+hyphen
+  canon  false
+  dict  all
+  limit  5
+info
+  lang  en
+onelook
+  links  false
+origin
+  canon  false
+phrase
+  canon  false
+  limit  5
+  weight  13
+merge  true
+pronounce
+  canon  false
+  dict  ||
+  limit  5
+  type  ||
+relate
+  canon  false
+  limit  10
+  type  ||
+rhyme
+  lang  en
+  max  50
+theme  square
+urban
+  limit  5
+verbose  false
+wordmap
+  limit  1

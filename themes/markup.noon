@@ -1,0 +1,13 @@
+prefix
+            str     <
+            style   bold.blue
+text
+            style   bold.cyan
+content
+            style   white
+suffix
+            str     >
+            style   bold.blue
+connector
+            str     ->
+            style   bold.green

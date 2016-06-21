@@ -1,0 +1,9 @@
+'use strict';
+
+exports.command = 'rbrain <command>';
+exports.desc = 'Rhymebrain operations';
+exports.builder = function (yargs) {
+  return yargs.commandDir('rhymebrain_cmds');
+};
+exports.handler = function (argv) {};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNtZHMvcmh5bWVicmFpbi5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLFFBQVEsT0FBUixHQUFrQixrQkFBbEI7QUFDQSxRQUFRLElBQVIsR0FBZSx1QkFBZjtBQUNBLFFBQVEsT0FBUixHQUFrQixVQUFDLEtBQUQ7QUFBQSxTQUFXLE1BQU0sVUFBTixDQUFpQixpQkFBakIsQ0FBWDtBQUFBLENBQWxCO0FBQ0EsUUFBUSxPQUFSLEdBQWtCLFVBQUMsSUFBRCxFQUFVLENBQUUsQ0FBOUIiLCJmaWxlIjoiY21kcy9yaHltZWJyYWluLmpzIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0cy5jb21tYW5kID0gJ3JicmFpbiA8Y29tbWFuZD4nXG5leHBvcnRzLmRlc2MgPSAnUmh5bWVicmFpbiBvcGVyYXRpb25zJ1xuZXhwb3J0cy5idWlsZGVyID0gKHlhcmdzKSA9PiB5YXJncy5jb21tYW5kRGlyKCdyaHltZWJyYWluX2NtZHMnKVxuZXhwb3J0cy5oYW5kbGVyID0gKGFyZ3YpID0+IHt9XG4iXX0=

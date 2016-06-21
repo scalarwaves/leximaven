@@ -1,0 +1,18 @@
+/* eslint no-unused-vars: 0 */
+const themes = require('../themes')
+
+const _ = require('lodash')
+
+const sample = 'Morbi ornare pulvinar metus, non faucibus arcu ultricies non.'
+
+exports.command = 'ls'
+exports.desc = 'Get a list of installed themes'
+exports.builder = {}
+exports.handler = (argv) => {
+  const list = themes.getThemes()
+  _.each(list, (value) => {
+    const name = value
+    const currentTheme = themes.loadTheme(name)
+    themes.labelDown(name, currentTheme, sample)
+  })
+}

@@ -1,0 +1,13 @@
+prefix
+            str     [
+            style   bold.green
+text
+            style   bold.white
+content
+            style   white
+suffix
+            str     ]
+            style   bold.green
+connector
+            str     →
+            style   bold.cyan

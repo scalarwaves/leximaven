@@ -1,0 +1,9 @@
+'use strict';
+
+exports.command = 'config <command>';
+exports.desc = 'Configuration tasks';
+exports.builder = function (yargs) {
+  return yargs.commandDir('config_cmds');
+};
+exports.handler = function (argv) {};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNtZHMvY29uZmlnLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsUUFBUSxPQUFSLEdBQWtCLGtCQUFsQjtBQUNBLFFBQVEsSUFBUixHQUFlLHFCQUFmO0FBQ0EsUUFBUSxPQUFSLEdBQWtCLFVBQUMsS0FBRDtBQUFBLFNBQVcsTUFBTSxVQUFOLENBQWlCLGFBQWpCLENBQVg7QUFBQSxDQUFsQjtBQUNBLFFBQVEsT0FBUixHQUFrQixVQUFDLElBQUQsRUFBVSxDQUFFLENBQTlCIiwiZmlsZSI6ImNtZHMvY29uZmlnLmpzIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0cy5jb21tYW5kID0gJ2NvbmZpZyA8Y29tbWFuZD4nXG5leHBvcnRzLmRlc2MgPSAnQ29uZmlndXJhdGlvbiB0YXNrcydcbmV4cG9ydHMuYnVpbGRlciA9ICh5YXJncykgPT4geWFyZ3MuY29tbWFuZERpcignY29uZmlnX2NtZHMnKVxuZXhwb3J0cy5oYW5kbGVyID0gKGFyZ3YpID0+IHt9XG4iXX0=

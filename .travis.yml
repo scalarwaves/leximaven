@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+- '6'
+- '5'
+- '4'
+- iojs
+before_script:
+- npm install -g gulp
+script: gulp
+env:
+  matrix:
+    secure: vsrlqxfxmG1ZBAfhGGXqQH3rUwVuIHqSaUSreTVG+WZgODKX2wXTfgin+LjngkQ2onLrigW7bcSbro4ijyn7MSX+Kpt+McIQsNJ7lbe4J8rejGh/j79SFtec7k42CHG/RqVySe+2DQGwe0LqU7ENrGkDy9qYDtSH5j1r92Xd5cezwgWwoZr5tGQdJfuGcIhfG7yoXMIeNHcTiXZtBP1eela1p2CsoQSa1NvnuHyTJt6JFAGkXNhQtNsK+b13hPXYDS/fauZ0c09fYo4e+kvqPx5+UOsF5GTVxzaSrAgpJlXFfP9U0yFgjFmBp46llkLmqjFOeZLDvbNRr3HHNdnCA7fCs/4uaJcO/SCEH8lH8KMJ4LEc4HgHDAv2JJZKV2B1Yszu6K2THAuvE6s8X2OsaxcvQUR0yTlDSwdJuj3xSXvqyM/d1TLk0VqIkUSvfZFbfXLlKgVJLBTPdH4KxTRAeDaZFokQKMEyTiFRDWFVE1bJhC5mUrhl4JI4G7x4csMmjeS7Hfov0ERcFzyhy8N4eJ43Nn7l3jcq1UlFJZvlslCT76l6xJPuL1OriJ8oAUKYnFP0vkoHtOzrwGhHh3jyB8qSkK7xpkZ3MTK6wVyVU24XvcPWoUK26GsW2d7lb0+YPqrj13kipuVtU8XElmMCFyG2MmQEwy1p7ITseXIB0dE=
+after_success:
+  - './node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls'

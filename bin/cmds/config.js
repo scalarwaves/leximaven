@@ -1,0 +1,1 @@
+"use strict";exports.command="config <command>",exports.desc="Configuration tasks",exports.builder=function(n){return n.commandDir("config_cmds")},exports.handler=function(n){};
