@@ -72,7 +72,7 @@ exports.handler = (argv) => {
       for (let i = 0; i <= list.length - 1; i++) {
         const item = list[i]
         themes.labelRight(item.source, theme, item.combined)
-        tofile[[`source${i}`]] = item.source
+        tofile[[`set${i}`]] = item.source
         tofile[[`portmanteau${i}`]] = item.combined
       }
       if (argv.o) tools.outFile(argv.o, argv.f, tofile)
