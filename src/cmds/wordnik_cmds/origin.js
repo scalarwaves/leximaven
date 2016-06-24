@@ -73,7 +73,7 @@ exports.handler = (argv) => {
         ets = ets.join(', ')
         themes.labelRight('Etymology', theme, ctstyle(`${content} ${ets}`))
         tofile.etymology = content
-        tofile.source = ets
+        tofile.origin = ets
       })
       if (argv.o) tools.outFile(argv.o, argv.f, tofile)
       if (argv.s && config.merge) noon.save(CFILE, config)
