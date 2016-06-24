@@ -48,8 +48,9 @@ exports.handler = (argv) => {
   const theme = themes.loadTheme(config.theme)
   if (config.verbose) themes.labelDown('Datamuse', theme, null)
   const ccont = []
+  ccont.push(argv.condition)
   if (argv._.length > 1) {
-    for (let i = 0; i <= argv._.length - 1; i++) {
+    for (let i = 1; i <= argv._.length - 1; i++) {
       ccont.push(argv._[i])
     }
   }
