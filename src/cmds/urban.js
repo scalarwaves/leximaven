@@ -47,12 +47,20 @@ exports.handler = (argv) => {
   if (config.merge) config = _.merge({}, config, userConfig)
   const theme = themes.loadTheme(config.theme)
   if (config.verbose) themes.labelDown('Urban Dictionary', theme, null)
-  const words = argv._.slice(1)
-  let query = ''
-  if (words.length > 1) {
-    query = words.join(' ')
-  } else { query = words[0] }
-  let url = `http://api.urbandictionary.com/v0/define?term=${query}`
+  const ucont = []
+  ucont.push(argv.query)
+  if (argv._.length > 1) {
+    for (let i = 1; i <= argv._.length - 1; i++) {
+      ucont.push(argv._[i])
+    }
+  }
+  let words = ''
+  if (ucont.length > 1) {
+    words = ucont.join('+')
+  } else {
+    words = ucont[0]
+  }
+  let url = `http://api.urbandictionary.com/v0/define?term=${words}`
   url = encodeURI(url)
   const tofile = { type: 'urban', source: 'http://www.urbandictionary.com' }
   needle.get(url, (error, response) => {
