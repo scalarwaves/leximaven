@@ -66,7 +66,6 @@ exports.handler = (argv) => {
     if (!error && response.statusCode === 200) {
       const resp = response.body
       const origin = resp[0]
-      console.log(origin)
       parser.parseString(origin, (err, result) => {
         const root = result.ety
         const content = root._
