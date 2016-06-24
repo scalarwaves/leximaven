@@ -6,9 +6,15 @@ var lab = require('gulp-lab')
 var ugly = require('gulp-uglify')
 var run = require('run-sequence')
 
-gulp.task('build', function () {
+gulp.task('dbuild', function () {
   return gulp.src('./src/**/*.js')
     .pipe(babel({ presets: ['es2015'], plugins: ['lodash', 'transform-runtime'], env: { development: { sourceMaps: 'inline' } } }))
+    .pipe(gulp.dest('./build'))
+})
+
+gulp.task('pbuild', function () {
+  return gulp.src('./src/**/*.js')
+    .pipe(babel({ presets: ['es2015'], plugins: ['lodash', 'transform-runtime'] }))
     .pipe(gulp.dest('./build'))
 })
 
@@ -28,7 +34,7 @@ gulp.task('min', function () {
 })
 
 gulp.task('bin', function (cb) {
-  return run('build', 'min', cb)
+  return run('dbuild', 'min', cb)
 })
 
 gulp.task('test', function () {
@@ -41,5 +47,5 @@ gulp.task('default', function (cb) {
 })
 
 gulp.task('all', function (cb) {
-  return run('clean', 'lint', 'test', 'build', 'min', cb)
+  return run('clean', 'lint', 'test', 'pbuild', 'min', cb)
 })
