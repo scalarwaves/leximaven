@@ -8,19 +8,19 @@ const path = require('path')
 const version = require('../package.json').version
 
 describe('command', () => {
-  before((done) => {
-    fs.mkdirpSync('test/output')
-    done()
-  })
-  after((done) => {
-    fs.removeSync('test/output')
-    done()
-  })
+  // before((done) => {
+  //   fs.mkdirpSync('test/output')
+  //   done()
+  // })
+  // after((done) => {
+  //   fs.removeSync('test/output')
+  //   done()
+  // })
   describe('acronym', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js acronym -o ${process.cwd()}/test/output/acronym.json DDC > test/output/acronym.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/acronym.out', 'utf8')
-        const json = fs.readJsonSync(`${process.cwd()}/test/output/acronym.json`)
+      child.exec(`node ${process.cwd()}/build/leximaven.js acronym -o ${process.cwd()}/test/acronym.json DDC > test/acronym.out`, (err) => {
+        const stdout = fs.readFileSync('test/acronym.out', 'utf8')
+        const json = fs.readJsonSync(`${process.cwd()}/test/acronym.json`)
         const obj = {
           type: 'acronym',
           source: 'http://acronyms.silmaril.ie',
@@ -46,9 +46,9 @@ describe('command', () => {
   })
   describe('anagram', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js anagram -o ${process.cwd()}/test/output/anagram.json ubiquity > test/output/anagram.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/anagram.out', 'utf8')
-        const json = fs.readJsonSync(`${process.cwd()}/test/output/anagram.json`)
+      child.exec(`node ${process.cwd()}/build/leximaven.js anagram -o ${process.cwd()}/test/anagram.json ubiquity > test/anagram.out`, (err) => {
+        const stdout = fs.readFileSync('test/anagram.out', 'utf8')
+        const json = fs.readJsonSync(`${process.cwd()}/test/anagram.json`)
         const obj = {
           type: 'anagram',
           source: 'http://wordsmith.org/',
@@ -67,8 +67,8 @@ describe('command', () => {
   })
   describe('comp', () => {
     it('outputs shell completion script', (done) => {
-      child.exec(`node ${__dirname}/../build/leximaven.js comp > test/output/comp.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/comp.out', 'utf8')
+      child.exec(`node ${__dirname}/../build/leximaven.js comp > test/comp.out`, (err) => {
+        const stdout = fs.readFileSync('test/comp.out', 'utf8')
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[#\-a-z0-9\.\s:\/>~_\(\)\{\}\[\]="$@,;]*/mig)
         done(err)
       })
@@ -76,8 +76,8 @@ describe('command', () => {
   })
   describe('dmuse', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js dmuse -o ${process.cwd()}/test/output/dmuse.json ml=ubiquity > test/output/dmuse.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/dmuse.out', 'utf8')
+      child.exec(`node ${process.cwd()}/build/leximaven.js dmuse -o ${process.cwd()}/test/dmuse.json ml=ubiquity > test/dmuse.out`, (err) => {
+        const stdout = fs.readFileSync('test/dmuse.out', 'utf8')
         const obj = {
           type: 'datamuse',
           source: 'http://datamuse.com/api',
@@ -88,8 +88,8 @@ describe('command', () => {
           tags0: 'noun',
           match3: 'prevalence',
         }
-        const json = fs.readJsonSync(`${process.cwd()}/test/output/dmuse.json`)
-        expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z\[\]→\s,]*\/output\/dmuse.json./mig)
+        const json = fs.readJsonSync(`${process.cwd()}/test/dmuse.json`)
+        expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z\[\]→\s,]*\/dmuse.json./mig)
         expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
         done(err)
       })
@@ -97,8 +97,8 @@ describe('command', () => {
   })
   describe('help', () => {
     it('shows usage', (done) => {
-      child.exec(`node ${__dirname}/../build/leximaven.js --help > test/output/help.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/help.out', 'utf8')
+      child.exec(`node ${__dirname}/../build/leximaven.js --help > test/help.out`, (err) => {
+        const stdout = fs.readFileSync('test/help.out', 'utf8')
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[_ \/\(\)\-\\'`|,\s]*\s*Usage:\s[a-z \/\.<>\[\]]*\s*Commands:\s[ a-z<>\s]*:\s[ \-a-z,\[\]\s]*\[boolean\]\s*/mig)
         done(err)
       })
@@ -106,8 +106,8 @@ describe('command', () => {
   })
   describe('ls', () => {
     it('demonstrates installed themes', (done) => {
-      child.exec(`node ${__dirname}/../build/leximaven.js ls > test/output/ls.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/ls.out', 'utf8')
+      child.exec(`node ${__dirname}/../build/leximaven.js ls > test/ls.out`, (err) => {
+        const stdout = fs.readFileSync('test/ls.out', 'utf8')
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z :|,.<>\-\[\]→]*/mig)
         done(err)
       })
@@ -115,8 +115,8 @@ describe('command', () => {
   })
   describe('map', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js map ubiquity > test/output/map.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/map.out', 'utf8')
+      child.exec(`node ${process.cwd()}/build/leximaven.js map ubiquity > test/map.out`, (err) => {
+        const stdout = fs.readFileSync('test/map.out', 'utf8')
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z0-9\[\],→ ;:'\?"\(\)-\.√©ĭēˈɪ”]*/mig)
         done(err)
       })
@@ -124,8 +124,8 @@ describe('command', () => {
   })
   describe('onelook', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js onelook -o ${process.cwd()}/test/output/onelook.json ubiquity > test/output/onelook.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/onelook.out', 'utf8')
+      child.exec(`node ${process.cwd()}/build/leximaven.js onelook -o ${process.cwd()}/test/onelook.json ubiquity > test/onelook.out`, (err) => {
+        const stdout = fs.readFileSync('test/onelook.out', 'utf8')
         const obj = {
           type: 'onelook',
           source: 'http://www.onelook.com',
@@ -133,7 +133,7 @@ describe('command', () => {
           phrase: 'ubiquity records',
           sim: 'omnipresence,ubiquitousness',
         }
-        const json = fs.readJsonSync(`${process.cwd()}/test/output/onelook.json`)
+        const json = fs.readJsonSync(`${process.cwd()}/test/onelook.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z\[\]:\(\)→ \/\.,]*/mig)
         expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
         done(err)
@@ -142,14 +142,14 @@ describe('command', () => {
   })
   describe('urban', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js urban -o ${process.cwd()}/test/output/urban.json ubiquity > test/output/urban.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/urban.out', 'utf8')
+      child.exec(`node ${process.cwd()}/build/leximaven.js urban -o ${process.cwd()}/test/urban.json ubiquity > test/urban.out`, (err) => {
+        const stdout = fs.readFileSync('test/urban.out', 'utf8')
         const obj = {
           type: 'urban',
           source: 'http://www.urbandictionary.com',
           definition0: 'Omnipresent; An existence or perceived existence of being everywhere at once.',
         }
-        const json = fs.readJsonSync(`${process.cwd()}/test/output/urban.json`)
+        const json = fs.readJsonSync(`${process.cwd()}/test/urban.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/\[Definition\]\s[a-z→; \.]*\sWrote data to [a-z\/\.]*/mig)
         expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
         done(err)
@@ -168,19 +168,19 @@ describe('command', () => {
 
 describe('config command', () => {
   before((done) => {
-    fs.mkdirpSync('test/output')
-    fs.copySync(CFILE, 'test/output/.leximaven.noon')
+    // fs.mkdirpSync('test/output')
+    fs.copySync(CFILE, 'test/.leximaven.noon')
     done()
   })
   after((done) => {
-    fs.copySync('test/output/.leximaven.noon', CFILE)
-    fs.removeSync('test/output')
+    fs.copySync('test/.leximaven.noon', CFILE)
+    // fs.removeSync('test/output')
     done()
   })
   describe('get', () => {
     it('shows value of option verbose', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js config get verbose > test/output/config-get.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/config-get.out', 'utf8')
+      child.exec(`node ${process.cwd()}/build/leximaven.js config get verbose > test/config-get.out`, (err) => {
+        const stdout = fs.readFileSync('test/config-get.out', 'utf8')
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/Option verbose is (true|false)\./mig)
         done(err)
       })
@@ -192,8 +192,8 @@ describe('config command', () => {
       done()
     })
     it('creates the config file', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js config init > test/output/config-init.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/config-init.out', 'utf8')
+      child.exec(`node ${process.cwd()}/build/leximaven.js config init > test/config-init.out`, (err) => {
+        const stdout = fs.readFileSync('test/config-init.out', 'utf8')
         const config = noon.load(CFILE)
         const obj = {
           anagram: {
@@ -277,8 +277,8 @@ describe('config command', () => {
   })
   describe('set', () => {
     it('sets value of option verbose to true', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js config set verbose false > test/output/config-set.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/config-set.out', 'utf8')
+      child.exec(`node ${process.cwd()}/build/leximaven.js config set verbose false > test/config-set.out`, (err) => {
+        const stdout = fs.readFileSync('test/config-set.out', 'utf8')
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/Set option verbose to (true|false)\./mig)
         done(err)
       })
@@ -287,18 +287,18 @@ describe('config command', () => {
 })
 
 describe('rbrain command', () => {
-  before((done) => {
-    fs.mkdirpSync('test/output')
-    done()
-  })
-  after((done) => {
-    fs.removeSync('test/output')
-    done()
-  })
+  // before((done) => {
+  //   fs.mkdirpSync('test/output')
+  //   done()
+  // })
+  // after((done) => {
+  //   fs.removeSync('test/output')
+  //   done()
+  // })
   describe('combine', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js rbrain combine -o ${process.cwd()}/test/output/combine.json value > test/output/combine.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/combine.out', 'utf8')
+      child.exec(`node ${process.cwd()}/build/leximaven.js rbrain combine -o ${process.cwd()}/test/combine.json value > test/combine.out`, (err) => {
+        const stdout = fs.readFileSync('test/combine.out', 'utf8')
         const obj = {
           type: 'portmanteau',
           source: 'http://rhymebrain.com',
@@ -313,7 +313,7 @@ describe('rbrain command', () => {
           set4: 'value,utilitarian',
           portmanteau4: 'valutilitarian',
         }
-        const json = fs.readJsonSync(`${process.cwd()}/test/output/combine.json`)
+        const json = fs.readJsonSync(`${process.cwd()}/test/combine.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[\[\]a-z,→ \/\.]*/mig)
         expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
         done(err)
@@ -322,8 +322,8 @@ describe('rbrain command', () => {
   })
   describe('info', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js rbrain info -o ${process.cwd()}/test/output/info.json ubiquity > test/output/info.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/info.out', 'utf8')
+      child.exec(`node ${process.cwd()}/build/leximaven.js rbrain info -o ${process.cwd()}/test/info.json ubiquity > test/info.out`, (err) => {
+        const stdout = fs.readFileSync('test/info.out', 'utf8')
         const obj = {
           type: 'word info',
           source: 'http://rhymebrain.com',
@@ -333,7 +333,7 @@ describe('rbrain command', () => {
           dict: true,
           trusted: true,
         }
-        const json = fs.readJsonSync(`${process.cwd()}/test/output/info.json`)
+        const json = fs.readJsonSync(`${process.cwd()}/test/info.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[\[\]a-z0-9 →ˈɪ\/\.,]*/mig)
         expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
         done(err)
@@ -342,8 +342,8 @@ describe('rbrain command', () => {
   })
   describe('rhyme', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js rbrain rhyme -m5 -o ${process.cwd()}/test/output/rhyme.json ubiquity > test/output/rhyme.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/rhyme.out', 'utf8')
+      child.exec(`node ${process.cwd()}/build/leximaven.js rbrain rhyme -m5 -o ${process.cwd()}/test/rhyme.json ubiquity > test/rhyme.out`, (err) => {
+        const stdout = fs.readFileSync('test/rhyme.out', 'utf8')
         const obj = {
           type: 'rhyme',
           source: 'http://rhymebrain.com',
@@ -353,7 +353,7 @@ describe('rbrain command', () => {
           rhyme3: 'respectively',
           rhyme4: 'effectively',
         }
-        const json = fs.readJsonSync(`${process.cwd()}/test/output/rhyme.json`)
+        const json = fs.readJsonSync(`${process.cwd()}/test/rhyme.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/\[Rhymes\]→[a-z*,]*\sWrote data to [a-z\/\.]*/mig)
         expect(JSON.stringify(json)).to.match(/[\{\}a-z0-9\s:\/\.",]*/mig)
         done(err)
@@ -363,18 +363,18 @@ describe('rbrain command', () => {
 })
 
 describe('wordnik command', () => {
-  before((done) => {
-    fs.mkdirpSync('test/output')
-    done()
-  })
-  after((done) => {
-    fs.removeSync('test/output')
-    done()
-  })
+  // before((done) => {
+  //   fs.mkdirpSync('test/output')
+  //   done()
+  // })
+  // after((done) => {
+  //   fs.removeSync('test/output')
+  //   done()
+  // })
   describe('define', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik define -l1 -o ${process.cwd()}/test/output/define.json ubiquity > test/output/define.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/define.out', 'utf8')
+      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik define -l1 -o ${process.cwd()}/test/define.json ubiquity > test/define.out`, (err) => {
+        const stdout = fs.readFileSync('test/define.out', 'utf8')
         const obj = {
           type: 'definition',
           source: 'http://www.wordnik.com',
@@ -382,7 +382,7 @@ describe('wordnik command', () => {
           deftype0: 'noun',
           source0: 'ahd-legacy',
         }
-        const json = fs.readJsonSync(`${process.cwd()}/test/output/define.json`)
+        const json = fs.readJsonSync(`${process.cwd()}/test/define.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z\[\]→ ;:",\-\(\)\.\/”]*Wrote data to [a-z\/\.]*/mig)
         expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
         done(err)
@@ -391,14 +391,14 @@ describe('wordnik command', () => {
   })
   describe('example', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik example -l1 -o ${process.cwd()}/test/output/example.json ubiquity > test/output/example.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/example.out', 'utf8')
+      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik example -l1 -o ${process.cwd()}/test/example.json ubiquity > test/example.out`, (err) => {
+        const stdout = fs.readFileSync('test/example.out', 'utf8')
         const obj = {
           type: 'example',
           source: 'http://www.wordnik.com',
           example0: 'Both are characterized by their ubiquity and their antiquity: No known human culture lacks them, and musical instruments are among the oldest human artifacts, dating to the Late Pleistocene about 50,000 years ago.',
         }
-        const json = fs.readJsonSync(`${process.cwd()}/test/output/example.json`)
+        const json = fs.readJsonSync(`${process.cwd()}/test/example.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z0-9\[\] →:,\.]*\sWrote data to [a-z\/\.]*/mig)
         expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
         done(err)
@@ -407,8 +407,8 @@ describe('wordnik command', () => {
   })
   describe('hyphen', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik hyphen -o ${process.cwd()}/test/output/hyphen.json ubiquity > test/output/hyphen.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/hyphen.out', 'utf8')
+      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik hyphen -o ${process.cwd()}/test/hyphen.json ubiquity > test/hyphen.out`, (err) => {
+        const stdout = fs.readFileSync('test/hyphen.out', 'utf8')
         const obj = {
           type: 'hyphenation',
           source: 'http://www.wordnik.com',
@@ -417,7 +417,7 @@ describe('wordnik command', () => {
           syllable2: 'ui',
           syllable3: 'ty',
         }
-        const json = fs.readJsonSync(`${process.cwd()}/test/output/hyphen.json`)
+        const json = fs.readJsonSync(`${process.cwd()}/test/hyphen.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/\[Hyphenation\]u-biq-ui-ty\sWrote data to [a-z\/\.]*/mig)
         expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
         done(err)
@@ -426,15 +426,15 @@ describe('wordnik command', () => {
   })
   describe('origin', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik origin -o ${process.cwd()}/test/output/origin.json ubiquity > test/output/origin.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/origin.out', 'utf8')
+      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik origin -o ${process.cwd()}/test/origin.json ubiquity > test/origin.out`, (err) => {
+        const stdout = fs.readFileSync('test/origin.out', 'utf8')
         const obj = {
           type: 'etymology',
           source: 'http://www.wordnik.com',
           etymology: '[L.  everywhere, fr.  where, perhaps for ,  (cf.  anywhere), and if so akin to E. : cf. F. .]',
           origin: 'ubique, ubi, cubi, quobi, alicubi, who, ubiquit√©',
         }
-        const json = fs.readJsonSync(`${process.cwd()}/test/output/origin.json`)
+        const json = fs.readJsonSync(`${process.cwd()}/test/origin.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z \[\]→\.,\(\):√©]*Wrote data to [a-z\/\.]*/mig)
         expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
         done(err)
@@ -443,8 +443,8 @@ describe('wordnik command', () => {
   })
   describe('phrase', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik phrase -o ${process.cwd()}/test/output/phrase.json ubiquitous > test/output/phrase.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/phrase.out', 'utf8')
+      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik phrase -o ${process.cwd()}/test/phrase.json ubiquitous > test/phrase.out`, (err) => {
+        const stdout = fs.readFileSync('test/phrase.out', 'utf8')
         const obj = {
           type: 'phrase',
           source: 'http://www.wordnik.com',
@@ -453,7 +453,7 @@ describe('wordnik command', () => {
           agram1: 'ubiquitous',
           bgram1: 'fakes',
         }
-        const json = fs.readJsonSync(`${process.cwd()}/test/output/phrase.json`)
+        const json = fs.readJsonSync(`${process.cwd()}/test/phrase.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z\[\]\-\s]*Wrote data to [a-z\/\.]*/mig)
         expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
         done(err)
@@ -462,8 +462,8 @@ describe('wordnik command', () => {
   })
   describe('pronounce', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik pronounce -o ${process.cwd()}/test/output/pronounce.json ubiquity > test/output/pronounce.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/pronounce.out', 'utf8')
+      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik pronounce -o ${process.cwd()}/test/pronounce.json ubiquity > test/pronounce.out`, (err) => {
+        const stdout = fs.readFileSync('test/pronounce.out', 'utf8')
         const obj = {
           type: 'pronunciation',
           source: 'http://www.wordnik.com',
@@ -473,7 +473,7 @@ describe('wordnik command', () => {
           pronunciation1: 'Y UW0 B IH1 K W IH0 T IY0',
           type1: 'arpabet',
         }
-        const json = fs.readJsonSync(`${process.cwd()}/test/output/pronounce.json`)
+        const json = fs.readJsonSync(`${process.cwd()}/test/pronounce.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z0-9\[\]\(\) \-→ĭēˈ\so͞]*\sWrote data to [a-z\/\.]*/mig)
         expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
         done(err)
@@ -482,8 +482,8 @@ describe('wordnik command', () => {
   })
   describe('relate', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik relate -o ${process.cwd()}/test/output/relate.json ubiquity > test/output/relate.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/relate.out', 'utf8')
+      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik relate -o ${process.cwd()}/test/relate.json ubiquity > test/relate.out`, (err) => {
+        const stdout = fs.readFileSync('test/relate.out', 'utf8')
         const obj = {
           type: 'related words',
           source: 'http://www.wordnik.com',
@@ -501,7 +501,7 @@ describe('wordnik command', () => {
           type5: 'same-context',
           words5: 'omnipresence, omniscience, self-existence, omnipotence, arahantship, timelessness, Catholicism, invincibility, nondiscrimination, barracoon',
         }
-        const json = fs.readJsonSync(`${process.cwd()}/test/output/relate.json`)
+        const json = fs.readJsonSync(`${process.cwd()}/test/relate.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z \[\],\-→]*\sWrote data to [a-z\/\.]*/mig)
         expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
         done(err)
