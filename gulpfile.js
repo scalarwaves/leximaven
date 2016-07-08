@@ -23,6 +23,9 @@ gulp.task('clean', function () {
     'build',
     'coverage/**/*',
     'coverage',
+    'test/*.out',
+    'test/*.json',
+    'test/.leximaven.noon'
   ])
 })
 
