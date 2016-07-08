@@ -1,6 +1,7 @@
 logs
 *.log
 coverage
+.nyc_output
 node_modules
 
 # Project specific
@@ -11,3 +12,4 @@ staging
 wiki
 TODO.md
 jsdoc.conf.json
+json

@@ -1,2 +1,5 @@
 bin/**/*
 build/**/*
+dist/**/*
+test/**/*
+gulpfile.js

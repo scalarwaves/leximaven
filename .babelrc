@@ -1,4 +1,10 @@
 {
   "presets": ["es2015"],
-  "plugins": ["lodash"]
+  "plugins": ["lodash"],
+  "sourceMaps": "both",
+  "env": {
+    "test": {
+      "plugins": ["istanbul"]
+    }
+  }
 }

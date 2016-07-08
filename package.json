@@ -1,7 +1,7 @@
 {
   "name": "leximaven",
   "version": "0.1.0",
-  "description": "Word-related APIs on the command line.",
+  "description": "A command line tool for searching word-related APIs.",
   "author": "Andrew Prentice",
   "license": "MIT",
   "config": {
@@ -9,14 +9,26 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "main": "bin/leximaven.js",
+  "main": "build/leximaven.js",
   "bin": {
-    "leximaven": "bin/leximaven.js"
+    "leximaven": "build/leximaven.js"
   },
   "scripts": {
     "release": "standard-version",
-    "report": "nyc report --reporter=html",
-    "test": "nyc lab"
+    "report": "./node_modules/.bin/nyc report -r text -r html",
+    "cover": "./node_modules/.bin/nyc report -r text-lcov | coveralls",
+    "test": "NODE_ENV=test ./node_modules/.bin/nyc ./node_modules/.bin/_mocha"
+  },
+  "nyc": {
+    "cache": true,
+    "include": [
+      "build/**/*.js"
+    ],
+    "require": [
+      "babel-register"
+    ],
+    "sourceMap": true,
+    "instrument": true
   },
   "dependencies": {
     "chalk": "^1.1.1",
@@ -34,25 +46,26 @@
     "babel-cli": "^6.6.5",
     "babel-core": "^6.5.2",
     "babel-eslint": "^6.0.0",
+    "babel-plugin-istanbul": "^1.0.2",
     "babel-plugin-lodash": "^2.2.1",
     "babel-plugin-transform-runtime": "^6.6.0",
     "babel-polyfill": "^6.7.4",
     "babel-preset-es2015": "^6.3.13",
-    "code": "^3.0.1",
+    "babel-register": "^6.9.0",
+    "chai": "^3.5.0",
     "cz-conventional-changelog": "^1.1.5",
-    "del": "^2.2.0",
+    "del": "^2.2.1",
     "eslint": "^2.7.0",
     "eslint-plugin-react": "^4.1.0",
     "fs-extra": "^0.30.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
-    "gulp-conventional-changelog": "^1.1.0",
+    "gulp-coveralls": "^0.1.4",
     "gulp-eslint": "^2.0.0",
-    "gulp-lab": "^1.0.6",
-    "gulp-uglify": "^1.5.3",
     "ink-docstrap": "^1.1.4",
-    "lab": "^10.7.1",
+    "mocha": "^2.5.3",
     "nyc": "^6.6.1",
+    "rimraf": "^2.5.2",
     "run-sequence": "^1.1.5",
     "standard-version": "^2.3.0"
   },
@@ -73,6 +86,14 @@
     "search",
     "api",
     "scraper",
-    "rest"
+    "rest",
+    "anagram",
+    "acronym",
+    "define",
+    "dictionary",
+    "thesaurus",
+    "slang",
+    "rhyme",
+    "pronunciation"
   ]
 }

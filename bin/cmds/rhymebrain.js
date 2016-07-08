@@ -1,1 +1,0 @@
-"use strict";exports.command="rbrain <command>",exports.desc="Rhymebrain operations",exports.builder=function(r){return r.commandDir("rhymebrain_cmds")},exports.handler=function(r){};

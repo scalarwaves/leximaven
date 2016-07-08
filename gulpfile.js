@@ -1,9 +1,8 @@
 var gulp = require('gulp')
 var babel = require('gulp-babel')
-var eslint = require('gulp-eslint')
 var del = require('del')
-var lab = require('gulp-lab')
-var ugly = require('gulp-uglify')
+var exec = require('child_process').exec
+var eslint = require('gulp-eslint')
 var run = require('run-sequence')
 
 gulp.task('dbuild', function () {
@@ -19,7 +18,12 @@ gulp.task('pbuild', function () {
 })
 
 gulp.task('clean', function () {
-  return del(['./build/**/*.js', './bin/**/*.js'])
+  return del([
+    'build/**/*',
+    'build',
+    'coverage/**/*',
+    'coverage',
+  ])
 })
 
 gulp.task('lint', function () {
@@ -27,25 +31,27 @@ gulp.task('lint', function () {
     .pipe(eslint.format())
 })
 
-gulp.task('min', function () {
-  return gulp.src('./build/**/*.js')
-    .pipe(ugly())
-    .pipe(gulp.dest('./bin'))
+gulp.task('coveralls', function () {
+  return gulp.src('coverage/lcov.info')
+    .pipe(coveralls())
+})
+
+gulp.task('test', function (cb) {
+  exec('npm test', function (err, stdout, stderr) {
+    console.log(stdout)
+    console.log(stderr)
+    cb(err)
+  })
 })
 
 gulp.task('bin', function (cb) {
-  return run('dbuild', 'min', cb)
-})
-
-gulp.task('test', function () {
-  return gulp.src('./test/**/*.js')
-    .pipe(lab())
+  return run('dbuild', cb)
 })
 
 gulp.task('default', function (cb) {
-  return run('test', cb)
+  return run('clean', 'dbuild', 'test', cb)
 })
 
 gulp.task('all', function (cb) {
-  return run('clean', 'lint', 'test', 'pbuild', 'min', cb)
+  return run('clean', 'lint', 'dbuild', 'test', cb)
 })
