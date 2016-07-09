@@ -17,16 +17,19 @@ gulp.task('pbuild', function () {
     .pipe(gulp.dest('./build'))
 })
 
-gulp.task('clean', function () {
+gulp.task('delete', function () {
   return del([
     'build/**/*',
     'build',
     'coverage/**/*',
     'coverage',
-    'test/*.out',
-    'test/*.json',
-    'test/.leximaven.noon'
+    'test/output/*',
+    'test/output'
   ])
+})
+
+gulp.task('clean', function (cb) {
+  return run('delete', 'dbuild', cb)
 })
 
 gulp.task('lint', function () {
@@ -52,9 +55,9 @@ gulp.task('bin', function (cb) {
 })
 
 gulp.task('default', function (cb) {
-  return run('clean', 'dbuild', 'test', cb)
+  return run('clean', 'test', cb)
 })
 
 gulp.task('all', function (cb) {
-  return run('clean', 'lint', 'dbuild', 'test', cb)
+  return run('clean', 'lint', 'test', cb)
 })
