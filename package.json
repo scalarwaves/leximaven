@@ -58,6 +58,7 @@
     "eslint": "^2.7.0",
     "eslint-plugin-react": "^4.1.0",
     "fs-extra": "^0.30.0",
+    "glob": "^7.0.5",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-coveralls": "^0.1.4",
