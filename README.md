@@ -1,5 +1,9 @@
 ## leximaven
 
+[![Build Status](https://travis-ci.org/drawnepicenter/leximaven.svg?branch=master)](https://travis-ci.org/drawnepicenter/leximaven)
+
+---
+
 Skip to [Introduction](#introduction)...
 
 ### Prose
