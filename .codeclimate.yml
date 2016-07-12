@@ -3,4 +3,4 @@ engines:
     enabled: true
     channel: "eslint-2"
     config:
-      config: quality/.eslintrc
+      config: test/.eslintrc

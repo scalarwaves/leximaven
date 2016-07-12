@@ -15,9 +15,10 @@
   },
   "scripts": {
     "release": "standard-version",
-    "report": "./node_modules/.bin/nyc report -r text -r html",
-    "cover": "./node_modules/.bin/nyc report -r text-lcov | ./node_modules/.bin/coveralls",
-    "test": "NODE_ENV=test ./node_modules/.bin/nyc ./node_modules/.bin/_mocha && ./node_modules/.bin/nyc report -r text-lcov | ./node_modules/.bin/coveralls"
+    "lcov": "./node_modules/.bin/nyc report -r text-lcov > lcov.info",
+    "cover": "cat lcov.info | ./node_modules/.bin/coveralls",
+    "report": "./node_modules/.bin/nyc report -r html",
+    "test": "NODE_ENV=test ./node_modules/.bin/nyc ./node_modules/.bin/_mocha"
   },
   "nyc": {
     "cache": true,
