@@ -1,5 +1,5 @@
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/leximaven.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/leximaven.js
 FNF:0
 FNH:0
 DA:4,23
@@ -13,7 +13,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/acronym.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/acronym.js
 FN:,(anonymous_1)
 FN:,(anonymous_2)
 FNF:2
@@ -83,7 +83,7 @@ BRF:14
 BRH:10
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/themes.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/themes.js
 FN:,(anonymous_1)
 FN:,(anonymous_2)
 FN:,(anonymous_3)
@@ -148,7 +148,7 @@ BRF:8
 BRH:8
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/tools.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/tools.js
 FN:,checkOutfile
 FN:,(anonymous_2)
 FN:,(anonymous_3)
@@ -241,7 +241,7 @@ BRF:26
 BRH:8
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/anagram.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/anagram.js
 FN:,(anonymous_1)
 FN:,(anonymous_2)
 FNF:2
@@ -347,7 +347,7 @@ BRF:24
 BRH:12
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/comp.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/comp.js
 FN:,(anonymous_1)
 FNF:1
 FNH:1
@@ -364,7 +364,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/config.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/config.js
 FN:,(anonymous_1)
 FN:,(anonymous_2)
 FNF:2
@@ -382,7 +382,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/datamuse.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/datamuse.js
 FN:,(anonymous_1)
 FN:,(anonymous_2)
 FN:,(anonymous_3)
@@ -473,7 +473,7 @@ BRF:26
 BRH:16
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/ls.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/ls.js
 FN:,(anonymous_1)
 FN:,(anonymous_2)
 FNF:2
@@ -498,7 +498,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/onelook.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/onelook.js
 FN:,(anonymous_1)
 FN:,(anonymous_2)
 FNF:2
@@ -598,7 +598,7 @@ BRF:26
 BRH:14
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/rhymebrain.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/rhymebrain.js
 FN:,(anonymous_1)
 FN:,(anonymous_2)
 FNF:2
@@ -616,7 +616,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/urban.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/urban.js
 FN:,(anonymous_1)
 FN:,(anonymous_2)
 FNF:2
@@ -692,7 +692,7 @@ BRF:22
 BRH:12
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/wordmap.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/wordmap.js
 FN:,(anonymous_1)
 FNF:1
 FNH:1
@@ -751,7 +751,7 @@ BRF:12
 BRH:6
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/wordnik.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/wordnik.js
 FN:,(anonymous_1)
 FN:,(anonymous_2)
 FNF:2
@@ -769,7 +769,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/config_cmds/get.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/config_cmds/get.js
 FN:,(anonymous_1)
 FNF:1
 FNH:1
@@ -807,7 +807,7 @@ BRF:6
 BRH:3
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/config_cmds/init.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/config_cmds/init.js
 FN:,(anonymous_1)
 FNF:1
 FNH:1
@@ -857,7 +857,7 @@ BRF:10
 BRH:4
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/config_cmds/set.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/config_cmds/set.js
 FN:,(anonymous_1)
 FNF:1
 FNH:1
@@ -899,7 +899,7 @@ BRF:6
 BRH:3
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/rhymebrain_cmds/combine.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/rhymebrain_cmds/combine.js
 FN:,(anonymous_1)
 FN:,(anonymous_2)
 FNF:2
@@ -971,7 +971,7 @@ BRF:18
 BRH:10
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/rhymebrain_cmds/info.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/rhymebrain_cmds/info.js
 FN:,(anonymous_1)
 FN:,(anonymous_2)
 FNF:2
@@ -1062,7 +1062,7 @@ BRF:24
 BRH:13
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/rhymebrain_cmds/rhyme.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/rhymebrain_cmds/rhyme.js
 FN:,(anonymous_1)
 FN:,(anonymous_2)
 FNF:2
@@ -1139,7 +1139,7 @@ BRF:20
 BRH:11
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/wordnik_cmds/define.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/wordnik_cmds/define.js
 FN:,(anonymous_1)
 FN:,(anonymous_2)
 FNF:2
@@ -1226,7 +1226,7 @@ BRF:18
 BRH:10
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/wordnik_cmds/example.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/wordnik_cmds/example.js
 FN:,(anonymous_1)
 FN:,(anonymous_2)
 FNF:2
@@ -1304,7 +1304,7 @@ BRF:20
 BRH:11
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/wordnik_cmds/hyphen.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/wordnik_cmds/hyphen.js
 FN:,(anonymous_1)
 FN:,(anonymous_2)
 FNF:2
@@ -1396,7 +1396,7 @@ BRF:26
 BRH:16
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/wordnik_cmds/origin.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/wordnik_cmds/origin.js
 FN:,(anonymous_1)
 FN:,(anonymous_2)
 FN:,(anonymous_3)
@@ -1477,7 +1477,7 @@ BRF:18
 BRH:10
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/wordnik_cmds/phrase.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/wordnik_cmds/phrase.js
 FN:,(anonymous_1)
 FN:,(anonymous_2)
 FNF:2
@@ -1552,7 +1552,7 @@ BRF:18
 BRH:10
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/wordnik_cmds/pronounce.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/wordnik_cmds/pronounce.js
 FN:,(anonymous_1)
 FN:,(anonymous_2)
 FNF:2
@@ -1633,7 +1633,7 @@ BRF:22
 BRH:12
 end_of_record
 TN:
-SF:/home/drew/sync/gitlab/drawnepicenter/leximaven/build/cmds/wordnik_cmds/relate.js
+SF:/home/travis/build/drawnepicenter/leximaven/build/cmds/wordnik_cmds/relate.js
 FN:,(anonymous_1)
 FN:,(anonymous_2)
 FNF:2
