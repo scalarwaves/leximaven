@@ -25,8 +25,7 @@ exports.handler = (argv) => {
       config[key] = value
     }
   } else {
-    console.error(chalk.red.bold(`Option ${key} not found.`))
-    process.exit(1)
+    throw new Error(`Option ${key} not found.`)
   }
   noon.save(CFILE, config)
   console.log(`Set option ${chalk.white.bold(key)} to ${chalk.white.bold(value)}.`)

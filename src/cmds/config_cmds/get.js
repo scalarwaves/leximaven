@@ -20,8 +20,7 @@ exports.handler = (argv) => {
   if (dot.exists(config, key)) {
     value = /\./i.test(key) ? dot.get(config, key) : config[key]
   } else {
-    console.error(chalk.red.bold(`Option ${key} not found.`))
-    process.exit(1)
+    throw new Error(`Option ${key} not found.`)
   }
   console.log(`Option ${chalk.white.bold(key)} is ${chalk.white.bold(value)}.`)
 }

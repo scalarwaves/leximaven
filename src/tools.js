@@ -1,3 +1,4 @@
+/* eslint max-len: 0 */
 const chalk = require('chalk')
 const fs = require('fs')
 const noon = require('noon')
@@ -50,8 +51,7 @@ exports.checkConfig = (file) => {
     fs.statSync(file)
   } catch (e) {
     if (e.code === 'ENOENT') {
-      console.log(`No config found at ${file}, run: ${chalk.white.bold('leximaven config init')}`)
-      process.exit(1)
+      throw new Error(`No config found at ${file}, run: ${chalk.white.bold('leximaven config init')}`)
     } else { throw e }
   }
 }
