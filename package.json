@@ -17,6 +17,7 @@
     "release": "standard-version",
     "lcov": "./node_modules/.bin/nyc report -r text-lcov > lcov.info",
     "cover": "cat lcov.info | ./node_modules/.bin/coveralls",
+    "climate": "./node_modules/.bin/codeclimate-test-reporter < lcov.info",
     "report": "./node_modules/.bin/nyc report -r html",
     "test": "NODE_ENV=test ./node_modules/.bin/nyc ./node_modules/.bin/_mocha"
   },
@@ -54,6 +55,7 @@
     "babel-preset-es2015": "^6.3.13",
     "babel-register": "^6.9.0",
     "chai": "^3.5.0",
+    "codeclimate-test-reporter": "^0.3.3",
     "cz-conventional-changelog": "^1.1.5",
     "del": "^2.2.1",
     "eslint": "^2.7.0",
