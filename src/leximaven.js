@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint max-len: 0, no-unused-expressions: 0 */
 const chalk = require('chalk')
 const pkg = require('../package.json')
 const yargonaut = require('yargonaut')
