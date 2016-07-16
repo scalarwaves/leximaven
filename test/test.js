@@ -74,27 +74,6 @@ describe('command', () => {
       })
     })
   })
-  describe('dmuse', () => {
-    it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js dmuse -o ${process.cwd()}/test/output/dmuse.json ml=ubiquity > test/output/dmuse.out`, (err) => {
-        const stdout = fs.readFileSync('test/output/dmuse.out', 'utf8')
-        const obj = {
-          type: 'datamuse',
-          source: 'http://datamuse.com/api',
-          match0: 'ubiquitousness',
-          tags1: 'noun',
-          match1: 'omnipresence',
-          match2: 'pervasiveness',
-          tags0: 'noun',
-          match3: 'prevalence',
-        }
-        const json = fs.readJsonSync(`${process.cwd()}/test/output/dmuse.json`)
-        expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z\[\]→\s,]*\/dmuse.json./mig)
-        expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
-        done(err)
-      })
-    })
-  })
   describe('help', () => {
     it('shows usage', (done) => {
       child.exec(`node ${__dirname}/../build/leximaven.js --help > test/output/help.out`, (err) => {
@@ -164,6 +143,47 @@ describe('command', () => {
       })
     })
   })
+})
+
+describe('dmuse command', () => {
+    before((done) => {
+      fs.mkdirpSync('test/output')
+      done()
+    })
+    after((done) => {
+      fs.removeSync('test/output')
+      done()
+    })
+    describe('get', () => {
+      it('shows output', (done) => {
+        child.exec(`node ${process.cwd()}/build/leximaven.js dmuse get -o ${process.cwd()}/test/output/dmuse.json ml=ubiquity > test/output/dmuse-get.out`, (err) => {
+          const stdout = fs.readFileSync('test/output/dmuse-get.out', 'utf8')
+          const obj = {
+            type: 'datamuse',
+            source: 'http://datamuse.com/api',
+            match0: 'ubiquitousness',
+            tags1: 'noun',
+            match1: 'omnipresence',
+            match2: 'pervasiveness',
+            tags0: 'noun',
+            match3: 'prevalence',
+          }
+          const json = fs.readJsonSync(`${process.cwd()}/test/output/dmuse.json`)
+          expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z\[\]→\s,]*\/dmuse.json./mig)
+          expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
+          done(err)
+        })
+      })
+    })
+    describe('info', () => {
+      it('shows metrics', (done) => {
+        child.exec(`node ${process.cwd()}/build/leximaven.js dmuse info > test/output/dmuse-info.out`, err => {
+          const stdout = fs.readFileSync('test/output/dmuse-info.out', 'utf8')
+          expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[\w ]*\(v\d\): \d*.\d*\s[\w \(\/\):\.,%]*\s[\w \(\/\):\.,%]*/)
+          done(err)
+        })
+      })
+    })
 })
 
 describe('config command', () => {

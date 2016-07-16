@@ -1,5 +1,5 @@
-const themes = require('../themes')
-const tools = require('../tools')
+const themes = require('../../themes')
+const tools = require('../../tools')
 
 const _ = require('lodash')
 const chalk = require('chalk')
@@ -8,7 +8,7 @@ const noon = require('noon')
 
 const CFILE = `${process.env.HOME}/.leximaven.noon`
 
-exports.command = 'dmuse <condition>'
+exports.command = 'get <condition>'
 exports.desc = 'Datamuse query'
 exports.builder = {
   out: {
