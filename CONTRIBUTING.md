@@ -11,13 +11,7 @@ As of right now, I am the only one contributing to this project. I welcome you t
 
 - Leximaven uses the [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog-angular/blob/master/convention.md) format. [commitizen](http://commitizen.github.io/cz-cli/) automates this formatting.
 - There is no development branch on top of master, so the workflow is clean and simple. [git town](http://www.git-town.com/) helps automate this workflow.
-- [standard-version](https://github.com/conventional-changelog/standard-version) automates [semantic versioning](http://semver.org/spec/v2.0.0.html) and changelog generation. Once changes are committed and `npm run release` is called, just run:
-
-```
-git push origin master --tags
-npm publish
-```
-
+- [standard-version](https://github.com/conventional-changelog/standard-version) automates [semantic versioning](http://semver.org/spec/v2.0.0.html) and changelog generation. Once changes are committed and `npm run release` is called, just run `npm run bump`.
 - See the [CHANGELOG](https://github.com/drawnepicenter/leximaven/blob/master/CHANGELOG.md) for progress.
 
 ### Coding Style & Linting

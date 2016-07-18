@@ -15,6 +15,7 @@
   },
   "scripts": {
     "release": "standard-version",
+    "bump": "git push origin master --tags && npm publish"
     "lcov": "./node_modules/.bin/nyc report -r text-lcov > lcov.info",
     "cover": "cat lcov.info | ./node_modules/.bin/coveralls",
     "climate": "./node_modules/.bin/codeclimate-test-reporter < lcov.info",
