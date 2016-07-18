@@ -8,50 +8,72 @@ anagram
   maxletter  50
   maxword  10
   repeat  false
-combine
-  lang  en
-  max  5
-define
-  canon  false
-  defdict  all
-  limit  5
-  part  ||
 dmuse
   max  5
-example
-  canon  false
-  limit  5
-  skip  0
-hyphen
-  canon  false
-  dict  all
-  limit  5
-info
-  lang  en
+  date
+    stamp  ||
+    interval  day
+    limit  100000
+    remain  100000
 onelook
   links  false
-origin
-  canon  false
-phrase
-  canon  false
-  limit  5
-  weight  13
+  date
+    stamp  ||
+    interval  day
+    limit  10000
+    remain  10000
 merge  true
-pronounce
-  canon  false
-  dict  ||
-  limit  5
-  type  ||
-relate
-  canon  false
-  limit  10
-  type  ||
-rhyme
-  lang  en
-  max  50
+rbrain
+  combine
+    lang  en
+    max  5
+  info
+    lang  en
+  rhyme
+    lang  en
+    max  50
+  date
+    stamp  ||
+    interval  hour
+    limit  350
+    remain  350
 theme  square
 urban
   limit  5
 verbose  false
 wordmap
   limit  1
+wordnik
+  define
+    canon  false
+    defdict  all
+    limit  5
+    part  ||
+  example
+    canon  false
+    limit  5
+    skip  0
+  hyphen
+    canon  false
+    dict  all
+    limit  5
+  origin
+    canon  false
+  phrase
+    canon  false
+    limit  5
+    weight  13
+  pronounce
+    canon  false
+    dict  ||
+    limit  5
+    type  ||
+  relate
+    canon  false
+    limit  10
+    type  ||
+  date
+    stamp  ||
+    interval  hour
+    limit  15000
+    remain  15000
