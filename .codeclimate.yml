@@ -13,3 +13,10 @@ engines:
         enabled: false
       no-unused-expressions:
         enabled: false
+ratings:
+  paths:
+    - "src/**/*"
+    - "**.js"
+exclude_paths:
+  - "test/**/*"
+  - "gulpfile.js"
