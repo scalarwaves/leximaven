@@ -18,6 +18,10 @@ exports.builder = {
 }
 exports.handler = (argv) => {
   const obj = noon.load('default.config.noon')
+  obj.dmuse.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+  obj.onelook.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+  obj.rbrain.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+  obj.wordnik.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
   let fileExists = null
   try {
     fs.statSync(CFILE)

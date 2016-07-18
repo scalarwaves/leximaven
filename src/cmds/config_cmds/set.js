@@ -20,7 +20,12 @@ exports.handler = (argv) => {
   if (config.verbose) themes.labelDown('Configuration', theme, null)
   if (dot.exists(config, key)) {
     if (/\./i.test(key)) {
-      dot.put(config, key, value)
+      if (/^\w*\.date/i.test(key)) {
+        console.error(chalk.red("API limits hardcoded, can't set this key."))
+        process.exit(1)
+      } else {
+        dot.put(config, key, value)
+      }
     } else {
       config[key] = value
     }

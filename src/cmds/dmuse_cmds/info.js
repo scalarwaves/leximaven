@@ -1,11 +1,19 @@
 /* eslint max-len:0, no-unused-vars:0 */
+const tools = require('../../tools')
+
 const chalk = require('chalk')
+const moment = require('moment')
 const needle = require('needle')
+const noon = require('noon')
+
+const CFILE = `${process.env.HOME}/.leximaven.noon`
 
 exports.command = 'info'
 exports.desc = 'Datamuse metrics'
 exports.builder = {}
 exports.handler = (argv) => {
+  tools.checkConfig(CFILE)
+  const config = noon.load(CFILE)
   const url = 'http://api.datamuse.com/metrics'
   needle.get(url, (error, response) => {
     if (!error && response.statusCode === 200) {
@@ -23,4 +31,9 @@ exports.handler = (argv) => {
       console.error(`${chalk.red.bold(`HTTP ${response.statusCode}:`)} ${chalk.red(error)}`)
     }
   })
+  const limit = config.dmuse.date.limit
+  const remain = config.dmuse.date.remain
+  const stamp = new Date(config.dmuse.date.stamp)
+  const reset = 24 - moment(new Date).diff(stamp, 'hours')
+  console.log(chalk.white(`${remain}/${limit} requests remain today, will reset in ${reset} hours.`))
 }
