@@ -6,7 +6,6 @@ As of right now, I am the only one contributing to this project. I welcome you t
 
 - Managed with [Gulp](http://gulpjs.com) plugins.
 - The **build** task transpiles all ES6 code to ES5 using [Babel](http://babeljs.io) and pipes to the build folder. Sourcemaps are inlined for code coverage.
-- The **min** task minifies the ES5 code and pipes to the bin folder.
 
 ### Changelog & Versioning
 
@@ -21,5 +20,5 @@ Code is linted with [ESLint](http://eslint.org). If you want to contribute code 
 
 ### Testing
 
-- Test runner - [Lab](https://github.com/hapijs/lab)
-- Assertions - [Code](https://github.com/hapijs/code)
+- Test runner - [Mocha](http://mochajs.org)
+- Assertions - [Chai](http://chaijs.org)
