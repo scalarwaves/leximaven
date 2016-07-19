@@ -110,7 +110,11 @@ exports.handler = (argv) => {
     let url = `${uri}${rest}`
     url = encodeURI(url)
     themes.labelDown('Pronunciations', theme, null)
-    const tofile = { type: 'pronunciation', source: 'http://www.wordnik.com' }
+    const tofile = {
+      type: 'pronunciation',
+      source: 'http://www.wordnik.com',
+      url,
+    }
     tofile.word = word
     needle.get(url, (error, response) => {
       if (!error && response.statusCode === 200) {

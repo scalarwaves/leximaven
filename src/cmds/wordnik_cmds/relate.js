@@ -104,7 +104,11 @@ exports.handler = (argv) => {
     let url = `${uri}${rest}`
     url = encodeURI(url)
     themes.labelDown('Related words', theme, null)
-    const tofile = { type: 'related words', source: 'http://www.wordnik.com' }
+    const tofile = {
+      type: 'related words',
+      source: 'http://www.wordnik.com',
+      url,
+    }
     tofile.word = word
     needle.get(url, (error, response) => {
       if (!error && response.statusCode === 200) {

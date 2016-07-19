@@ -91,7 +91,11 @@ exports.handler = (argv) => {
     const rest = pcont.join('')
     let url = `${uri}${rest}`
     url = encodeURI(url)
-    const tofile = { type: 'rhyme', source: 'http://rhymebrain.com' }
+    const tofile = {
+      type: 'rhyme',
+      source: 'http://rhymebrain.com',
+      url,
+    }
     const ctstyle = _.get(chalk, theme.content.style)
     needle.get(url, (error, response) => {
       if (!error && response.statusCode === 200) {

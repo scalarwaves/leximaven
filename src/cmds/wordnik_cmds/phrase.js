@@ -102,7 +102,11 @@ exports.handler = (argv) => {
     let url = `${uri}${rest}`
     url = encodeURI(url)
     themes.labelDown('Bi-gram phrases', theme, null)
-    const tofile = { type: 'phrase', source: 'http://www.wordnik.com' }
+    const tofile = {
+      type: 'phrase',
+      source: 'http://www.wordnik.com',
+      url,
+    }
     needle.get(url, (error, response) => {
       if (!error && response.statusCode === 200) {
         const list = response.body

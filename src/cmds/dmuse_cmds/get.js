@@ -94,7 +94,11 @@ exports.handler = (argv) => {
       adv: 'adverb',
       syn: 'synonym',
     }
-    const tofile = { type: 'datamuse', source: 'http://datamuse.com/api' }
+    const tofile = {
+      type: 'datamuse',
+      source: 'http://datamuse.com/api',
+      url,
+    }
     const ctstyle = _.get(chalk, theme.content.style)
     needle.get(url, (error, response) => {
       if (!error && response.statusCode === 200) {

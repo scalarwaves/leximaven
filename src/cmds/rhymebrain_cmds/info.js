@@ -86,7 +86,11 @@ exports.handler = (argv) => {
     let url = `${uri}${rest}`
     url = encodeURI(url)
     themes.labelDown('Word Info', theme, null)
-    const tofile = { type: 'word info', source: 'http://rhymebrain.com' }
+    const tofile = {
+      type: 'word info',
+      source: 'http://rhymebrain.com',
+      url,
+    }
     const ctstyle = _.get(chalk, theme.content.style)
     needle.get(url, (error, response) => {
       if (!error && response.statusCode === 200) {

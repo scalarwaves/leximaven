@@ -101,7 +101,11 @@ exports.handler = (argv) => {
     const rest = pcont.join('')
     let url = `${uri}${rest}`
     url = encodeURI(url)
-    const tofile = { type: 'hyphenation', source: 'http://www.wordnik.com' }
+    const tofile = {
+      type: 'hyphenation',
+      source: 'http://www.wordnik.com',
+      url,
+    }
     const ctstyle = _.get(chalk, theme.content.style)
     needle.get(url, (error, response) => {
       if (!error && response.statusCode === 200) {

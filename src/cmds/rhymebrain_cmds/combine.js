@@ -92,7 +92,11 @@ exports.handler = (argv) => {
     let url = `${uri}${rest}`
     url = encodeURI(url)
     themes.labelDown('Portmanteaus', theme, null)
-    const tofile = { type: 'portmanteau', source: 'http://rhymebrain.com' }
+    const tofile = {
+      type: 'portmanteau',
+      source: 'http://rhymebrain.com',
+      url,
+    }
     needle.get(url, (error, response) => {
       if (!error && response.statusCode === 200) {
         const list = response.body

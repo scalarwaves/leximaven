@@ -150,7 +150,11 @@ exports.handler = (argv) => {
   const rest = pcont.join('')
   let url = `${uri}${rest}`
   url = encodeURI(url)
-  const tofile = { type: 'anagram', source: 'http://wordsmith.org/' }
+  const tofile = {
+    type: 'anagram',
+    source: 'http://wordsmith.org/',
+    url,
+  }
   const ctstyle = _.get(chalk, theme.content.style)
   const spinner = ora({
     text: `${chalk.bold.cyan('Loading anagrams...')}`,

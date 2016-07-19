@@ -62,7 +62,11 @@ exports.handler = (argv) => {
   }
   let url = `http://api.urbandictionary.com/v0/define?term=${words}`
   url = encodeURI(url)
-  const tofile = { type: 'urban', source: 'http://www.urbandictionary.com' }
+  const tofile = {
+    type: 'urban',
+    source: 'http://www.urbandictionary.com',
+    url,
+  }
   needle.get(url, (error, response) => {
     if (!error && response.statusCode === 200) {
       const limit = config.urban.limit

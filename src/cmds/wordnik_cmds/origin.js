@@ -87,7 +87,11 @@ exports.handler = (argv) => {
     let url = `${uri}${rest}`
     url = encodeURI(url)
     const parser = new xml2js.Parser()
-    const tofile = { type: 'etymology', source: 'http://www.wordnik.com' }
+    const tofile = {
+      type: 'etymology',
+      source: 'http://www.wordnik.com',
+      url,
+    }
     const ctstyle = _.get(chalk, theme.content.style)
     needle.get(url, (error, response) => {
       if (!error && response.statusCode === 200) {

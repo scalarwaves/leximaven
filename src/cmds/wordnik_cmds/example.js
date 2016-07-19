@@ -106,7 +106,11 @@ exports.handler = (argv) => {
     const rest = pcont.join('')
     let url = `${uri}${rest}`
     url = encodeURI(url)
-    const tofile = { type: 'example', source: 'http://www.wordnik.com' }
+    const tofile = {
+      type: 'example',
+      source: 'http://www.wordnik.com',
+      url,
+    }
     needle.get(url, (error, response) => {
       if (!error && response.statusCode === 200) {
         const list = response.body.examples

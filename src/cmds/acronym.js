@@ -31,7 +31,11 @@ exports.handler = (argv) => {
   if (config.verbose) themes.labelDown('Acronyms', theme, null)
   const acronym = argv.acronym.toUpperCase()
   const url = `http://acronyms.silmaril.ie/cgi-bin/xaa?${argv.acronym}`
-  const tofile = { type: 'acronym', source: 'http://acronyms.silmaril.ie' }
+  const tofile = {
+    type: 'acronym',
+    source: 'http://acronyms.silmaril.ie',
+    url,
+  }
   const ctstyle = _.get(chalk, theme.content.style)
   needle.get(url, (error, response) => {
     if (!error && response.statusCode === 200) {

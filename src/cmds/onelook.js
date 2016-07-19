@@ -76,7 +76,11 @@ exports.handler = (argv) => {
     if (config.verbose) themes.labelDown('Onelook', theme, null)
     let url = `http://onelook.com/?xml=1&w=${argv.word}`
     url = encodeURI(url)
-    const tofile = { type: 'onelook', source: 'http://www.onelook.com' }
+    const tofile = {
+      type: 'onelook',
+      source: 'http://www.onelook.com',
+      url,
+    }
     const ctstyle = _.get(chalk, theme.content.style)
     needle.get(url, (error, response) => {
       if (!error && response.statusCode === 200) {
