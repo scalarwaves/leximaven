@@ -33,24 +33,32 @@ exports.handler = (argv) => {
   }
   if (fileExists) {
     if (argv.f) {
-      console.log(`Overwrote ${chalk.white.bold(CFILE)}.`)
+      const config = noon.load(CFILE)
+      obj.dmuse.date.stamp = config.dmuse.date.stamp
+      obj.onelook.date.stamp = config.onelook.date.stamp
+      obj.rbrain.date.stamp = config.rbrain.date.stamp
+      obj.wordnik.date.stamp = config.wordnik.date.stamp
       noon.save(CFILE, obj)
+      console.log(`Overwrote ${chalk.white.bold(CFILE)}.`)
     } else {
       console.log(`Using configuration at ${chalk.white.bold(CFILE)}.`)
     }
   } else if (!fileExists) {
-    console.log(`Created ${chalk.white.bold(CFILE)}.`)
     noon.save(CFILE, obj)
+    console.log(`Created ${chalk.white.bold(CFILE)}.`)
   }
   const config = noon.load(CFILE)
   const theme = themes.loadTheme(config.theme)
-  if (config.verbose) themes.labelDown('Configuration', theme, null)
-  console.log('Your current configuration is:')
-  console.log(noon.stringify(config, {
-    indent: 2,
-    align: true,
-    maxalign: 32,
-    sort: true,
-    colors: true,
-  }))
+  if (argv.v) {
+    themes.labelDown('Configuration', theme, null)
+    console.log('Your current configuration is:')
+    console.log(noon.stringify(config, {
+      indent: 2,
+      align: true,
+      maxalign: 32,
+      sort: true,
+      colors: true,
+    }))
+    console.log('')
+  }
 }
