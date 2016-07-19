@@ -1,42 +1,42 @@
 anagram
   case  1
   lang  english
+  limit  10
   linenum  false
   list  false
-  limit  10
-  minletter  1
   maxletter  50
   maxword  10
+  minletter  1
   repeat  false
 dmuse
-  max  5
   date
-    stamp  ||
     interval  day
     limit  100000
     remain  100000
-onelook
-  links  false
-  date
     stamp  ||
+  max  5
+merge  true
+onelook
+  date
     interval  day
     limit  10000
     remain  10000
-merge  true
+    stamp  ||
+  links  false
 rbrain
   combine
     lang  en
     max  5
+  date
+    interval  hour
+    limit  350
+    remain  350
+    stamp  ||
   info
     lang  en
   rhyme
     lang  en
     max  50
-  date
-    stamp  ||
-    interval  hour
-    limit  350
-    remain  350
 theme  square
 urban
   limit  5
@@ -44,6 +44,11 @@ verbose  false
 wordmap
   limit  1
 wordnik
+  date
+    interval  hour
+    limit  15000
+    remain  15000
+    stamp  ||
   define
     canon  false
     defdict  all
@@ -72,8 +77,3 @@ wordnik
     canon  false
     limit  10
     type  ||
-  date
-    stamp  ||
-    interval  hour
-    limit  15000
-    remain  15000
