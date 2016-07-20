@@ -43,13 +43,14 @@ exports.handler = (argv) => {
   let config = noon.load(CFILE)
   let proceed = false
   const stamp = new Date(config.dmuse.date.stamp)
-  const now = new Date
-  const diff = moment(now).diff(stamp, 'hours')
-  const reset = 24 - diff
+  const now = moment(new Date).diff(stamp, 'hours')
+  const diff = 24 - now
+  let reset = false
   if (diff < 24) {
     config.dmuse.date.remain = config.dmuse.date.remain - 1
     noon.save(CFILE, config)
   } else if (diff >= 24) {
+    reset = true
     config.dmuse.date.stamp = moment().format()
     config.dmuse.date.remain = config.dmuse.date.limit
     console.log(chalk.white(`Reset API limit to ${config.dmuse.date.limit}/${config.dmuse.date.interval}.`))
@@ -123,7 +124,11 @@ exports.handler = (argv) => {
         if (argv.o) tools.outFile(argv.o, argv.f, tofile)
         if (argv.s && config.merge) noon.save(CFILE, config)
         if (argv.s && !config.merge) console.err(chalk.red('Set option merge to true!'))
-        console.log(`${config.dmuse.date.remain}/${config.dmuse.date.limit} requests remaining today, will reset in ${reset} hours.`)
+        if (reset) {
+          console.log(`${config.dmuse.date.remain}/${config.dmuse.date.limit} requests remaining today.`)
+        } else {
+          console.log(`${config.dmuse.date.remain}/${config.dmuse.date.limit} requests remaining today, will reset in ${diff} hours.`)
+        }
       } else {
         console.error(`${chalk.red.bold(`HTTP ${response.statusCode}:`)} ${chalk.red(error)}`)
       }

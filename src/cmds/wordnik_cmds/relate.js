@@ -55,9 +55,9 @@ exports.handler = (argv) => {
   let config = noon.load(CFILE)
   let proceed = false
   const stamp = new Date(config.wordnik.date.stamp)
-  const now = new Date
-  const diff = moment(now).diff(stamp, 'minutes')
-  const reset = 60 - diff
+  const now = moment(new Date).diff(stamp, 'minutes')
+  const diff = 60 - now
+  let reset = false
   if (diff < 60) {
     config.wordnik.date.remain = config.wordnik.date.remain - 1
     noon.save(CFILE, config)
@@ -79,10 +79,12 @@ exports.handler = (argv) => {
   }
   if (proceed) {
     const userConfig = {
-      relate: {
-        canon: argv.c,
-        type: argv.t,
-        limit: argv.l,
+      wordnik: {
+        relate: {
+          canon: argv.c,
+          type: argv.t,
+          limit: argv.l,
+        },
       },
     }
     if (config.merge) config = _.merge({}, config, userConfig)
@@ -122,7 +124,11 @@ exports.handler = (argv) => {
         if (argv.o) tools.outFile(argv.o, argv.f, tofile)
         if (argv.s && config.merge) noon.save(CFILE, config)
         if (argv.s && !config.merge) console.err(chalk.red('Set option merge to true!'))
-        console.log(`${config.wordnik.date.remain}/${config.wordnik.date.limit} requests remaining this hour, will reset in ${reset} minutes.`)
+        if (reset) {
+          console.log(`${config.wordnik.date.remain}/${config.wordnik.date.limit} requests remaining this hour.`)
+        } else {
+          console.log(`${config.wordnik.date.remain}/${config.wordnik.date.limit} requests remaining this hour, will reset in ${diff} minutes.`)
+        }
       } else {
         console.error(`${chalk.red.bold(`HTTP ${response.statusCode}:`)} ${chalk.red(error)}`)
       }

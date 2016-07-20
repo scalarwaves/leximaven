@@ -43,13 +43,14 @@ exports.handler = (argv) => {
   let config = noon.load(CFILE)
   let proceed = false
   const stamp = new Date(config.rbrain.date.stamp)
-  const now = new Date
-  const diff = moment(now).diff(stamp, 'minutes')
-  const reset = 60 - diff
+  const now = moment(new Date).diff(stamp, 'minutes')
+  const diff = 60 - now
+  let reset = false
   if (diff < 60) {
     config.rbrain.date.remain = config.rbrain.date.remain - 1
     noon.save(CFILE, config)
   } else if (diff >= 60) {
+    reset = true
     config.rbrain.date.stamp = moment().format()
     config.rbrain.date.remain = config.rbrain.date.limit
     console.log(chalk.white(`Reset API limit to ${config.rbrain.date.limit}/${config.rbrain.date.interval}.`))
@@ -67,9 +68,11 @@ exports.handler = (argv) => {
   }
   if (proceed) {
     const userConfig = {
-      info: {
-        lang: argv.l,
-        max: argv.m,
+      rbrain: {
+        info: {
+          lang: argv.l,
+          max: argv.m,
+        },
       },
     }
     if (config.merge) config = _.merge({}, config, userConfig)
@@ -118,7 +121,11 @@ exports.handler = (argv) => {
         if (argv.o) tools.outFile(argv.o, argv.f, tofile)
         if (argv.s && config.merge) noon.save(CFILE, config)
         if (argv.s && !config.merge) console.err(chalk.red('Set option merge to true!'))
-        console.log(`${config.rbrain.date.remain}/${config.rbrain.date.limit} requests remaining this hour, will reset in ${reset} minutes.`)
+        if (reset) {
+          console.log(`${config.rbrain.date.remain}/${config.rbrain.date.limit} requests remaining this hour.`)
+        } else {
+          console.log(`${config.rbrain.date.remain}/${config.rbrain.date.limit} requests remaining this hour, will reset in ${diff} minutes.`)
+        }
       } else {
         console.error(`${chalk.red.bold(`HTTP ${response.statusCode}:`)} ${chalk.red(error)}`)
       }
