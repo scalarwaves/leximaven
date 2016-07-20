@@ -102,7 +102,6 @@ exports.handler = (argv) => {
     const ctstyle = _.get(chalk, theme.content.style)
     needle.get(url, (error, response) => {
       if (!error && response.statusCode === 200) {
-        console.log(response.body)
         const list = response.body
         const lcont = []
         for (let i = 0; i <= list.length - 1; i++) {
