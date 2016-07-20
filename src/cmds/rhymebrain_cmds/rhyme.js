@@ -40,7 +40,7 @@ exports.builder = {
   max: {
     alias: 'm',
     desc: 'Max results to return',
-    default: 50,
+    default: 5,
     type: 'number',
   },
 }
@@ -49,13 +49,14 @@ exports.handler = (argv) => {
   let config = noon.load(CFILE)
   let proceed = false
   const stamp = new Date(config.rbrain.date.stamp)
-  const now = new Date
-  const diff = moment(now).diff(stamp, 'minutes')
-  const reset = 60 - diff
+  const now = moment(new Date).diff(stamp, 'minutes')
+  const diff = 60 - now
+  let reset = false
   if (diff < 60) {
     config.rbrain.date.remain = config.rbrain.date.remain - 1
     noon.save(CFILE, config)
   } else if (diff >= 60) {
+    reset = true
     config.rbrain.date.stamp = moment().format()
     config.rbrain.date.remain = config.rbrain.date.limit
     console.log(chalk.white(`Reset API limit to ${config.rbrain.date.limit}/${config.rbrain.date.interval}.`))
@@ -73,9 +74,11 @@ exports.handler = (argv) => {
   }
   if (proceed) {
     const userConfig = {
-      rhyme: {
-        lang: argv.l,
-        max: argv.m,
+      rbrain: {
+        rhyme: {
+          lang: argv.l,
+          max: argv.m,
+        },
       },
     }
     if (config.merge) config = _.merge({}, config, userConfig)
@@ -99,22 +102,38 @@ exports.handler = (argv) => {
     const ctstyle = _.get(chalk, theme.content.style)
     needle.get(url, (error, response) => {
       if (!error && response.statusCode === 200) {
+        console.log(response.body)
         const list = response.body
-        const rcont = []
+        const lcont = []
         for (let i = 0; i <= list.length - 1; i++) {
           const item = list[i]
+          lcont.push(item.word)
+        }
+        lcont.sort((a, b) => {
+          if (a < b) return -1
+          if (a > b) return 1
+          return 0
+        })
+        const rcont = []
+        for (let j = 0; j <= lcont.length - 1; j++) {
+          const item = lcont[j]
           rcont.push(ctstyle(`${item.word}`))
           if (item.score >= 300) {
-            tofile[[`hiscore${i}`]] = item.word
+            tofile[[`hiscore${j}`]] = item.word
           } else {
-            tofile[[`rhyme${i}`]] = item.word
+            tofile[[`rhyme${j}`]] = item.word
           }
         }
-        themes.labelRight('Rhymes', theme, rcont.join(','))
+        rcont.sort()
+        themes.labelRight('Rhymes', theme, rcont.join(', '))
         if (argv.o) tools.outFile(argv.o, argv.f, tofile)
         if (argv.s && config.merge) noon.save(CFILE, config)
         if (argv.s && !config.merge) console.err(chalk.red('Set option merge to true!'))
-        console.log(`${config.rbrain.date.remain}/${config.rbrain.date.limit} requests remaining this hour, will reset in ${reset} minutes.`)
+        if (reset) {
+          console.log(`${config.rbrain.date.remain}/${config.rbrain.date.limit} requests remaining this hour.`)
+        } else {
+          console.log(`${config.rbrain.date.remain}/${config.rbrain.date.limit} requests remaining this hour, will reset in ${diff} minutes.`)
+        }
       } else {
         console.error(`${chalk.red.bold(`HTTP ${response.statusCode}:`)} ${chalk.red(error)}`)
       }
