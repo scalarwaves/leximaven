@@ -35,9 +35,13 @@ exports.handler = (argv) => {
     if (argv.f) {
       const config = noon.load(CFILE)
       obj.dmuse.date.stamp = config.dmuse.date.stamp
+      obj.dmuse.date.remain = config.dmuse.date.remain
       obj.onelook.date.stamp = config.onelook.date.stamp
+      obj.onelook.date.remain = config.onelook.date.remain
       obj.rbrain.date.stamp = config.rbrain.date.stamp
+      obj.rbrain.date.remain = config.rbrain.date.remain
       obj.wordnik.date.stamp = config.wordnik.date.stamp
+      obj.wordnik.date.remain = config.wordnik.date.remain
       noon.save(CFILE, obj)
       console.log(`Overwrote ${chalk.white.bold(CFILE)}.`)
     } else {

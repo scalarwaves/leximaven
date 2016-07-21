@@ -1,18 +1,62 @@
 /* eslint max-len: 0 */
 const CFILE = `${process.env.HOME}/.leximaven.noon`
+const TFILE = `${process.cwd()}/test/test.config.noon`
 const child = require('child_process')
 const expect = require('chai').expect
 const fs = require('fs-extra')
 const noon = require('noon')
-const path = require('path')
 const version = require('../package.json').version
 
 describe('command', () => {
   before((done) => {
     fs.mkdirpSync('test/output')
+    const obj = noon.load(TFILE)
+    obj.dmuse.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+    obj.onelook.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+    obj.rbrain.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+    obj.wordnik.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+    let fileExists = null
+    try {
+      fs.statSync(CFILE)
+      fileExists = true
+    } catch (e) {
+      if (e.code === 'ENOENT') {
+        fileExists = false
+      }
+    }
+    if (fileExists) {
+      const config = noon.load(CFILE)
+      obj.dmuse.date.stamp = config.dmuse.date.stamp
+      obj.dmuse.date.remain = config.dmuse.date.remain
+      obj.onelook.date.stamp = config.onelook.date.stamp
+      obj.onelook.date.remain = config.onelook.date.remain
+      obj.rbrain.date.stamp = config.rbrain.date.stamp
+      obj.rbrain.date.remain = config.rbrain.date.remain
+      obj.wordnik.date.stamp = config.wordnik.date.stamp
+      obj.wordnik.date.remain = config.wordnik.date.remain
+      fs.copySync(CFILE, 'test/output/saved.config.noon')
+      noon.save(CFILE, obj)
+    } else {
+      noon.save(CFILE, obj)
+    }
     done()
   })
   after((done) => {
+    let fileExists = null
+    try {
+      fs.statSync('test/output/saved.config.noon')
+      fileExists = true
+    } catch (e) {
+      if (e.code === 'ENOENT') {
+        fileExists = false
+      }
+    }
+    if (fileExists) {
+      fs.removeSync(CFILE)
+      fs.copySync('test/output/saved.config.noon', CFILE)
+    } else {
+      fs.removeSync(CFILE)
+    }
     fs.removeSync('test/output')
     done()
   })
@@ -24,6 +68,7 @@ describe('command', () => {
         const obj = {
           type: 'acronym',
           source: 'http://acronyms.silmaril.ie',
+          url: 'http://acronyms.silmaril.ie/cgi-bin/xaa?DDC',
           expansion0: 'Dewey Decimal Classification',
           comment0: 'library and knowledge classification system',
           url0: 'http://www.oclc.org/dewey/',
@@ -52,6 +97,7 @@ describe('command', () => {
         const obj = {
           type: 'anagram',
           source: 'http://wordsmith.org/',
+          url: 'http://wordsmith.org/anagram/anagram.cgi?anagram=ubiquity&language=english&t=10&d=10&include=&exclude=&n=1&m=50&a=n&l=n&q=n&k=1&src=adv',
           found: '2',
           show: 'all',
           alist: [
@@ -59,7 +105,7 @@ describe('command', () => {
             'Buy I Quit',
           ],
         }
-        expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[Anagrams\]\sAnagrams for: [a-z]*\s\d* found. Displaying all:\s[a-z\s]*/mig)
+        expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[Anagrams\]\sAnagrams for: [a-z]*\s\d* found. Displaying all:\s[a-z\/\.\s]*/mig)
         expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
         done(err)
       })
@@ -96,7 +142,7 @@ describe('command', () => {
     it('shows output', (done) => {
       child.exec(`node ${process.cwd()}/build/leximaven.js map ubiquity > test/output/map.out`, (err) => {
         const stdout = fs.readFileSync('test/output/map.out', 'utf8')
-        expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z0-9\[\],→ ;:'\?"\(\)-\.√©ĭēˈɪ”]*/mig)
+        expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z0-9\[\],→ ;:'\?"\(\)-…\/\.√©ĭēˈɪ”]*/mig)
         done(err)
       })
     })
@@ -108,12 +154,13 @@ describe('command', () => {
         const obj = {
           type: 'onelook',
           source: 'http://www.onelook.com',
+          url: 'http://onelook.com/?xml=1&w=ubiquity',
           definition: 'noun: the state of being everywhere at once (or seeming to be everywhere at once)',
           phrase: 'ubiquity records',
           sim: 'omnipresence,ubiquitousness',
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/onelook.json`)
-        expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z\[\]:\(\)→ \/\.,]*/mig)
+        expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z0-9\[\]:\(\)→ \/\.,]*/mig)
         expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
         done(err)
       })
@@ -126,6 +173,7 @@ describe('command', () => {
         const obj = {
           type: 'urban',
           source: 'http://www.urbandictionary.com',
+          url: 'http://api.urbandictionary.com/v0/define?term=ubiquity',
           definition0: 'Omnipresent; An existence or perceived existence of being everywhere at once.',
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/urban.json`)
@@ -148,9 +196,51 @@ describe('command', () => {
 describe('dmuse command', () => {
     before((done) => {
       fs.mkdirpSync('test/output')
+      const obj = noon.load(TFILE)
+      obj.dmuse.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+      obj.onelook.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+      obj.rbrain.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+      obj.wordnik.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+      let fileExists = null
+      try {
+        fs.statSync(CFILE)
+        fileExists = true
+      } catch (e) {
+        if (e.code === 'ENOENT') {
+          fileExists = false
+        }
+      }
+      if (fileExists) {
+        const config = noon.load(CFILE)
+        obj.dmuse.date.stamp = config.dmuse.date.stamp
+        obj.dmuse.date.remain = config.dmuse.date.remain
+        obj.onelook.date.stamp = config.onelook.date.stamp
+        obj.onelook.date.remain = config.onelook.date.remain
+        obj.rbrain.date.stamp = config.rbrain.date.stamp
+        obj.rbrain.date.remain = config.rbrain.date.remain
+        obj.wordnik.date.stamp = config.wordnik.date.stamp
+        obj.wordnik.date.remain = config.wordnik.date.remain
+        fs.copySync(CFILE, 'test/output/saved.config.noon')
+      }
+      noon.save(CFILE, obj)
       done()
     })
     after((done) => {
+      let fileExists = null
+      try {
+        fs.statSync('test/output/saved.config.noon')
+        fileExists = true
+      } catch (e) {
+        if (e.code === 'ENOENT') {
+          fileExists = false
+        }
+      }
+      if (fileExists) {
+        fs.removeSync(CFILE)
+        fs.copySync('test/output/saved.config.noon', CFILE)
+      } else {
+        fs.removeSync(CFILE)
+      }
       fs.removeSync('test/output')
       done()
     })
@@ -179,7 +269,7 @@ describe('dmuse command', () => {
       it('shows metrics', (done) => {
         child.exec(`node ${process.cwd()}/build/leximaven.js dmuse info > test/output/dmuse-info.out`, err => {
           const stdout = fs.readFileSync('test/output/dmuse-info.out', 'utf8')
-          expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[\w ]*\(v\d\): \d*.\d*\s[\w \(\/\):\.,%]*\s[\w \(\/\):\.,%]*/)
+          expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z0-9\/ ,\.]*\s[\w ]*\(v\d\): \d*.\d*\s[\w \(\/\):\.,%]*\s[\w \(\/\):\.,%]*/)
           done(err)
         })
       })
@@ -189,11 +279,11 @@ describe('dmuse command', () => {
 describe('config command', () => {
   before((done) => {
     fs.mkdirpSync('test/output')
-    fs.copySync(CFILE, 'test/output/.leximaven.noon')
+    fs.copySync(CFILE, 'test/output/saved.config.noon')
     done()
   })
   after((done) => {
-    fs.copySync('test/output/.leximaven.noon', CFILE)
+    fs.copySync('test/output/saved.config.noon', CFILE)
     fs.removeSync('test/output')
     done()
   })
@@ -219,66 +309,51 @@ describe('config command', () => {
           anagram: {
             case: 1,
             lang: 'english',
+            limit: 10,
             linenum: false,
             list: false,
-            limit: 10,
-            minletter: 1,
             maxletter: 50,
             maxword: 10,
+            minletter: 1,
             repeat: false,
           },
-          combine: {
-            lang: 'en',
-            max: 5,
-          },
-          define: {
-            canon: false,
-            defdict: 'all',
-            limit: 5,
-            part: '',
-          },
           dmuse: {
+            date: {
+              interval: 'day',
+              limit: 100000,
+              remain: 100000,
+              stamp: '',
+            },
             max: 5,
-          },
-          example: {
-            canon: false,
-            limit: 5,
-            skip: 0,
-          },
-          hyphen: {
-            canon: false,
-            dict: 'all',
-            limit: 5,
-          },
-          info: {
-            lang: 'en',
-          },
-          onelook: {
-            links: false,
-          },
-          origin: {
-            canon: false,
-          },
-          phrase: {
-            canon: false,
-            limit: 5,
-            weight: 13,
           },
           merge: true,
-          pronounce: {
-            canon: false,
-            dict: '',
-            limit: 5,
-            type: '',
+          onelook: {
+            date: {
+              interval: 'day',
+              limit: 10000,
+              remain: 10000,
+              stamp: '',
+            },
+            links: false,
           },
-          relate: {
-            canon: false,
-            limit: 10,
-            type: '',
-          },
-          rhyme: {
-            lang: 'en',
-            max: 50,
+          rbrain: {
+            combine: {
+              lang: 'en',
+              max: 5,
+            },
+            date: {
+              interval: 'hour',
+              limit: 350,
+              remain: 350,
+              stamp: '',
+            },
+            info: {
+              lang: 'en',
+            },
+            rhyme: {
+              lang: 'en',
+              max: 50,
+            },
           },
           theme: 'square',
           urban: {
@@ -288,7 +363,58 @@ describe('config command', () => {
           wordmap: {
             limit: 1,
           },
+          wordnik: {
+            date: {
+              interval: 'hour',
+              limit: 15000,
+              remain: 15000,
+              stamp: '',
+            },
+            define: {
+              canon: false,
+              defdict: 'all',
+              limit: 5,
+              part: '',
+            },
+            example: {
+              canon: false,
+              limit: 5,
+              skip: 0,
+            },
+            hyphen: {
+              canon: false,
+              dict: 'all',
+              limit: 5,
+            },
+            origin: {
+              canon: false,
+            },
+            phrase: {
+              canon: false,
+              limit: 5,
+              weight: 13,
+            },
+            pronounce: {
+              canon: false,
+              dict: '',
+              limit: 5,
+              type: '',
+            },
+            relate: {
+              canon: false,
+              limit: 10,
+              type: '',
+            },
+          },
         }
+        config.dmuse.date.stamp = ''
+        config.dmuse.date.remain = 100000
+        config.onelook.date.stamp = ''
+        config.onelook.date.remain = 10000
+        config.rbrain.date.stamp = ''
+        config.rbrain.date.remain = 350
+        config.wordnik.date.stamp = ''
+        config.rbrain.date.remain = 15000
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/Created [\/a-z\.\s]*:\s[ a-z0-9\W]*/mig)
         expect(JSON.stringify(config, null, ' ')).to.equals(JSON.stringify(obj, null, ' '))
         done(err)
@@ -309,9 +435,51 @@ describe('config command', () => {
 describe('rbrain command', () => {
   before((done) => {
     fs.mkdirpSync('test/output')
+    const obj = noon.load(TFILE)
+    obj.dmuse.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+    obj.onelook.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+    obj.rbrain.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+    obj.wordnik.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+    let fileExists = null
+    try {
+      fs.statSync(CFILE)
+      fileExists = true
+    } catch (e) {
+      if (e.code === 'ENOENT') {
+        fileExists = false
+      }
+    }
+    if (fileExists) {
+      const config = noon.load(CFILE)
+      obj.dmuse.date.stamp = config.dmuse.date.stamp
+      obj.dmuse.date.remain = config.dmuse.date.remain
+      obj.onelook.date.stamp = config.onelook.date.stamp
+      obj.onelook.date.remain = config.onelook.date.remain
+      obj.rbrain.date.stamp = config.rbrain.date.stamp
+      obj.rbrain.date.remain = config.rbrain.date.remain
+      obj.wordnik.date.stamp = config.wordnik.date.stamp
+      obj.wordnik.date.remain = config.wordnik.date.remain
+      fs.copySync(CFILE, 'test/output/saved.config.noon')
+    }
+    noon.save(CFILE, obj)
     done()
   })
   after((done) => {
+    let fileExists = null
+    try {
+      fs.statSync('test/output/saved.config.noon')
+      fileExists = true
+    } catch (e) {
+      if (e.code === 'ENOENT') {
+        fileExists = false
+      }
+    }
+    if (fileExists) {
+      fs.removeSync(CFILE)
+      fs.copySync('test/output/saved.config.noon', CFILE)
+    } else {
+      fs.removeSync(CFILE)
+    }
     fs.removeSync('test/output')
     done()
   })
@@ -322,19 +490,12 @@ describe('rbrain command', () => {
         const obj = {
           type: 'portmanteau',
           source: 'http://rhymebrain.com',
+          url: 'http://rhymebrain.com/talk?function=getPortmanteaus&word=value&lang=en&maxResults=5&',
           set0: 'value,united',
           portmanteau0: 'valunited',
-          set1: 'value,unique',
-          portmanteau1: 'valunique',
-          set2: 'value,utility',
-          portmanteau2: 'valutility',
-          set3: 'value,uniqueness',
-          portmanteau3: 'valuniqueness',
-          set4: 'value,utilitarian',
-          portmanteau4: 'valutilitarian',
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/combine.json`)
-        expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[\[\]a-z,→ \/\.]*/mig)
+        expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[\[\]a-z0-9,→ -\/\.]*/mig)
         expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
         done(err)
       })
@@ -347,6 +508,7 @@ describe('rbrain command', () => {
         const obj = {
           type: 'word info',
           source: 'http://rhymebrain.com',
+          url: 'http://rhymebrain.com/talk?function=getWordInfo&word=ubiquity&lang=en&maxResults=undefined&',
           arpabet: 'Y UW0 B IH1 K W IH0 T IY0',
           ipa: 'juˈbɪkwɪti',
           syllables: '4',
@@ -354,7 +516,7 @@ describe('rbrain command', () => {
           trusted: true,
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/info.json`)
-        expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[\[\]a-z0-9 →ˈɪ\/\.,]*/mig)
+        expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[\[\]a-z0-9 -→ˈɪ\/\.,]*/mig)
         expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
         done(err)
       })
@@ -362,11 +524,12 @@ describe('rbrain command', () => {
   })
   describe('rhyme', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js rbrain rhyme -m5 -o ${process.cwd()}/test/output/rhyme.json ubiquity > test/output/rhyme.out`, (err) => {
+      child.exec(`node ${process.cwd()}/build/leximaven.js rbrain rhyme -o ${process.cwd()}/test/output/rhyme.json ubiquity > test/output/rhyme.out`, (err) => {
         const stdout = fs.readFileSync('test/output/rhyme.out', 'utf8')
         const obj = {
           type: 'rhyme',
           source: 'http://rhymebrain.com',
+          url: 'http://rhymebrain.com/talk?function=getRhymes&word=ubiquity&lang=en&maxResults=5&',
           rhyme0: 'stability',
           rhyme1: 'typically',
           rhyme2: 'specifically',
@@ -385,15 +548,57 @@ describe('rbrain command', () => {
 describe('wordnik command', () => {
   before((done) => {
     fs.mkdirpSync('test/output')
+    const obj = noon.load(TFILE)
+    obj.dmuse.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+    obj.onelook.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+    obj.rbrain.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+    obj.wordnik.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+    let fileExists = null
+    try {
+      fs.statSync(CFILE)
+      fileExists = true
+    } catch (e) {
+      if (e.code === 'ENOENT') {
+        fileExists = false
+      }
+    }
+    if (fileExists) {
+      const config = noon.load(CFILE)
+      obj.dmuse.date.stamp = config.dmuse.date.stamp
+      obj.dmuse.date.remain = config.dmuse.date.remain
+      obj.onelook.date.stamp = config.onelook.date.stamp
+      obj.onelook.date.remain = config.onelook.date.remain
+      obj.rbrain.date.stamp = config.rbrain.date.stamp
+      obj.rbrain.date.remain = config.rbrain.date.remain
+      obj.wordnik.date.stamp = config.wordnik.date.stamp
+      obj.wordnik.date.remain = config.wordnik.date.remain
+      fs.copySync(CFILE, 'test/output/saved.config.noon')
+    }
+    noon.save(CFILE, obj)
     done()
   })
   after((done) => {
+    let fileExists = null
+    try {
+      fs.statSync('test/output/saved.config.noon')
+      fileExists = true
+    } catch (e) {
+      if (e.code === 'ENOENT') {
+        fileExists = false
+      }
+    }
+    if (fileExists) {
+      fs.removeSync(CFILE)
+      fs.copySync('test/output/saved.config.noon', CFILE)
+    } else {
+      fs.removeSync(CFILE)
+    }
     fs.removeSync('test/output')
     done()
   })
   describe('define', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik define -l1 -o ${process.cwd()}/test/output/define.json ubiquity > test/output/define.out`, (err) => {
+      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik define -o ${process.cwd()}/test/output/define.json ubiquity > test/output/define.out`, (err) => {
         const stdout = fs.readFileSync('test/output/define.out', 'utf8')
         const obj = {
           type: 'definition',
@@ -411,7 +616,7 @@ describe('wordnik command', () => {
   })
   describe('example', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik example -l1 -o ${process.cwd()}/test/output/example.json ubiquity > test/output/example.out`, (err) => {
+      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik example -o ${process.cwd()}/test/output/example.json ubiquity > test/output/example.out`, (err) => {
         const stdout = fs.readFileSync('test/output/example.out', 'utf8')
         const obj = {
           type: 'example',
@@ -470,8 +675,6 @@ describe('wordnik command', () => {
           source: 'http://www.wordnik.com',
           agram0: 'ubiquitous',
           bgram0: 'amoeba',
-          agram1: 'ubiquitous',
-          bgram1: 'fakes',
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/phrase.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z\[\]\-\s]*Wrote data to [a-z\/\.]*/mig)
@@ -510,16 +713,6 @@ describe('wordnik command', () => {
           word: 'ubiquity',
           type0: 'antonym',
           words0: 'uniquity',
-          type1: 'hypernym',
-          words1: 'presence',
-          type2: 'cross-reference',
-          words2: 'ubiquity of the king, coefficient',
-          type3: 'synonym',
-          words3: 'omnipresence',
-          type4: 'rhyme',
-          words4: 'iniquity',
-          type5: 'same-context',
-          words5: 'omnipresence, omniscience, self-existence, omnipotence, arahantship, timelessness, Catholicism, invincibility, nondiscrimination, barracoon',
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/relate.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z \[\],\-→]*\sWrote data to [a-z\/\.]*/mig)
