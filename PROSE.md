@@ -12,7 +12,7 @@ I looked down at his feathery friends.
 He squinted at me and said, "A seed easy?"
 I replied, "No, 'eh bee seedy."
 A young couple was approaching us. My companion owlgled the lady and said,
-"See that bird with the feather in her cap? She let me touch her titmouse."
+"See that chick with the feather in her cap? She let me touch her titmouse."
 The young man turned cardinal red and said, "I should pfinch your face in!" The
 homeless man flipped him the bird and shouted, "You're too scared to try it,
 you yellow-bellied sapsucker!" As they hurried away, the young man muttered,
@@ -22,7 +22,7 @@ I dodon't know what to say. The indignent just sat there puffin on his halfpipe.
 "Crackpot."
 "You can slow-cock a rooster hen one of those, just chickadee timer often."
 "Yeah, but my brownies always come out hash-baked."
-"Well, maybe you just need some potluck. Here's a five-leaf clover."
+"Well, maybe you just need some potluck. Here's a five-leaf clover, a tokin' of my appreciation."
 "What kind bud?"
 "This strainge? Blueberrdy."
 He took the nice nugget from me and said, "Dank." He rolled a joint and bluntly
