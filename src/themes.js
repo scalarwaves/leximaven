@@ -24,12 +24,10 @@ exports.loadTheme = (theme) => noon.load(`themes/${theme}.noon`)
 exports.getThemes = () => {
   const list = []
   const files = glob.sync('themes/*.noon')
-  for (let i = 0; i <= files.length - 1; i++) {
-    const filename = files[i]
-    const prefix = filename.replace(/themes\//, '')
-    const suffix = prefix.replace(/\.noon/, '')
-    list.push(suffix)
-  }
+  _.each(files, (path) => {
+    const name = path.replace(/themes\/|\.noon/, '')
+    list.push(name)
+  })
   return list
 }
 

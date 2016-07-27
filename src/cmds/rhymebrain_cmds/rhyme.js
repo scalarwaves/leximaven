@@ -104,10 +104,9 @@ exports.handler = (argv) => {
       if (!error && response.statusCode === 200) {
         const list = response.body
         const lcont = []
-        for (let i = 0; i <= list.length - 1; i++) {
-          const item = list[i]
+        _.each(list, (item) => {
           lcont.push(item.word)
-        }
+        })
         lcont.sort((a, b) => {
           if (a < b) return -1
           if (a > b) return 1
