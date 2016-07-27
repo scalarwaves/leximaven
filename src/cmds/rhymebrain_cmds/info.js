@@ -43,13 +43,12 @@ exports.handler = (argv) => {
   let config = noon.load(CFILE)
   let proceed = false
   const stamp = new Date(config.rbrain.date.stamp)
-  const now = moment(new Date).diff(stamp, 'minutes')
-  const diff = 60 - now
+  const minutes = moment(new Date).diff(stamp, 'minutes')
   let reset = false
-  if (diff < 60) {
+  if (minutes < 60) {
     config.rbrain.date.remain = config.rbrain.date.remain - 1
     noon.save(CFILE, config)
-  } else if (diff >= 60) {
+  } else if (minutes >= 60) {
     reset = true
     config.rbrain.date.stamp = moment().format()
     config.rbrain.date.remain = config.rbrain.date.limit
@@ -124,7 +123,7 @@ exports.handler = (argv) => {
         if (reset) {
           console.log(`${config.rbrain.date.remain}/${config.rbrain.date.limit} requests remaining this hour.`)
         } else {
-          console.log(`${config.rbrain.date.remain}/${config.rbrain.date.limit} requests remaining this hour, will reset in ${diff} minutes.`)
+          console.log(`${config.rbrain.date.remain}/${config.rbrain.date.limit} requests remaining this hour, will reset in ${59 - minutes} minutes.`)
         }
       } else {
         console.error(`${chalk.red.bold(`HTTP ${response.statusCode}:`)} ${chalk.red(error)}`)

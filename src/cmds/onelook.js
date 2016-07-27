@@ -43,13 +43,13 @@ exports.handler = (argv) => {
   let config = noon.load(CFILE)
   let proceed = false
   const stamp = new Date(config.onelook.date.stamp)
-  const now = moment(new Date).diff(stamp, 'hours')
-  const diff = 24 - now
+  const hours = moment(new Date).diff(stamp, 'hours')
+  const minutes = moment(new Date).diff(stamp, 'minutes')
   let reset = false
-  if (diff < 24) {
+  if (hours < 24 || hours < 0) {
     config.onelook.date.remain = config.onelook.date.remain - 1
     noon.save(CFILE, config)
-  } else if (diff >= 24) {
+  } else if (hours >= 24) {
     reset = true
     config.onelook.date.stamp = moment().format()
     config.onelook.date.remain = config.onelook.date.limit
@@ -132,7 +132,7 @@ exports.handler = (argv) => {
         if (reset) {
           console.log(`${config.onelook.date.remain}/${config.onelook.date.limit} requests remaining today.`)
         } else {
-          console.log(`${config.onelook.date.remain}/${config.onelook.date.limit} requests remaining today, will reset in ${diff} hours.`)
+          console.log(`${config.onelook.date.remain}/${config.onelook.date.limit} requests remaining today, will reset in ${23 - hours} hours, ${59 - minutes} minutes.`)
         }
       } else {
         console.error(`${chalk.red.bold(`HTTP ${response.statusCode}:`)} ${chalk.red(error)}`)

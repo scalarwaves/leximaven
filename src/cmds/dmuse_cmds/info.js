@@ -34,6 +34,7 @@ exports.handler = (argv) => {
   const limit = config.dmuse.date.limit
   const remain = config.dmuse.date.remain
   const stamp = new Date(config.dmuse.date.stamp)
-  const reset = 24 - moment(new Date).diff(stamp, 'hours')
-  console.log(chalk.white(`${remain}/${limit} requests remain today, will reset in ${reset} hours.`))
+  const hours = moment(new Date).diff(stamp, 'hours')
+  const minutes = moment(new Date).diff(stamp, 'minutes')
+  console.log(chalk.white(`${remain}/${limit} requests remain today, will reset in ${23 - hours} hours, ${59 - minutes} minutes.`))
 }

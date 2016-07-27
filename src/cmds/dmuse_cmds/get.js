@@ -43,13 +43,13 @@ exports.handler = (argv) => {
   let config = noon.load(CFILE)
   let proceed = false
   const stamp = new Date(config.dmuse.date.stamp)
-  const now = moment(new Date).diff(stamp, 'hours')
-  const diff = 24 - now
+  const hours = moment(new Date).diff(stamp, 'hours')
+  const minutes = moment(new Date).diff(stamp, 'minutes')
   let reset = false
-  if (diff < 24) {
+  if (hours < 24) {
     config.dmuse.date.remain = config.dmuse.date.remain - 1
     noon.save(CFILE, config)
-  } else if (diff >= 24) {
+  } else if (hours >= 24) {
     reset = true
     config.dmuse.date.stamp = moment().format()
     config.dmuse.date.remain = config.dmuse.date.limit
@@ -78,9 +78,9 @@ exports.handler = (argv) => {
     const ccont = []
     ccont.push(argv.condition)
     if (argv._.length > 1) {
-      for (let i = 1; i <= argv._.length - 1; i++) {
-        ccont.push(argv._[i])
-      }
+      _.each(argv._, (value) => {
+        ccont.push(value)
+      })
     }
     const prefix = 'http://api.datamuse.com/words?'
     let conditions = `max=${config.dmuse.max}&`
@@ -127,7 +127,7 @@ exports.handler = (argv) => {
         if (reset) {
           console.log(`${config.dmuse.date.remain}/${config.dmuse.date.limit} requests remaining today.`)
         } else {
-          console.log(`${config.dmuse.date.remain}/${config.dmuse.date.limit} requests remaining today, will reset in ${diff} hours.`)
+          console.log(`${config.dmuse.date.remain}/${config.dmuse.date.limit} requests remaining today, will reset in ${23 - hours} hours, ${59 - minutes} minutes.`)
         }
       } else {
         console.error(`${chalk.red.bold(`HTTP ${response.statusCode}:`)} ${chalk.red(error)}`)
