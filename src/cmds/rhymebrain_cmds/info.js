@@ -70,7 +70,6 @@ exports.handler = (argv) => {
       rbrain: {
         info: {
           lang: argv.l,
-          max: argv.m,
         },
       },
     }
@@ -80,13 +79,8 @@ exports.handler = (argv) => {
     const word = argv.word
     const task = 'WordInfo'
     const prefix = 'http://rhymebrain.com/talk?function=get'
-    const uri = `${prefix}${task}&word=${word}&`
-    const pcont = []
-    pcont.push(`lang=${config.rbrain.info.lang}&`)
-    pcont.push(`maxResults=${config.rbrain.info.max}&`)
-    const rest = pcont.join('')
-    let url = `${uri}${rest}`
-    url = encodeURI(url)
+    const uri = `${prefix}${task}&word=${word}&lang=${config.rbrain.info.lang}`
+    const url = encodeURI(uri)
     themes.labelDown('Word Info', theme, null)
     const tofile = {
       type: 'word info',
