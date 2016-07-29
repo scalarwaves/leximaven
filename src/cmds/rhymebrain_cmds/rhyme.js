@@ -114,11 +114,11 @@ exports.handler = (argv) => {
         const rcont = []
         for (let j = 0; j <= lcont.length - 1; j++) {
           const item = lcont[j]
-          rcont.push(ctstyle(`${item.word}`))
+          rcont.push(ctstyle(item))
           if (item.score >= 300) {
-            tofile[[`hiscore${j}`]] = item.word
+            tofile[[`hiscore${j}`]] = item
           } else {
-            tofile[[`rhyme${j}`]] = item.word
+            tofile[[`rhyme${j}`]] = item
           }
         }
         rcont.sort()
