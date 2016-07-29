@@ -121,7 +121,6 @@ exports.handler = (argv) => {
       }
     })
   } else {
-    console.error(chalk.red(`Reached this hour's usage limit of ${config.rbrain.date.limit}.`))
-    process.exit(1)
+    throw new Error(`Reached this hour's usage limit of ${config.rbrain.date.limit}.`)
   }
 }

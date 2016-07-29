@@ -21,8 +21,7 @@ exports.handler = (argv) => {
   if (dot.exists(config, key)) {
     if (/\./i.test(key)) {
       if (/^\w*\.date/i.test(key)) {
-        console.error(chalk.red("API limits hardcoded, can't set this key."))
-        process.exit(1)
+        throw new Error("API limits hardcoded, can't set this key.")
       } else {
         dot.put(config, key, value)
       }

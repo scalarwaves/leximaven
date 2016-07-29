@@ -56,7 +56,7 @@ exports.handler = (argv) => {
   let proceed = false
   const stamp = new Date(config.wordnik.date.stamp)
   const minutes = moment(new Date).diff(stamp, 'minutes')
-  let reset = false
+  const reset = false
   if (minutes < 60) {
     config.wordnik.date.remain = config.wordnik.date.remain - 1
     noon.save(CFILE, config)
@@ -133,7 +133,6 @@ exports.handler = (argv) => {
       }
     })
   } else {
-    console.error(chalk.red(`Reached this hour's usage limit of ${config.wordnik.date.limit}.`))
-    process.exit(1)
+    throw new Error(`Reached this hour's usage limit of ${config.wordnik.date.limit}.`)
   }
 }
