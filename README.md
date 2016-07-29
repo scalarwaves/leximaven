@@ -6,7 +6,7 @@
 
 ---
 
-Read some [prose](https://github.com/drawnepicenter/leximaven/blob/master/PROSE.md)...
+Read some [prose](https://github.com/drawnepicenter/prose#readme)...
 
 ### Introduction
 
