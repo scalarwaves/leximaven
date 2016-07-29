@@ -23,6 +23,8 @@ gulp.task('delete', function () {
     'build',
     'coverage/**/*',
     'coverage',
+    '.nyc_output/*',
+    '.nyc_output',
     'test/output/*',
     'test/output'
   ])

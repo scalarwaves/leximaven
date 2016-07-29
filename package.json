@@ -20,18 +20,20 @@
     "cover": "cat lcov.info | ./node_modules/.bin/coveralls",
     "climate": "./node_modules/.bin/codeclimate-test-reporter < lcov.info",
     "report": "./node_modules/.bin/nyc report -r html",
-    "test": "NODE_ENV=test ./node_modules/.bin/nyc ./node_modules/.bin/_mocha"
+    "pretest": "./node_modules/.bin/babel test/test.es6 -o test/test.js",
+    "test": "./node_modules/.bin/nyc ./node_modules/.bin/_mocha test/test.js"
   },
   "nyc": {
-    "cache": true,
+    "cache": false,
     "include": [
-      "build/**/*.js"
+      "src/**/*.js"
     ],
     "require": [
-      "babel-register"
+      "babel-register",
+      "babel-polyfill"
     ],
-    "sourceMap": true,
-    "instrument": true
+    "sourceMap": false,
+    "instrument": false
   },
   "dependencies": {
     "chalk": "^1.1.3",
