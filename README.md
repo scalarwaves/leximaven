@@ -56,3 +56,5 @@ See [CONTRIBUTING](https://github.com/drawnepicenter/leximaven/blob/master/CONTR
 ### Gratitude
 
 Many thanks to all contributors to the libraries used in this project! And thanks to the creators and maintainers of the APIs that this tool consumes. Acronym Server, Datamuse, Onelook, Rhymebrain, Urban Dictionary, Wordnik, and Wordsmith are awesome!
+
+[![Powered by wordnik](http://www.wordnik.com/img/wordnik_badge_a1.png)](http://developer.wordnik.com)
