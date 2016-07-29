@@ -25,7 +25,7 @@ exports.getThemes = () => {
   const list = []
   const files = glob.sync('themes/*.noon')
   _.each(files, (path) => {
-    const name = path.replace(/themes\/|\.noon/, '')
+    const name = path.replace(/themes\//, '').replace(/\.noon/, '')
     list.push(name)
   })
   return list
