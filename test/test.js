@@ -251,6 +251,7 @@ describe('dmuse command', () => {
           const obj = {
             type: 'datamuse',
             source: 'http://datamuse.com/api',
+            url: 'http://api.datamuse.com/words?max=5&&ml=ubiquity&dmuse&get',
             match0: 'ubiquitousness',
             tags1: 'noun',
             match1: 'omnipresence',
@@ -414,8 +415,8 @@ describe('config command', () => {
         config.rbrain.date.stamp = ''
         config.rbrain.date.remain = 350
         config.wordnik.date.stamp = ''
-        config.rbrain.date.remain = 15000
-        expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/Created [\/a-z\.\s]*:\s[ a-z0-9\W]*/mig)
+        config.wordnik.date.remain = 15000
+        expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/Created [a-z\/\.]*/mig)
         expect(JSON.stringify(config, null, ' ')).to.equals(JSON.stringify(obj, null, ' '))
         done(err)
       })
@@ -485,14 +486,14 @@ describe('rbrain command', () => {
   })
   describe('combine', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js rbrain combine -o ${process.cwd()}/test/output/combine.json value > test/output/combine.out`, (err) => {
+      child.exec(`node ${process.cwd()}/build/leximaven.js rbrain combine -m1 -o ${process.cwd()}/test/output/combine.json value > test/output/combine.out`, (err) => {
         const stdout = fs.readFileSync('test/output/combine.out', 'utf8')
         const obj = {
           type: 'portmanteau',
           source: 'http://rhymebrain.com',
-          url: 'http://rhymebrain.com/talk?function=getPortmanteaus&word=value&lang=en&maxResults=5&',
-          set0: 'value,united',
-          portmanteau0: 'valunited',
+          url: 'http://rhymebrain.com/talk?function=getPortmanteaus&word=value&lang=en&maxResults=1&',
+          set0: 'value,unique',
+          portmanteau0: 'valunique',
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/combine.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[\[\]a-z0-9,→ -\/\.]*/mig)
@@ -508,7 +509,7 @@ describe('rbrain command', () => {
         const obj = {
           type: 'word info',
           source: 'http://rhymebrain.com',
-          url: 'http://rhymebrain.com/talk?function=getWordInfo&word=ubiquity&lang=en&maxResults=undefined&',
+          url: 'http://rhymebrain.com/talk?function=getWordInfo&word=ubiquity&lang=en',
           arpabet: 'Y UW0 B IH1 K W IH0 T IY0',
           ipa: 'juˈbɪkwɪti',
           syllables: '4',
@@ -537,7 +538,7 @@ describe('rbrain command', () => {
           rhyme4: 'effectively',
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/rhyme.json`)
-        expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/\[Rhymes\]→[a-z*,]*\sWrote data to [a-z\/\.]*/mig)
+        expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/\[Rhymes\]→[a-z*, ]*\sWrote data to [a-z\/\.]*\s\d*\/\d*[a-z0-9 ,\.]*/mig)
         expect(JSON.stringify(json)).to.match(/[\{\}a-z0-9\s:\/\.",]*/mig)
         done(err)
       })
@@ -598,11 +599,12 @@ describe('wordnik command', () => {
   })
   describe('define', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik define -o ${process.cwd()}/test/output/define.json ubiquity > test/output/define.out`, (err) => {
+      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik define -l1 -o ${process.cwd()}/test/output/define.json ubiquity > test/output/define.out`, (err) => {
         const stdout = fs.readFileSync('test/output/define.out', 'utf8')
         const obj = {
           type: 'definition',
           source: 'http://www.wordnik.com',
+          url: `http://api.wordnik.com:80/v4/word.json/ubiquity/definitions?useCanonical=false&sourceDictionaries=all&includeRelated=false&includeTags=false&limit=1&partOfSpeech=&api_key=${process.env.WORDNIK}`,
           text0: 'Existence or apparent existence everywhere at the same time; omnipresence: "the repetitiveness, the selfsameness, and the ubiquity of modern mass culture”  ( Theodor Adorno ). ',
           deftype0: 'noun',
           source0: 'ahd-legacy',
@@ -616,11 +618,12 @@ describe('wordnik command', () => {
   })
   describe('example', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik example -o ${process.cwd()}/test/output/example.json ubiquity > test/output/example.out`, (err) => {
+      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik example -l1 -o ${process.cwd()}/test/output/example.json ubiquity > test/output/example.out`, (err) => {
         const stdout = fs.readFileSync('test/output/example.out', 'utf8')
         const obj = {
           type: 'example',
           source: 'http://www.wordnik.com',
+          url: `http://api.wordnik.com:80/v4/word.json/ubiquity/examples?useCanonical=false&includeDuplicates=false&limit=1&skip=0&api_key=${process.env.WORDNIK}`,
           example0: 'Both are characterized by their ubiquity and their antiquity: No known human culture lacks them, and musical instruments are among the oldest human artifacts, dating to the Late Pleistocene about 50,000 years ago.',
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/example.json`)
@@ -637,6 +640,7 @@ describe('wordnik command', () => {
         const obj = {
           type: 'hyphenation',
           source: 'http://www.wordnik.com',
+          url: `http://api.wordnik.com:80/v4/word.json/ubiquity/hyphenation?useCanonical=false&limit=5&api_key=${process.env.WORDNIK}`,
           syllable0: 'u',
           stress1: 'biq',
           syllable2: 'ui',
@@ -656,6 +660,7 @@ describe('wordnik command', () => {
         const obj = {
           type: 'etymology',
           source: 'http://www.wordnik.com',
+          url: `http://api.wordnik.com:80/v4/word.json/ubiquity/etymologies?useCanonical=false&api_key=${process.env.WORDNIK}`,
           etymology: '[L.  everywhere, fr.  where, perhaps for ,  (cf.  anywhere), and if so akin to E. : cf. F. .]',
           origin: 'ubique, ubi, cubi, quobi, alicubi, who, ubiquit√©',
         }
@@ -668,11 +673,12 @@ describe('wordnik command', () => {
   })
   describe('phrase', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik phrase -o ${process.cwd()}/test/output/phrase.json ubiquitous > test/output/phrase.out`, (err) => {
+      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik phrase -l1 -o ${process.cwd()}/test/output/phrase.json ubiquitous > test/output/phrase.out`, (err) => {
         const stdout = fs.readFileSync('test/output/phrase.out', 'utf8')
         const obj = {
           type: 'phrase',
           source: 'http://www.wordnik.com',
+          url: `http://api.wordnik.com:80/v4/word.json/ubiquitous/phrases?useCanonical=false&limit=1&wlmi=13&api_key=${process.env.WORDNIK}`,
           agram0: 'ubiquitous',
           bgram0: 'amoeba',
         }
@@ -690,6 +696,7 @@ describe('wordnik command', () => {
         const obj = {
           type: 'pronunciation',
           source: 'http://www.wordnik.com',
+          url: `http://api.wordnik.com:80/v4/word.json/ubiquity/pronunciations?useCanonical=false&limit=5&api_key=${process.env.WORDNIK}`,
           word: 'ubiquity',
           pronunciation0: '(yo͞o-bĭkˈwĭ-tē)',
           type0: 'ahd-legacy',
@@ -705,14 +712,25 @@ describe('wordnik command', () => {
   })
   describe('relate', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik relate -o ${process.cwd()}/test/output/relate.json ubiquity > test/output/relate.out`, (err) => {
+      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik relate -l1 -o ${process.cwd()}/test/output/relate.json ubiquity > test/output/relate.out`, (err) => {
         const stdout = fs.readFileSync('test/output/relate.out', 'utf8')
         const obj = {
           type: 'related words',
           source: 'http://www.wordnik.com',
+          url: `http://api.wordnik.com:80/v4/word.json/ubiquity/relatedWords?useCanonical=false&limitPerRelationshipType=1&api_key=${process.env.WORDNIK}`,
           word: 'ubiquity',
           type0: 'antonym',
           words0: 'uniquity',
+          type1: 'hypernym',
+          words1: 'presence',
+          type2: 'cross-reference',
+          words2: 'ubiquity of the king',
+          type3: 'synonym',
+          words3: 'omnipresence',
+          type4: 'rhyme',
+          words4: 'iniquity',
+          type5: 'same-context',
+          words5: 'omnipresence'
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/relate.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z \[\],\-→]*\sWrote data to [a-z\/\.]*/mig)
