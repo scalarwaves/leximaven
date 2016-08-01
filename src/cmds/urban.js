@@ -79,9 +79,9 @@ exports.handler = (argv) => {
       }
       if (argv.o) tools.outFile(argv.o, argv.f, tofile)
       if (argv.s && config.merge) noon.save(CFILE, config)
-      if (argv.s && !config.merge) console.err(chalk.red('Set option merge to true!'))
+      if (argv.s && !config.merge) throw new Error("Can't save user config, set option merge to true.")
     } else {
-      console.error(`${chalk.red.bold(`HTTP ${response.statusCode}:`)} ${chalk.red(error)}`)
+      throw new Error(`HTTP ${response.statusCode}: ${error}`)
     }
   })
 }

@@ -73,7 +73,7 @@ exports.handler = (argv) => {
         }
       })
     } else {
-      console.error(`${chalk.red.bold(`HTTP ${response.statusCode}:`)} ${chalk.red(error)}`)
+      throw new Error(`HTTP ${response.statusCode}: ${error}`)
     }
   })
 }
