@@ -3,7 +3,7 @@ const tools = require('../../tools')
 
 const chalk = require('chalk')
 const moment = require('moment')
-const needle = require('needle')
+const http = require('good-guy-http')()
 const noon = require('noon')
 
 const CFILE = `${process.env.HOME}/.leximaven.noon`
@@ -15,9 +15,9 @@ exports.handler = (argv) => {
   tools.checkConfig(CFILE)
   const config = noon.load(CFILE)
   const url = 'http://api.datamuse.com/metrics'
-  needle.get(url, (error, response) => {
+  http({ url }, (error, response) => {
     if (!error && response.statusCode === 200) {
-      const body = response.body
+      const body = JSON.parse(response.body)
       const version = body[0]
       const qps = body[1]
       const sugf = body[2]

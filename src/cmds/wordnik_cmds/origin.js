@@ -5,7 +5,7 @@ const tools = require('../../tools')
 const _ = require('lodash')
 const chalk = require('chalk')
 const moment = require('moment')
-const needle = require('needle')
+const http = require('good-guy-http')()
 const noon = require('noon')
 const xml2js = require('xml2js')
 
@@ -95,9 +95,9 @@ exports.handler = (argv) => {
       url,
     }
     const ctstyle = _.get(chalk, theme.content.style)
-    needle.get(url, (error, response) => {
+    http({ url }, (error, response) => {
       if (!error && response.statusCode === 200) {
-        const resp = response.body
+        const resp = JSON.parse(response.body)
         const origin = resp[0]
         parser.parseString(origin, (err, result) => {
           const root = result.ety

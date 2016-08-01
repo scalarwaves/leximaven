@@ -5,7 +5,7 @@ const tools = require('../../tools')
 const _ = require('lodash')
 const chalk = require('chalk')
 const moment = require('moment')
-const needle = require('needle')
+const http = require('good-guy-http')()
 const noon = require('noon')
 
 const CFILE = `${process.env.HOME}/.leximaven.noon`
@@ -113,9 +113,10 @@ exports.handler = (argv) => {
       source: 'http://www.wordnik.com',
       url,
     }
-    needle.get(url, (error, response) => {
+    http({ url }, (error, response) => {
       if (!error && response.statusCode === 200) {
-        const list = response.body.examples
+        const body = JSON.parse(response.body)
+        const list = body.examples
         for (let i = 0; i <= list.length - 1; i++) {
           const item = list[i]
           themes.labelRight('Example', theme, item.text)

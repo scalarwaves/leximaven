@@ -3,7 +3,7 @@ const tools = require('../tools')
 
 const _ = require('lodash')
 const chalk = require('chalk')
-const needle = require('needle')
+const http = require('good-guy-http')()
 const noon = require('noon')
 
 const CFILE = `${process.env.HOME}/.leximaven.noon`
@@ -67,10 +67,11 @@ exports.handler = (argv) => {
     source: 'http://www.urbandictionary.com',
     url,
   }
-  needle.get(url, (error, response) => {
+  http({ url }, (error, response) => {
     if (!error && response.statusCode === 200) {
+      const body = JSON.parse(response.body)
       const limit = config.urban.limit
-      const list = response.body.list.slice(0, limit)
+      const list = body.list.slice(0, limit)
       for (let i = 0; i <= list.length - 1; i++) {
         const result = list[i]
         themes.labelDown('Definition', theme, result.definition)
