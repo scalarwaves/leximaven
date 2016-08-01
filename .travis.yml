@@ -4,9 +4,9 @@ node_js:
 - '5'
 before_script:
 - node build/leximaven.js config init
-#after_success:
-#- npm run cover
-#- npm run climate
+after_success:
+- npm run cover
+- npm run climate
 env:
   global:
   - secure: wz4jisPphGKHXyfiTGcFgYxWovWt9HA7XCvsJtgnckBY/b/k0V3Szy5yRwpepNzC0yYqNlwGBUwFvWYPjYfejQaJItMAmDOgOJTIVHROwq1jkxG9q75pKq/xUWpfs46UCU7xxkUMLbIaLOJFirlLT2d/aIMZnQbx4hxmPm0FSyIfLtfg6kU3NKW+YyYbOkzSmCYUjJ/bp+2fsfUKXp3v0ti8vzijiywD4fRD+S/QaoOpR1RnHCSc5tUnvYDpo9mZ3Uqr0Ua6nOwMf9RlAZLy7ncFre7Q3OvIePogdteu+03lp3HrAnkPtm3zbWSwVYl9sVjUFhJZYqYlqFa8x0/xi1ykqqtg8FPIX5IDjHH/fwduikFp3SEN16AcrJtD1k7bfxwqJ2cghrcOILidNT52c8kdmFRmn4mcmv6yqDKZgxU0hffyLbPYjkX0WguhSYTFa8nc+ThyQR7Iq6VX5xx/aD25TVTOfYn4ToUUpenXkVmfcHf/345EVKdU2gNOrM1VMagK2hz23pDR3MM77UBURv+XI8ZUymZI7KS8yQo9hftAPBwqFiXGTdZga4gBt2YsZrDC63I/FUJ70rznsfyEioGDFGb01wn3Q7P1LCj25V+vI01cb4vICfcWBJGNpn98E9habj48N31Ilj49msvzsM4qLOXHmJntqRay6l0JW5Q=
