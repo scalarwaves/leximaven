@@ -114,7 +114,7 @@ exports.handler = (argv) => {
         if (reset) {
           console.log(`${config.rbrain.date.remain}/${config.rbrain.date.limit} requests remaining this hour.`)
         } else {
-          console.log(`${config.rbrain.date.remain}/${config.rbrain.date.limit} requests remaining this hour, will reset in ${59 - minutes} minutes.`)
+          if (config.usage) console.log(`${config.rbrain.date.remain}/${config.rbrain.date.limit} requests remaining this hour, will reset in ${59 - minutes} minutes.`)
         }
       } else {
         throw new Error(`HTTP ${response.statusCode}: ${error}`)

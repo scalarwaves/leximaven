@@ -114,7 +114,7 @@ exports.handler = (argv) => {
         if (reset) {
           console.log(`${config.wordnik.date.remain}/${config.wordnik.date.limit} requests remaining this hour.`)
         } else {
-          console.log(`${config.wordnik.date.remain}/${config.wordnik.date.limit} requests remaining this hour, will reset in ${59 - minutes} minutes.`)
+          if (config.usage) console.log(`${config.wordnik.date.remain}/${config.wordnik.date.limit} requests remaining this hour, will reset in ${59 - minutes} minutes.`)
         }
       } else {
         throw new Error(`HTTP ${response.statusCode}: ${error}`)

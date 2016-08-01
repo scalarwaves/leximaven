@@ -135,7 +135,7 @@ exports.handler = (argv) => {
           if (reset) {
             console.log(`${config.onelook.date.remain}/${config.onelook.date.limit} requests remaining today.`)
           } else {
-            console.log(`${config.onelook.date.remain}/${config.onelook.date.limit} requests remaining today, will reset in ${23 - hours} hours, ${59 - minutes} minutes.`)
+            if (config.usage) console.log(`${config.onelook.date.remain}/${config.onelook.date.limit} requests remaining today, will reset in ${23 - hours} hours, ${59 - minutes} minutes.`)
           }
         })
       } else {

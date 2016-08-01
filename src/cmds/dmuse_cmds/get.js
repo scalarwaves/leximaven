@@ -127,7 +127,7 @@ exports.handler = (argv) => {
         if (reset) {
           console.log(`${config.dmuse.date.remain}/${config.dmuse.date.limit} requests remaining today.`)
         } else {
-          console.log(`${config.dmuse.date.remain}/${config.dmuse.date.limit} requests remaining today, will reset in ${23 - hours} hours, ${59 - minutes} minutes.`)
+          if (config.usage) console.log(`${config.dmuse.date.remain}/${config.dmuse.date.limit} requests remaining today, will reset in ${23 - hours} hours, ${59 - minutes} minutes.`)
         }
       } else {
         throw new Error(`HTTP ${response.statusCode}: ${error}`)
