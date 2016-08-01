@@ -1,7 +1,6 @@
 var gulp = require('gulp')
 var babel = require('gulp-babel')
 var del = require('del')
-var exec = require('child_process').exec
 var eslint = require('gulp-eslint')
 var run = require('run-sequence')
 
@@ -35,21 +34,8 @@ gulp.task('clean', function (cb) {
 })
 
 gulp.task('lint', function () {
-  return gulp.src(['**/**/*.js', '!node_modules/**/*.*', '!build/**/*.js', '!bin/**/*.js'])
+  return gulp.src(['**/**/*.js', '!node_modules/**/*.*', '!build/**/*.js'])
     .pipe(eslint.format())
-})
-
-gulp.task('coveralls', function () {
-  return gulp.src('coverage/lcov.info')
-    .pipe(coveralls())
-})
-
-gulp.task('test', function (cb) {
-  exec('npm test', function (err, stdout, stderr) {
-    console.log(stdout)
-    console.log(stderr)
-    cb(err)
-  })
 })
 
 gulp.task('bin', function (cb) {
