@@ -24,16 +24,16 @@
     "test": "./node_modules/.bin/nyc ./node_modules/.bin/_mocha test/test.js"
   },
   "nyc": {
-    "cache": false,
+    "cache": true,
     "include": [
-      "src/**/*.js"
+      "build/**/*.js"
     ],
     "require": [
       "babel-register",
       "babel-polyfill"
     ],
-    "sourceMap": false,
-    "instrument": false
+    "sourceMap": true,
+    "instrument": true
   },
   "dependencies": {
     "chalk": "^1.1.3",
