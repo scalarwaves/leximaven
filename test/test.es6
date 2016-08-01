@@ -360,6 +360,7 @@ describe('config command', () => {
           urban: {
             limit: 5,
           },
+          usage: true,
           verbose: false,
           wordmap: {
             limit: 1,
