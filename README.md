@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/drawnepicenter/leximaven.svg?branch=master)](https://travis-ci.org/drawnepicenter/leximaven) [![Dependency Status](https://gemnasium.com/badges/github.com/drawnepicenter/leximaven.svg)](https://gemnasium.com/github.com/drawnepicenter/leximaven) [![Coverage Status](https://coveralls.io/repos/github/drawnepicenter/leximaven/badge.svg?branch=master)](https://coveralls.io/github/drawnepicenter/leximaven?branch=master) [![Code Climate](https://codeclimate.com/github/drawnepicenter/leximaven/badges/gpa.svg)](https://codeclimate.com/github/drawnepicenter/leximaven) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
-[![Standard Version](https://img.shields.io/badge/release-standard%20version-brightgreen.svg)](https://github.com/conventional-changelog/standard-version) [![MIT Licence](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/mit-license.php) [![Semver 2.0.0](https://img.shields.io/badge/semver-2.0.0-ff69b4.svg)](http://semver.org/spec/v2.0.0.html)
+[![Standard Version](https://img.shields.io/badge/release-standard%20version-brightgreen.svg)](https://github.com/conventional-changelog/standard-version) [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/mit-license.php) [![Semver 2.0.0](https://img.shields.io/badge/semver-2.0.0-ff69b4.svg)](http://semver.org/spec/v2.0.0.html)
 
----
+[![Powered by Acronym Server](https://img.shields.io/badge/powered%20by-acronym%20server-brightgreen.svg)](http://acronyms.silmaril.ie) [![Powered by Datamuse](https://img.shields.io/badge/powered%20by-datamuse-green.svg)](http://www.datamuse.com) [![Powered by Onelook](https://img.shields.io/badge/powered%20by-onelook-yellow.svg)](http://www.onelook.com) [![Powered by Rhymebrain](https://img.shields.io/badge/powered%20by-rhymebrain-orange.svg)](http://www.rhymebrain.com) [![Powered by Wordnik](https://img.shields.io/badge/powered%20by-wordnik-red.svg)](http://www.wordnik.com) [![Powered by Wordsmith](https://img.shields.io/badge/powered%20by-wordsmith-blue.svg)](http://wordsmith.org/anagram/)
 
 Read some [prose](https://github.com/drawnepicenter/prose#readme)...
 
@@ -56,5 +56,3 @@ See [CONTRIBUTING](https://github.com/drawnepicenter/leximaven/blob/master/CONTR
 ### Gratitude
 
 Many thanks to all contributors to the libraries used in this project! And thanks to the creators and maintainers of the APIs that this tool consumes. Acronym Server, Datamuse, Onelook, Rhymebrain, Urban Dictionary, Wordnik, and Wordsmith are awesome!
-
-[![Powered by wordnik](http://www.wordnik.com/img/wordnik_badge_a1.png)](http://developer.wordnik.com)
