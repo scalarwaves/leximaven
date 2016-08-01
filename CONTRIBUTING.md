@@ -5,7 +5,8 @@ As of right now, I am the only one contributing to this project. I welcome you t
 ### Build process
 
 - Managed with [Gulp](http://gulpjs.com) plugins.
-- The **build** task transpiles all ES6 code to ES5 using [Babel](http://babeljs.io) and pipes to the build folder. Sourcemaps are inlined for code coverage.
+- The **bin** task transpiles all ES6 code to ES5 using [Babel](http://babeljs.io) and pipes to the build folder. Sourcemaps are inlined for code coverage.
+- The **clean** task removes test output and the build folder, then runs the build task
 
 ### Changelog & Versioning
 
@@ -20,5 +21,4 @@ Code is linted with [ESLint](http://eslint.org). If you want to contribute code 
 
 ### Testing
 
-- Test runner - [Mocha](http://mochajs.org)
-- Assertions - [Chai](http://chaijs.org)
+[Mocha](http://mochajs.org) is the test runner and it uses [Chai](http://chaijs.org) for assertions. Tests are written in BDD style. Coverage is calculated with [nyc](https://github.com/istanbuljs/nyc).

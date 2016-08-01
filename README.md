@@ -1,18 +1,16 @@
-## leximaven
+# leximaven
 
-[![Build Status](https://travis-ci.org/drawnepicenter/leximaven.svg?branch=master)](https://travis-ci.org/drawnepicenter/leximaven) [![Dependency Status](https://gemnasium.com/badges/github.com/drawnepicenter/leximaven.svg)](https://gemnasium.com/github.com/drawnepicenter/leximaven) [![Coverage Status](https://coveralls.io/repos/github/drawnepicenter/leximaven/badge.svg?branch=master)](https://coveralls.io/github/drawnepicenter/leximaven?branch=master) [![Code Climate](https://codeclimate.com/github/drawnepicenter/leximaven/badges/gpa.svg)](https://codeclimate.com/github/drawnepicenter/leximaven) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![Build Status](https://travis-ci.org/drawnepicenter/leximaven.svg?branch=master)](https://travis-ci.org/drawnepicenter/leximaven) [![Dependency Status](https://gemnasium.com/badges/github.com/drawnepicenter/leximaven.svg)](https://gemnasium.com/github.com/drawnepicenter/leximaven) [![Coverage Status](https://coveralls.io/repos/github/drawnepicenter/leximaven/badge.svg?branch=master)](https://coveralls.io/github/drawnepicenter/leximaven?branch=master) [![Code Climate](https://codeclimate.com/github/drawnepicenter/leximaven/badges/gpa.svg)](https://codeclimate.com/github/drawnepicenter/leximaven) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![Git Town](https://img.shields.io/badge/workflow-git%20town-brightgreen.svg)](http://www.git-town.com/)
 
 [![Standard Version](https://img.shields.io/badge/release-standard%20version-brightgreen.svg)](https://github.com/conventional-changelog/standard-version) [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/mit-license.php) [![Semver 2.0.0](https://img.shields.io/badge/semver-2.0.0-ff69b4.svg)](http://semver.org/spec/v2.0.0.html)
 
 [![Powered by Acronym Server](https://img.shields.io/badge/powered%20by-acronym%20server-brightgreen.svg)](http://acronyms.silmaril.ie) [![Powered by Datamuse](https://img.shields.io/badge/powered%20by-datamuse-green.svg)](http://www.datamuse.com) [![Powered by Onelook](https://img.shields.io/badge/powered%20by-onelook-yellow.svg)](http://www.onelook.com) [![Powered by Rhymebrain](https://img.shields.io/badge/powered%20by-rhymebrain-orange.svg)](http://www.rhymebrain.com) [![Powered by Wordnik](https://img.shields.io/badge/powered%20by-wordnik-red.svg)](http://www.wordnik.com) [![Powered by Wordsmith](https://img.shields.io/badge/powered%20by-wordsmith-blue.svg)](http://wordsmith.org/anagram/)
 
-Read some [prose](https://github.com/drawnepicenter/prose#readme)...
+## Introduction
 
-### Introduction
+Leximaven is a powerful tool for searching word-related APIs from the command line. It can fetch acronyms, anagrams, bi-gram phrases, definitions, etymologies, example uses, hyphenation, offensive word flags, portmanteaus, pronunciations (Arpabet & IPA), related words, rhymes, slang, syllable stress and count, and more. See the [wiki](https://github.com/drawnepicenter/leximaven/wiki) for more info.
 
-Leximaven is powerful. It can fetch acronyms, anagrams, bi-gram phrases, definitions, etymologies, example uses, hyphenation, offensive word flags, portmanteaus, pronunciations (Arpabet & IPA), related words, rhymes, slang, and syllable stress and count. See the [wiki](https://github.com/drawnepicenter/leximaven/wiki) for more info.
-
-### Installation
+## Installation
 
 [Get a Wordnik API key](http://developer.wordnik.com/) and put it in an environment variable WORDNIK. Add it to .bashrc, .zshrc, Windows env, etc.
 Then run:
@@ -20,15 +18,30 @@ Then run:
     npm install -g leximaven
     leximaven config init
 
-### Usage
+## Usage
 
 Leximaven has a built-in help system for CLI parameters and options. Access it with `leximaven -h|--help [command] [subcommand]`. There is also the [wiki](https://github.com/drawnepicenter/leximaven/wiki).
 
 Here are some examples:
 
 ```
+// Get definitions for 'catharsis'
+leximaven wordnik define catharsis
+
 // Get antonyms for 'noise'
 leximaven wordnik relate --canon --type antonym noises
+
+// Pronounce 'quixotic'
+leximaven wordnik pronounce quixotic
+
+// Get etymology for 'special'
+leximaven wordnik origin special
+
+// Get words that sound like 'blue'
+leximaven dmuse get sl=blue
+
+// Get slang/colloquialisms for 'diesel'
+leximaven urban diesel
 
 // Get anagrams with at least 2 letters in each word and a maximum of 3 words
 // per anagram using short form flags and exporting to JSON
@@ -38,7 +51,9 @@ leximaven anagram -n2 -w3 -o anagrams.json toomanysecrets
 leximaven map ubiquity
 ```
 
-### Resources
+See the [tests](https://github.com/drawnepicenter/leximaven/blob/master/test/test.es6) for more.
+
+## Resources
 
 The following links can help you use Leximaven or perform related tasks.
 
@@ -49,10 +64,14 @@ The following links can help you use Leximaven or perform related tasks.
 - [proselint](https://github.com/amperser/proselint) checks your writing style and has plugins for multiple editors
 - [write-good](https://github.com/btford/write-good) Naive linter for English prose for developers who can't write good and wanna learn to do other stuff good too.
 
-### Contributing
+## Contributing
 
 See [CONTRIBUTING](https://github.com/drawnepicenter/leximaven/blob/master/CONTRIBUTING.md).
 
-### Gratitude
+## Gratitude
 
 Many thanks to all contributors to the libraries used in this project! And thanks to the creators and maintainers of the APIs that this tool consumes. Acronym Server, Datamuse, Onelook, Rhymebrain, Urban Dictionary, Wordnik, and Wordsmith are awesome!
+
+## Prose
+
+For fun, read some of my [prose](https://github.com/drawnepicenter/prose#readme)...
