@@ -1,10 +1,10 @@
 {
   "presets": ["es2015"],
   "plugins": ["lodash"],
-  "sourceMaps": "both",
+  "sourceMaps": "inline",
   "env": {
     "test": {
-      "plugins": ["istanbul"]
+      "plugins": []
     }
   }
 }

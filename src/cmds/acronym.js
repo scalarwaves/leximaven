@@ -3,8 +3,9 @@ const tools = require('../tools')
 
 const _ = require('lodash')
 const chalk = require('chalk')
-const needle = require('needle')
+const http = require('good-guy-http')()
 const noon = require('noon')
+const xml2js = require('xml2js')
 
 const CFILE = `${process.env.HOME}/.leximaven.noon`
 
@@ -37,35 +38,40 @@ exports.handler = (argv) => {
     url,
   }
   const ctstyle = _.get(chalk, theme.content.style)
-  needle.get(url, (error, response) => {
+  http({ url }, (error, response) => {
     if (!error && response.statusCode === 200) {
-      const resp = response.body
-      if (resp.acronym.found.$.n === '0') {
-        console.log(ctstyle(`Found 0 acronyms for ${acronym}.`))
-      } else {
-        const found = resp.acronym.found
-        console.log(ctstyle(`Found ${found.$.n} acronyms for ${acronym}:`))
-        const list = found.acro
-        for (let i = 0; i <= list.length - 1; i++) {
-          const item = list[i]
-          process.stdout.write(ctstyle(`${item.expan}`))
-          tofile[[`expansion${i}`]] = item.expan
-          if (item.comment !== '') {
-            if (item.comment.a) {
-              const comment = item.comment.a
-              process.stdout.write(ctstyle(` - ${comment._} - ${comment.$.href}`))
-              tofile[[`comment${i}`]] = comment._
-              tofile[[`url${i}`]] = comment.$.href
-            } else {
-              process.stdout.write(ctstyle(` - ${item.comment}`))
-              tofile[[`comment${i}`]] = item.comment
+      const body = response.body
+      const parser = new xml2js.Parser()
+      parser.parseString(body, (err, result) => {
+        const found = result.acronym.found[0]
+        const count = found.$
+        if (count.n === '0') {
+          console.log(ctstyle(`Found 0 acronyms for ${acronym}.`))
+        } else {
+          console.log(ctstyle(`Found ${count.n} acronyms for ${acronym}:`))
+          const list = found.acro
+          for (let i = 0; i <= list.length - 1; i++) {
+            const item = list[i]
+            process.stdout.write(ctstyle(`${item.expan}`))
+            tofile[[`expansion${i}`]] = item.expan[0]
+            const comm = item.comment[0]
+            if (comm !== '') {
+              if (comm.a) {
+                const comment = comm.a[0]
+                process.stdout.write(ctstyle(` - ${comment._} - ${comment.$.href}`))
+                tofile[[`comment${i}`]] = comment._
+                tofile[[`url${i}`]] = comment.$.href
+              } else {
+                process.stdout.write(ctstyle(` - ${comm}`))
+                tofile[[`comment${i}`]] = item.comment[0]
+              }
             }
+            console.log(ctstyle(` - DDC: ${item.$.dewey}`))
+            tofile[[`DDC${i}`]] = item.$.dewey
           }
-          console.log(ctstyle(` - DDC: ${item.$.dewey}`))
-          tofile[[`DDC${i}`]] = item.$.dewey
+          if (argv.o) tools.outFile(argv.o, argv.f, tofile)
         }
-        if (argv.o) tools.outFile(argv.o, argv.f, tofile)
-      }
+      })
     } else {
       console.error(`${chalk.red.bold(`HTTP ${response.statusCode}:`)} ${chalk.red(error)}`)
     }

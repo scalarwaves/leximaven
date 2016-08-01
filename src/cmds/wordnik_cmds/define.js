@@ -5,7 +5,7 @@ const tools = require('../../tools')
 const _ = require('lodash')
 const chalk = require('chalk')
 const moment = require('moment')
-const needle = require('needle')
+const http = require('good-guy-http')()
 const noon = require('noon')
 
 const CFILE = `${process.env.HOME}/.leximaven.noon`
@@ -122,9 +122,9 @@ exports.handler = (argv) => {
     const ctstyle = _.get(chalk, theme.content.style)
     const uline = _.get(chalk, `${theme.content.style}.underline`)
     const conn = cstyle(theme.connector.str)
-    needle.get(url, (error, response) => {
+    http({ url }, (error, response) => {
       if (!error && response.statusCode === 200) {
-        const list = response.body
+        const list = JSON.parse(response.body)
         for (let i = 0; i <= list.length - 1; i++) {
           const item = list[i]
           const icont = []
