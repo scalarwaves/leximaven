@@ -5,6 +5,7 @@ const fs = require('fs')
 const noon = require('noon')
 
 const CFILE = `${process.env.HOME}/.leximaven.noon`
+const PKGDIR = `${process.env.NODE_PATH}/leximaven/`
 
 exports.command = 'init'
 exports.desc = 'Initialize config file'
@@ -17,7 +18,7 @@ exports.builder = {
   },
 }
 exports.handler = (argv) => {
-  const obj = noon.load('default.config.noon')
+  const obj = noon.load('${PKGDIR}default.config.noon')
   obj.dmuse.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
   obj.onelook.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
   obj.rbrain.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
