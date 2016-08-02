@@ -18,7 +18,21 @@ exports.builder = {
   },
 }
 exports.handler = (argv) => {
-  const obj = noon.load('${PKGDIR}default.config.noon')
+  let dirExists = null
+  try {
+    fs.statSync(PKGDIR)
+    dirExists = true
+  } catch (e) {
+    if (e.code === 'ENOENT') {
+      dirExists = false
+    }
+  }
+  let obj = null
+  if (dirExists) {
+    obj = noon.load(`${PKGDIR}default.config.noon`)
+  } else {
+    throw new Error('Package dir not found, set NODE_PATH per documentation.')
+  }
   obj.dmuse.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
   obj.onelook.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
   obj.rbrain.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')

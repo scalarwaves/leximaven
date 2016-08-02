@@ -3,7 +3,7 @@ const chalk = require('chalk')
 const glob = require('glob')
 const noon = require('noon')
 
-const PKGDIR = `${process.env.NODE_PATH}/leximaven/`
+const TDIR = `${process.env.NODE_PATH}/leximaven/themes/`
 
 /**
   * The themes module provides useful repetitive theme tasks
@@ -16,7 +16,7 @@ const PKGDIR = `${process.env.NODE_PATH}/leximaven/`
   * @param {string} theme The name of the theme
   * @return {Object} theme The style to use
   */
-exports.loadTheme = (theme) => noon.load(`${PKGDIR}themes/${theme}.noon`)
+exports.loadTheme = (theme) => noon.load(`${TDIR}${theme}.noon`)
 
 /**
   * Gets themes for list command
@@ -25,9 +25,9 @@ exports.loadTheme = (theme) => noon.load(`${PKGDIR}themes/${theme}.noon`)
   */
 exports.getThemes = () => {
   const list = []
-  const files = glob.sync(`${PKGDIR}themes/*.noon`)
+  const files = glob.sync(`${TDIR}*.noon`)
   _.each(files, (path) => {
-    const name = path.replace(/themes\//, '').replace(/\.noon/, '')
+    const name = path.replace(/[a-z0-9\/_\.]*themes\//, '').replace(/\.noon/, '')
     list.push(name)
   })
   return list

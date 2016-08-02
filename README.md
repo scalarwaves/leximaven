@@ -12,7 +12,14 @@ Leximaven is a powerful tool for searching word-related APIs from the command li
 
 ## Installation
 
-[Get a Wordnik API key](http://developer.wordnik.com/) and put it in an environment variable WORDNIK. Add it to .bashrc, .zshrc, Windows env, etc.
+To initialize the config file and load themes, your NODE_PATH environment variable must point to the **lib/node_modules** directory of the Node.js installation. You can set this path automatically like this:
+
+    export NP=$(which node)
+    export BP=${NP%bin/node} #this replaces the string '/bin/node'
+    export LP="${BP}lib/node_modules"
+    export NODE_PATH="$LP"
+
+This should work for a system installation of Node.js and [nvm](https://github.com/creationix/nvm). You'll also need to get a [Wordnik API key](http://developer.wordnik.com/) and put it in an environment variable WORDNIK. Add all of this to .bashrc, .zshrc, etc.
 Then run:
 
     npm install -g leximaven
@@ -24,32 +31,30 @@ Leximaven has a built-in help system for CLI parameters and options. Access it w
 
 Here are some examples:
 
-```
-// Get definitions for 'catharsis'
-leximaven wordnik define catharsis
+    // Get definitions for 'catharsis'
+    leximaven wordnik define catharsis
 
-// Get antonyms for 'noise'
-leximaven wordnik relate --canon --type antonym noises
+    // Get antonyms for 'noise'
+    leximaven wordnik relate --canon --type antonym noises
 
-// Pronounce 'quixotic'
-leximaven wordnik pronounce quixotic
+    // Pronounce 'quixotic'
+    leximaven wordnik pronounce quixotic
 
-// Get etymology for 'special'
-leximaven wordnik origin special
+    // Get etymology for 'special'
+    leximaven wordnik origin special
 
-// Get words that sound like 'blue'
-leximaven dmuse get sl=blue
+    // Get words that sound like 'blue'
+    leximaven dmuse get sl=blue
 
-// Get slang/colloquialisms for 'diesel'
-leximaven urban diesel
+    // Get slang/colloquialisms for 'diesel'
+    leximaven urban diesel
 
-// Get anagrams with at least 2 letters in each word and a maximum of 3 words
-// per anagram using short form flags and exporting to JSON
-leximaven anagram -n2 -w3 -o anagrams.json toomanysecrets
+    // Get anagrams with at least 2 letters in each word and a maximum of 3 words
+    // per anagram using short form flags and exporting to JSON
+    leximaven anagram -n2 -w3 -o anagrams.json toomanysecrets
 
-// Get a wordmap for 'ubiquity'
-leximaven map ubiquity
-```
+    // Get a wordmap for 'ubiquity'
+    leximaven map ubiquity
 
 See the [tests](https://github.com/drawnepicenter/leximaven/blob/master/test/test.es6) for more.
 
