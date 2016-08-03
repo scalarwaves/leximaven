@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.4"></a>
+## [0.1.4](https://github.com/drawnepicenter/leximaven/compare/v0.1.3...v0.1.4) (2016-08-03)
+
+
+### Bug Fixes
+
+* **project:** use repo dir or pkg dir ([f13cdd1](https://github.com/drawnepicenter/leximaven/commit/f13cdd1))
+
+
+
 <a name="0.1.3"></a>
 ## [0.1.3](https://github.com/drawnepicenter/leximaven/compare/v0.1.2...v0.1.3) (2016-08-02)
 
