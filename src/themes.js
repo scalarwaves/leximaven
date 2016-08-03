@@ -1,5 +1,6 @@
 const _ = require('lodash')
 const chalk = require('chalk')
+const fs = require('fs')
 const glob = require('glob')
 const noon = require('noon')
 
@@ -14,9 +15,24 @@ const TDIR = `${process.env.NODE_PATH}/leximaven/themes/`
   * Loads theme
   * @public
   * @param {string} theme The name of the theme
-  * @return {Object} theme The style to use
+  * @return {Object} load The style to use
   */
-exports.loadTheme = (theme) => noon.load(`${TDIR}${theme}.noon`)
+exports.loadTheme = (theme) => {
+  let dirExists = null
+  let load = null
+  try {
+    fs.statSync('themes')
+    dirExists = true
+  } catch (e) {
+    if (e.code === 'ENOENT') dirExists = false
+  }
+  if (dirExists) {
+    load = noon.load(`themes/${theme}.noon`)
+  } else {
+    load = noon.load(`${TDIR}${theme}.noon`)
+  }
+  return load
+}
 
 /**
   * Gets themes for list command
@@ -25,7 +41,19 @@ exports.loadTheme = (theme) => noon.load(`${TDIR}${theme}.noon`)
   */
 exports.getThemes = () => {
   const list = []
-  const files = glob.sync(`${TDIR}*.noon`)
+  let dirExists = null
+  let files = []
+  try {
+    fs.statSync('themes')
+    dirExists = true
+  } catch (e) {
+    if (e.code === 'ENOENT') dirExists = false
+  }
+  if (dirExists) {
+    files = glob.sync('themes/*.noon')
+  } else {
+    files = glob.sync(`${TDIR}*.noon`)
+  }
   _.each(files, (path) => {
     const name = path.replace(/[a-z0-9\/_\.]*themes\//, '').replace(/\.noon/, '')
     list.push(name)

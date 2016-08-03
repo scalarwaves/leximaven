@@ -18,20 +18,31 @@ exports.builder = {
   },
 }
 exports.handler = (argv) => {
+  let obj = null
+  let configExists = null
   let dirExists = null
   try {
-    fs.statSync(PKGDIR)
-    dirExists = true
+    fs.statSync('default.config.noon')
+    configExists = true
   } catch (e) {
-    if (e.code === 'ENOENT') {
-      dirExists = false
-    }
+    if (e.code === 'ENOENT') configExists = false
   }
-  let obj = null
-  if (dirExists) {
-    obj = noon.load(`${PKGDIR}default.config.noon`)
+  if (configExists) {
+    obj = noon.load('default.config.noon')
   } else {
-    throw new Error('Package dir not found, set NODE_PATH per documentation.')
+    try {
+      fs.statSync(PKGDIR)
+      dirExists = true
+    } catch (e) {
+      if (e.code === 'ENOENT') {
+        dirExists = false
+      }
+    }
+    if (dirExists) {
+      obj = noon.load(`${PKGDIR}default.config.noon`)
+    } else {
+      throw new Error('Package dir not found, set NODE_PATH per documentation.')
+    }
   }
   obj.dmuse.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
   obj.onelook.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
