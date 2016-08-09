@@ -16,7 +16,7 @@ exports.handler = (argv) => {
   tools.checkConfig(CFILE)
   const config = noon.load(CFILE)
   const theme = themes.loadTheme(config.theme)
-  if (config.verbose) themes.labelDown('Configuration', theme, null)
+  if (config.verbose) themes.label(theme, 'down', 'Configuration')
   if (dot.exists(config, key)) {
     value = /\./i.test(key) ? dot.get(config, key) : config[key]
   } else {

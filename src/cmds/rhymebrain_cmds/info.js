@@ -75,13 +75,13 @@ exports.handler = (argv) => {
     }
     if (config.merge) config = _.merge({}, config, userConfig)
     const theme = themes.loadTheme(config.theme)
-    if (config.verbose) themes.labelDown('Rhymebrain', theme, null)
+    if (config.verbose) themes.label(theme, 'down', 'Rhymebrain')
     const word = argv.word
     const task = 'WordInfo'
     const prefix = 'http://rhymebrain.com/talk?function=get'
     const uri = `${prefix}${task}&word=${word}&lang=${config.rbrain.info.lang}`
     const url = encodeURI(uri)
-    themes.labelDown('Word Info', theme, null)
+    themes.label(theme, 'down', 'Word Info')
     const tofile = {
       type: 'word info',
       source: 'http://rhymebrain.com',
@@ -91,9 +91,9 @@ exports.handler = (argv) => {
     http({ url }, (error, response) => {
       if (!error && response.statusCode === 200) {
         const info = JSON.parse(response.body)
-        themes.labelRight('Arpabet', theme, info.pron)
-        themes.labelRight('IPA', theme, info.ipa)
-        themes.labelRight('Syllables', theme, info.syllables)
+        themes.label(theme, 'right', 'Arpabet', info.pron)
+        themes.label(theme, 'right', 'IPA', info.ipa)
+        themes.label(theme, 'right', 'Syllables', info.syllables)
         tofile.arpabet = info.pron
         tofile.ipa = info.ipa
         tofile.syllables = info.syllables
@@ -110,7 +110,7 @@ exports.handler = (argv) => {
           flags.push(ctstyle('[Trusted pronunciation, not generated]'))
           tofile.trusted = true
         }
-        themes.labelRight('Word Flags', theme, flags.join(''))
+        themes.label(theme, 'right', 'Word Flags', flags.join(''))
         if (argv.o) tools.outFile(argv.o, argv.f, tofile)
         if (argv.s && config.merge) noon.save(CFILE, config)
         if (argv.s && !config.merge) throw new Error("Can't save user config, set option merge to true.")

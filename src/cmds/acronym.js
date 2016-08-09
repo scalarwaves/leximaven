@@ -29,7 +29,7 @@ exports.handler = (argv) => {
   tools.checkConfig(CFILE)
   const config = noon.load(CFILE)
   const theme = themes.loadTheme(config.theme)
-  if (config.verbose) themes.labelDown('Acronyms', theme, null)
+  if (config.verbose) themes.label(theme, 'down', 'Acronyms')
   const acronym = argv.acronym.toUpperCase()
   const url = `http://acronyms.silmaril.ie/cgi-bin/xaa?${argv.acronym}`
   const tofile = {

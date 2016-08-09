@@ -75,7 +75,7 @@ exports.handler = (argv) => {
     }
     if (config.merge) config = _.merge({}, config, userConfig)
     const theme = themes.loadTheme(config.theme)
-    if (config.verbose) themes.labelDown('Onelook', theme, null)
+    if (config.verbose) themes.label(theme, 'down', 'Onelook')
     let url = `http://onelook.com/?xml=1&w=${argv.word}`
     url = encodeURI(url)
     const tofile = {
@@ -94,7 +94,7 @@ exports.handler = (argv) => {
           const similar = resp.OLSimilar[0]
           const quickdef = resp.OLQuickDef
           const resources = resp.OLRes
-          themes.labelDown('Definition', theme, null)
+          themes.label(theme, 'down', 'Definition')
           if (Array.isArray(quickdef) && quickdef.length > 1) {
             for (let i = 0; i <= quickdef.length - 1; i++) {
               let item = quickdef[i]
@@ -110,21 +110,21 @@ exports.handler = (argv) => {
           }
           if (phrase) {
             const phrases = phrase.replace(/\n/g, '')
-            themes.labelDown('Phrases', theme, phrases)
+            themes.label(theme, 'down', 'Phrases', phrases)
             tofile.phrase = phrases
           }
           if (similar) {
             const sim = similar.replace(/\n/g, '')
-            themes.labelDown('Similar', theme, sim)
+            themes.label(theme, 'down', 'Similar', sim)
             tofile.sim = sim
           }
           if (config.onelook.links) {
-            themes.labelDown('Resources', theme, null)
+            themes.label(theme, 'down', 'Resources')
             for (let i = 0; i <= resources.length - 1; i++) {
               const item = resources[i]
               const res = item.OLResName.replace(/\n/g, '')
               const link = item.OLResLink.replace(/\n/g, '')
-              themes.labelRight(res, theme, link)
+              themes.label(theme, 'right', res, link)
               tofile[[`res${i}`]] = res
               tofile[[`link${i}`]] = link
             }

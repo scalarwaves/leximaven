@@ -76,7 +76,7 @@ exports.handler = (argv) => {
     }
     if (config.merge) config = _.merge({}, config, userConfig)
     const theme = themes.loadTheme(config.theme)
-    if (config.verbose) themes.labelDown('Wordnik', theme, null)
+    if (config.verbose) themes.label(theme, 'down', 'Wordnik')
     const word = argv.word
     const task = 'etymologies'
     const prefix = 'http://api.wordnik.com:80/v4/word.json/'
@@ -104,7 +104,7 @@ exports.handler = (argv) => {
           const content = root._
           let ets = root.ets
           ets = ets.join(', ')
-          themes.labelRight('Etymology', theme, ctstyle(`${content} ${ets}`))
+          themes.label(theme, 'right', 'Etymology', ctstyle(`${content} ${ets}`))
           tofile.etymology = content
           tofile.origin = ets
         })

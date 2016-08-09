@@ -96,7 +96,7 @@ exports.handler = (argv) => {
     }
     if (config.merge) config = _.merge({}, config, userConfig)
     const theme = themes.loadTheme(config.theme)
-    if (config.verbose) themes.labelDown('Wordnik', theme, null)
+    if (config.verbose) themes.label(theme, 'down', 'Wordnik')
     const word = argv.word
     const task = 'definitions'
     const prefix = 'http://api.wordnik.com:80/v4/word.json/'
@@ -132,7 +132,7 @@ exports.handler = (argv) => {
           icont.push(uline(item.partOfSpeech))
           icont.push(conn)
           icont.push(ctstyle(item.sourceDictionary))
-          themes.labelRight('Definition', theme, icont.join(''))
+          themes.label(theme, 'right', 'Definition', icont.join(''))
           tofile[[`text${i}`]] = item.text
           tofile[[`deftype${i}`]] = item.partOfSpeech
           tofile[[`source${i}`]] = item.sourceDictionary

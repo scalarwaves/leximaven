@@ -96,7 +96,7 @@ exports.handler = (argv) => {
     }
     if (config.merge) config = _.merge({}, config, userConfig)
     const theme = themes.loadTheme(config.theme)
-    if (config.verbose) themes.labelDown('Wordnik', theme, null)
+    if (config.verbose) themes.label(theme, 'down', 'Wordnik')
     const word = argv.word
     const task = 'pronunciations'
     const prefix = 'http://api.wordnik.com:80/v4/word.json/'
@@ -111,7 +111,7 @@ exports.handler = (argv) => {
     const rest = pcont.join('')
     let url = `${uri}${rest}`
     url = encodeURI(url)
-    themes.labelDown('Pronunciations', theme, null)
+    themes.label(theme, 'down', 'Pronunciations')
     const tofile = {
       type: 'pronunciation',
       source: 'http://www.wordnik.com',
@@ -123,7 +123,7 @@ exports.handler = (argv) => {
         const list = JSON.parse(response.body)
         for (let i = 0; i <= list.length - 1; i++) {
           const item = list[i]
-          themes.labelRight(word, theme, `${item.raw} - Type - ${item.rawType}`)
+          themes.label(theme, 'right', word, `${item.raw} - Type - ${item.rawType}`)
           tofile[[`pronunciation${i}`]] = item.raw
           tofile[[`type${i}`]] = item.rawType
         }

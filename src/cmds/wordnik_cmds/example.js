@@ -89,7 +89,7 @@ exports.handler = (argv) => {
     }
     if (config.merge) config = _.merge({}, config, userConfig)
     const theme = themes.loadTheme(config.theme)
-    if (config.verbose) themes.labelDown('Wordnik', theme, null)
+    if (config.verbose) themes.label(theme, 'down', 'Wordnik')
     const word = argv.word
     const task = 'examples'
     const prefix = 'http://api.wordnik.com:80/v4/word.json/'
@@ -119,7 +119,7 @@ exports.handler = (argv) => {
         const list = body.examples
         for (let i = 0; i <= list.length - 1; i++) {
           const item = list[i]
-          themes.labelRight('Example', theme, item.text)
+          themes.label(theme, 'right', 'Example', item.text)
           tofile[[`example${i}`]] = item.text
         }
         if (argv.o) tools.outFile(argv.o, argv.f, tofile)

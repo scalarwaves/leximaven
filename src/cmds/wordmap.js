@@ -33,7 +33,7 @@ exports.handler = (argv) => {
   }
   if (config.merge) config = _.merge({}, config, userConfig)
   const theme = themes.loadTheme(config.theme)
-  if (config.verbose) themes.labelDown('Wordmap', theme, null)
+  if (config.verbose) themes.label(theme, 'down', 'Wordmap')
   const word = argv.word
   const l = argv.l
   const bin = `${process.cwd()}/build/leximaven.js`

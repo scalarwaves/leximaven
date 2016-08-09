@@ -1,3 +1,4 @@
+/* eslint max-len:0 */
 const _ = require('lodash')
 const chalk = require('chalk')
 const fs = require('fs')
@@ -26,11 +27,7 @@ exports.loadTheme = (theme) => {
   } catch (e) {
     if (e.code === 'ENOENT') dirExists = false
   }
-  if (dirExists) {
-    load = noon.load(`themes/${theme}.noon`)
-  } else {
-    load = noon.load(`${TDIR}${theme}.noon`)
-  }
+  dirExists ? load = noon.load(`themes/${theme}.noon`) : load = noon.load(`${TDIR}${theme}.noon`)
   return load
 }
 
@@ -49,11 +46,7 @@ exports.getThemes = () => {
   } catch (e) {
     if (e.code === 'ENOENT') dirExists = false
   }
-  if (dirExists) {
-    files = glob.sync('themes/*.noon')
-  } else {
-    files = glob.sync(`${TDIR}*.noon`)
-  }
+  dirExists ? files = glob.sync('themes/*.noon') : files = glob.sync(`${TDIR}*.noon`)
   _.each(files, (path) => {
     const name = path.replace(/[a-z0-9\/_\.]*themes\//, '').replace(/\.noon/, '')
     list.push(name)
@@ -62,46 +55,24 @@ exports.getThemes = () => {
 }
 
 /**
-  * Prints connector and content below the label
+  * Prints label, connector, and content
   * @public
-  * @param {string} text The label text
   * @param {Object} theme The style to use
+  * @param {string} direction 'down' or 'right'
+  * @param {string} text The label text
   * @param {string} [content] The text the label points at
   */
-exports.labelDown = (text, theme, content) => {
+exports.label = (theme, direction, text, content) => {
   const pstyle = _.get(chalk, theme.prefix.style)
-  process.stdout.write(pstyle(theme.prefix.str))
   const tstyle = _.get(chalk, theme.text.style)
-  process.stdout.write(tstyle(text))
   const sstyle = _.get(chalk, theme.suffix.style)
-  process.stdout.write(sstyle(theme.suffix.str))
-  console.log('')
-  if (content !== null || undefined) {
-    const cnstyle = _.get(chalk, theme.connector.style)
-    process.stdout.write(cnstyle(theme.connector.str))
-    const ctstyle = _.get(chalk, theme.content.style)
-    console.log(ctstyle(content))
-  }
-}
-
-/**
-  * Prints connector and content next to the label
-  * @public
-  * @param {string} text The label text
-  * @param {Object} theme The style to use
-  * @param {string} [content] The text the label points at
-  */
-exports.labelRight = (text, theme, content) => {
-  const pstyle = _.get(chalk, theme.prefix.style)
-  process.stdout.write(pstyle(theme.prefix.str))
-  const tstyle = _.get(chalk, theme.text.style)
-  process.stdout.write(tstyle(text))
-  const sstyle = _.get(chalk, theme.suffix.style)
-  process.stdout.write(sstyle(theme.suffix.str))
-  if (content !== null || undefined) {
-    const cnstyle = _.get(chalk, theme.connector.style)
-    process.stdout.write(cnstyle(theme.connector.str))
-    const ctstyle = _.get(chalk, theme.content.style)
-    console.log(ctstyle(content))
-  }
+  const cnstyle = _.get(chalk, theme.connector.style)
+  const ctstyle = _.get(chalk, theme.content.style)
+  let label = `${pstyle(theme.prefix.str)}${tstyle(text)}${sstyle(theme.suffix.str)}`
+  if (direction === 'right') {
+    content !== null || undefined ? label = `${label}${cnstyle(theme.connector.str)}${ctstyle(content)}` : label = `${label}`
+  } else if (direction === 'down') {
+    content !== null || undefined ? label = `${label}\n${cnstyle(theme.connector.str)}${ctstyle(content)}` : label = `${label}`
+  } else { throw new Error("Unsupported label direction, use 'down' or 'right'.") }
+  console.log(label)
 }

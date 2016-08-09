@@ -127,7 +127,7 @@ exports.handler = (argv) => {
   }
   if (config.merge) config = _.merge({}, config, userConfig)
   const theme = themes.loadTheme(config.theme)
-  if (config.verbose) themes.labelDown('Wordsmith', theme, null)
+  if (config.verbose) themes.label(theme, 'down', 'Wordsmith')
   const prefix = 'http://wordsmith.org/anagram/anagram.cgi?anagram='
   const query = argv.query
   const uri = `${prefix}${query}`
@@ -180,7 +180,7 @@ exports.handler = (argv) => {
       const found = data[1]
       const show = data[2]
       const alist = data[3].trim()
-      themes.labelDown('Anagrams', theme, null)
+      themes.label(theme, 'down', 'Anagrams')
       console.log(ctstyle(`Anagrams for: ${query}\n${found} found. Displaying ${show}:`))
       console.log(ctstyle(alist))
       tofile.found = found

@@ -1,8 +1,8 @@
+/* eslint max-len:0 */
 const themes = require('../themes')
 const tools = require('../tools')
 
 const _ = require('lodash')
-const chalk = require('chalk')
 const http = require('good-guy-http')()
 const noon = require('noon')
 
@@ -46,7 +46,7 @@ exports.handler = (argv) => {
   }
   if (config.merge) config = _.merge({}, config, userConfig)
   const theme = themes.loadTheme(config.theme)
-  if (config.verbose) themes.labelDown('Urban Dictionary', theme, null)
+  if (config.verbose) themes.label(theme, 'down', 'Urban Dictionary')
   const ucont = []
   ucont.push(argv.query)
   if (argv._.length > 1) {
@@ -74,7 +74,7 @@ exports.handler = (argv) => {
       const list = body.list.slice(0, limit)
       for (let i = 0; i <= list.length - 1; i++) {
         const result = list[i]
-        themes.labelDown('Definition', theme, result.definition)
+        themes.label(theme, 'down', 'Urban Dictionary', result.definition)
         tofile[[`definition${i}`]] = result.definition
       }
       if (argv.o) tools.outFile(argv.o, argv.f, tofile)

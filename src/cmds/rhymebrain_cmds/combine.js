@@ -82,7 +82,7 @@ exports.handler = (argv) => {
     }
     if (config.merge) config = _.merge({}, config, userConfig)
     const theme = themes.loadTheme(config.theme)
-    if (config.verbose) themes.labelDown('Rhymebrain', theme, null)
+    if (config.verbose) themes.label(theme, 'down', 'Rhymebrain')
     const query = argv.query
     const task = 'Portmanteaus'
     const prefix = 'http://rhymebrain.com/talk?function=get'
@@ -93,7 +93,7 @@ exports.handler = (argv) => {
     const rest = pcont.join('')
     let url = `${uri}${rest}`
     url = encodeURI(url)
-    themes.labelDown('Portmanteaus', theme, null)
+    themes.label(theme, 'down', task)
     const tofile = {
       type: 'portmanteau',
       source: 'http://rhymebrain.com',
@@ -104,7 +104,7 @@ exports.handler = (argv) => {
         const list = JSON.parse(response.body)
         for (let i = 0; i <= list.length - 1; i++) {
           const item = list[i]
-          themes.labelRight(item.source, theme, item.combined)
+          themes.label(theme, 'right', item.source, item.combined)
           tofile[[`set${i}`]] = item.source
           tofile[[`portmanteau${i}`]] = item.combined
         }

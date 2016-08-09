@@ -74,7 +74,7 @@ exports.handler = (argv) => {
     }
     if (config.merge) config = _.merge({}, config, userConfig)
     const theme = themes.loadTheme(config.theme)
-    if (config.verbose) themes.labelDown('Datamuse', theme, null)
+    if (config.verbose) themes.label(theme, 'down', 'Datamuse')
     const ccont = []
     ccont.push(argv.condition)
     if (argv._.length > 1) {
@@ -106,10 +106,10 @@ exports.handler = (argv) => {
         const resp = JSON.parse(response.body)
         for (let i = 0; i <= resp.length - 1; i++) {
           const item = resp[i]
-          themes.labelRight('Match', theme, `${item.word} `)
+          themes.label(theme, 'right', 'Match', `${item.word} `)
           tofile[[`match${i}`]] = item.word
           if (item.tags !== undefined && item.tags !== []) {
-            themes.labelRight('Tags', theme, null)
+            themes.label(theme, 'right', 'Tag')
             for (let j = 0; j <= item.tags.length - 1; j++) {
               if (j === item.tags.length - 1) {
                 process.stdout.write(ctstyle(`${tags[item.tags[j]]}`))

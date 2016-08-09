@@ -80,7 +80,7 @@ exports.handler = (argv) => {
   const config = noon.load(CFILE)
   const theme = themes.loadTheme(config.theme)
   if (argv.v) {
-    themes.labelDown('Configuration', theme, null)
+    themes.label(theme, 'down', 'Configuration')
     console.log('Your current configuration is:')
     console.log(noon.stringify(config, {
       indent: 2,

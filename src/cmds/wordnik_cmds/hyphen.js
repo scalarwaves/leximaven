@@ -89,7 +89,7 @@ exports.handler = (argv) => {
     }
     if (config.merge) config = _.merge({}, config, userConfig)
     const theme = themes.loadTheme(config.theme)
-    if (config.verbose) themes.labelDown('Wordnik', theme, null)
+    if (config.verbose) themes.label(theme, 'down', 'Wordnik')
     const word = argv.word
     const task = 'hyphenation'
     const prefix = 'http://api.wordnik.com:80/v4/word.json/'
@@ -112,7 +112,7 @@ exports.handler = (argv) => {
     http({ url }, (error, response) => {
       if (!error && response.statusCode === 200) {
         const list = JSON.parse(response.body)
-        themes.labelRight('Hyphenation', theme, null)
+        themes.label(theme, 'right', 'Hyphenation')
         for (let i = 0; i <= list.length - 1; i++) {
           const item = list[i]
           if (item.type === 'stress') {

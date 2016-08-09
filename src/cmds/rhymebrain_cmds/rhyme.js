@@ -82,7 +82,7 @@ exports.handler = (argv) => {
     }
     if (config.merge) config = _.merge({}, config, userConfig)
     const theme = themes.loadTheme(config.theme)
-    if (config.verbose) themes.labelDown('Rhymebrain', theme, null)
+    if (config.verbose) themes.label(theme, 'down', 'Rhymebrain')
     const word = argv.word
     const task = 'Rhymes'
     const prefix = 'http://rhymebrain.com/talk?function=get'
@@ -122,7 +122,7 @@ exports.handler = (argv) => {
           }
         }
         rcont.sort()
-        themes.labelRight('Rhymes', theme, rcont.join(', '))
+        themes.label(theme, 'right', task, rcont.join(', '))
         if (argv.o) tools.outFile(argv.o, argv.f, tofile)
         if (argv.s && config.merge) noon.save(CFILE, config)
         if (argv.s && !config.merge) throw new Error("Can't save user config, set option merge to true.")

@@ -89,7 +89,7 @@ exports.handler = (argv) => {
     }
     if (config.merge) config = _.merge({}, config, userConfig)
     const theme = themes.loadTheme(config.theme)
-    if (config.verbose) themes.labelDown('Wordnik', theme, null)
+    if (config.verbose) themes.label(theme, 'down', 'Wordnik')
     const word = argv.word
     const task = 'phrases'
     const prefix = 'http://api.wordnik.com:80/v4/word.json/'
@@ -103,7 +103,7 @@ exports.handler = (argv) => {
     const rest = pcont.join('')
     let url = `${uri}${rest}`
     url = encodeURI(url)
-    themes.labelDown('Bi-gram phrases', theme, null)
+    themes.label(theme, 'down', 'Bi-gram phrases')
     const tofile = {
       type: 'phrase',
       source: 'http://www.wordnik.com',

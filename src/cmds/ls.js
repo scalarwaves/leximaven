@@ -13,6 +13,6 @@ exports.handler = (argv) => {
   _.each(list, (value) => {
     const name = value
     const currentTheme = themes.loadTheme(name)
-    themes.labelDown(name, currentTheme, sample)
+    themes.label(currentTheme, 'down', name, sample)
   })
 }
