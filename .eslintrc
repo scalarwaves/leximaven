@@ -198,7 +198,7 @@
     // http://eslint.org/docs/rules/no-unmodified-loop-condition
     "no-unmodified-loop-condition": 0,
     // disallow usage of expressions in statement position
-    "no-unused-expressions": 2,
+    "no-unused-expressions": [2, {"allowShortCircuit": true, "allowTernary": true}],
     // disallow unused labels
     // http://eslint.org/docs/rules/no-unused-labels
     "no-unused-labels": 2,
