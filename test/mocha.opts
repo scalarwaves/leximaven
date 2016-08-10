@@ -1,4 +1,5 @@
---timeout 200000
---reporter spec
---ui bdd
+-t 500000
+-R spec
+-u bdd
+-b
 --use_strict
