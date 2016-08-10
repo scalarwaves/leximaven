@@ -61,6 +61,7 @@ exports.getThemes = () => {
   * @param {string} direction 'down' or 'right'
   * @param {string} text The label text
   * @param {string} [content] The text the label points at
+  * @return {string} The stylized string to log
   */
 exports.label = (theme, direction, text, content) => {
   const pstyle = _.get(chalk, theme.prefix.style)
@@ -75,4 +76,5 @@ exports.label = (theme, direction, text, content) => {
     content !== null || undefined ? label = `${label}\n${cnstyle(theme.connector.str)}${ctstyle(content)}` : label = `${label}`
   } else { throw new Error("Unsupported label direction, use 'down' or 'right'.") }
   console.log(label)
+  return label
 }
