@@ -112,24 +112,24 @@ exports.handler = (argv) => {
     http({ url }, (error, response) => {
       if (!error && response.statusCode === 200) {
         const list = JSON.parse(response.body)
-        themes.label(theme, 'right', 'Hyphenation')
+        const hcont = []
         for (let i = 0; i <= list.length - 1; i++) {
           const item = list[i]
           if (item.type === 'stress') {
-            process.stdout.write(`${chalk.red.bold(item.text)}`)
+            hcont.push(`${chalk.red.bold(item.text)}`)
             tofile[[`stress${i}`]] = item.text
           } else if (item.type === 'secondary stress') {
-            process.stdout.write(ctstyle(item.text))
+            hcont.push(ctstyle(item.text))
             tofile[[`secondary${i}`]] = item.text
           } else {
-            process.stdout.write(ctstyle(item.text))
+            hcont.push(ctstyle(item.text))
             tofile[[`syllable${i}`]] = item.text
           }
           if (i < list.length - 1) {
-            process.stdout.write(ctstyle('-'))
+            hcont.push(ctstyle('-'))
           }
         }
-        console.log('')
+        themes.label(theme, 'right', 'Hyphenation', hcont.join(''))
         if (argv.o) tools.outFile(argv.o, argv.f, tofile)
         if (argv.s && config.merge) noon.save(CFILE, config)
         if (argv.s && !config.merge) throw new Error("Can't save user config, set option merge to true.")

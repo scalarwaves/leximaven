@@ -74,7 +74,7 @@ exports.handler = (argv) => {
       const list = body.list.slice(0, limit)
       for (let i = 0; i <= list.length - 1; i++) {
         const result = list[i]
-        themes.label(theme, 'down', 'Urban Dictionary', result.definition)
+        themes.label(theme, 'down', 'Definition', result.definition)
         tofile[[`definition${i}`]] = result.definition
       }
       if (argv.o) tools.outFile(argv.o, argv.f, tofile)
