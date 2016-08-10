@@ -51,9 +51,10 @@ exports.checkConfig = (file) => {
     fs.statSync(file)
   } catch (e) {
     if (e.code === 'ENOENT') {
-      throw new Error(`No config found at ${file}, run: ${chalk.white.bold('leximaven config init')}`)
-    } else { throw e }
+      throw new Error(`No config found at ${file}, run: 'leximaven config init'`)
+    }
   }
+  return true
 }
 
 /**
@@ -85,7 +86,7 @@ exports.outFile = (path, force, tofile) => {
       fs.closeSync(fd)
       console.log(chalk.white(`Wrote data to ${path}.`))
     }
-  } else if (ext === 'cson' || 'json' || 'noon' || 'plist' || 'yml' || 'yaml') {
+  } else if (ext === 'cson' || ext === 'json' || ext === 'noon' || ext === 'plist' || ext === 'yml' || ext === 'yaml') {
     if (checkOutfile(path)) {
       if (force) {
         noon.save(path, tofile)
@@ -97,5 +98,5 @@ exports.outFile = (path, force, tofile) => {
       noon.save(path, tofile)
       console.log(chalk.white(`Wrote data to ${path}.`))
     }
-  } else console.log(chalk.white(`Format ${ext} not supported.`))
+  } else if (ext !== 'xml' || ext !== 'cson' || ext !== 'json' || ext !== 'noon' || ext !== 'plist' || ext !== 'yml' || ext !== 'yaml') throw new Error(`Format ${ext} not supported.`)
 }
