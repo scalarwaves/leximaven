@@ -58,6 +58,22 @@ exports.checkConfig = (file) => {
 }
 
 /**
+  * Checks if object is a single string in an array
+  * @public
+  * @param {Object} obj Any object
+  * @return {Object} Original object or extracted string
+  */
+exports.arrToStr = (obj) => {
+  let fixed = null
+  if (Array.isArray(obj) && obj.length === 1 && typeof obj[0] === 'string') {
+    fixed = obj[0]
+  } else {
+    fixed = obj
+  }
+  return fixed
+}
+
+/**
   * Handles data export to file. Supports cson, json, noon, plist, xml, yaml.
   * @public
   * @param {string} path The desired filepath and extension
