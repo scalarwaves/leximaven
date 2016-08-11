@@ -122,11 +122,13 @@ exports.handler = (argv) => {
             themes.label(theme, 'down', 'Resources')
             for (let i = 0; i <= resources.length - 1; i++) {
               const item = resources[i]
-              const res = item.OLResName.replace(/\n/g, '')
-              const link = item.OLResLink.replace(/\n/g, '')
+              const res = tools.arrToStr(item.OLResName).replace(/\n/g, '')
+              const link = tools.arrToStr(item.OLResLink).replace(/\n/g, '')
+              const home = tools.arrToStr(item.OLResHomeLink).replace(/\n/g, '')
               themes.label(theme, 'right', res, link)
               tofile[[`res${i}`]] = res
               tofile[[`link${i}`]] = link
+              tofile[[`home${i}`]] = home
             }
           }
           if (argv.o) tools.outFile(argv.o, argv.f, tofile)
