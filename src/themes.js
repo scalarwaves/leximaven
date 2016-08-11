@@ -71,9 +71,9 @@ exports.label = (theme, direction, text, content) => {
   const ctstyle = _.get(chalk, theme.content.style)
   let label = `${pstyle(theme.prefix.str)}${tstyle(text)}${sstyle(theme.suffix.str)}`
   if (direction === 'right') {
-    content !== null || undefined ? label = `${label}${cnstyle(theme.connector.str)}${ctstyle(content)}` : label = `${label}`
+    content !== null && content !== undefined ? label = `${label}${cnstyle(theme.connector.str)}${ctstyle(content)}` : label = `${label}`
   } else if (direction === 'down') {
-    content !== null || undefined ? label = `${label}\n${cnstyle(theme.connector.str)}${ctstyle(content)}` : label = `${label}`
+    content !== null && content !== undefined ? label = `${label}\n${cnstyle(theme.connector.str)}${ctstyle(content)}` : label = `${label}`
   } else { throw new Error("Unsupported label direction, use 'down' or 'right'.") }
   console.log(label)
   return label
