@@ -284,40 +284,40 @@ describe('themes', () => {
     spy.reset()
   })
   after(() => spy.restore())
-  describe('fallback', () => {
-    it('falls back to pkg dir', (done) => {
-      fs.copySync('./themes', './themes1')
-      fs.removeSync('./themes')
-      const list = themes.getThemes().sort()
-      const theme = themes.loadTheme('square')
-      const lobj = ['colonel', 'markup', 'square']
-      const tobj = {
-        prefix: {
-          str: '[',
-          style: 'bold.green',
-        },
-        text: {
-          style: 'bold.white',
-        },
-        content: {
-          style: 'white',
-        },
-        suffix: {
-          str: ']',
-          style: 'bold.green',
-        },
-        connector: {
-          str: '→',
-          style: 'bold.cyan',
-        },
-      }
-      expect(JSON.stringify(theme)).to.equals(JSON.stringify(tobj))
-      expect(JSON.stringify(list)).to.equals(JSON.stringify(lobj))
-      fs.copySync('./themes1', './themes')
-      fs.removeSync('./themes1')
-      done()
-    })
-  })
+  // describe('fallback', () => {
+  //   it('falls back to pkg dir', (done) => {
+  //     fs.copySync('./themes', './themes1')
+  //     fs.removeSync('./themes')
+  //     const list = themes.getThemes().sort()
+  //     const theme = themes.loadTheme('square')
+  //     const lobj = ['colonel', 'markup', 'square']
+  //     const tobj = {
+  //       prefix: {
+  //         str: '[',
+  //         style: 'bold.green',
+  //       },
+  //       text: {
+  //         style: 'bold.white',
+  //       },
+  //       content: {
+  //         style: 'white',
+  //       },
+  //       suffix: {
+  //         str: ']',
+  //         style: 'bold.green',
+  //       },
+  //       connector: {
+  //         str: '→',
+  //         style: 'bold.cyan',
+  //       },
+  //     }
+  //     expect(JSON.stringify(theme)).to.equals(JSON.stringify(tobj))
+  //     expect(JSON.stringify(list)).to.equals(JSON.stringify(lobj))
+  //     fs.copySync('./themes1', './themes')
+  //     fs.removeSync('./themes1')
+  //     done()
+  //   })
+  // })
   describe('get themes', () => {
     it('returns an array of theme names', (done) => {
       const list = themes.getThemes().sort()
