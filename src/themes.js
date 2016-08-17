@@ -5,7 +5,20 @@ const fs = require('fs')
 const glob = require('glob')
 const noon = require('noon')
 
-const TDIR = `${process.env.NODE_PATH}/leximaven/themes/`
+let TDIR = null
+let dirExists = null
+try {
+  fs.statSync('themes')
+  dirExists = true
+} catch (e) {
+  if (e.code === 'ENOENT') dirExists = false
+}
+if (dirExists) {
+  TDIR = 'themes/'
+} else {
+  const nvmbin = process.env.NVM_BIN
+  TDIR = nvmbin.replace(/bin/, 'lib/node_modules/leximaven/themes/')
+}
 
 /**
   * The themes module provides useful repetitive theme tasks
