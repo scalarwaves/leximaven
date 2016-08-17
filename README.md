@@ -12,7 +12,14 @@ Leximaven is a powerful tool for searching word-related APIs from the command li
 
 ## Installation
 
-Currently Leximaven relies on [nvm](https://github.com/creationix/nvm), it should not work with node installed from a package manager. You'll also need to get a [Wordnik API key](http://developer.wordnik.com/) and put it in an environment variable WORDNIK. Add this to .bashrc, .zshrc, etc.
+To initialize the config file and load themes, your NODE_PATH environment variable must point to the **lib/node_modules** directory of the Node.js installation. You can set this path automatically like this:
+
+    export NP=$(which node)
+    export BP=${NP%bin/node} #this replaces the string '/bin/node'
+    export LP="${BP}lib/node_modules"
+    export NODE_PATH="$LP"
+
+This should work for a system installation of Node.js and [nvm](https://github.com/creationix/nvm). You'll also need to get a [Wordnik API key](http://developer.wordnik.com/) and put it in an environment variable WORDNIK. Add all of this to .bashrc, .zshrc, etc.
 Then run:
 
     npm install -g leximaven
