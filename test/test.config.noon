@@ -41,7 +41,7 @@ theme  square
 urban
   limit  5
 usage  true
-verbose  false
+verbose  true
 wordmap
   limit  1
 wordnik
