@@ -42,29 +42,13 @@ exports.handler = (argv) => {
   tools.checkConfig(CFILE)
   let config = noon.load(CFILE)
   let proceed = false
+  let reset = false
   const stamp = new Date(config.rbrain.date.stamp)
   const minutes = moment(new Date).diff(stamp, 'minutes')
-  let reset = false
-  if (minutes < 60) {
-    config.rbrain.date.remain = config.rbrain.date.remain - 1
-    noon.save(CFILE, config)
-  } else if (minutes >= 60) {
-    reset = true
-    config.rbrain.date.stamp = moment().format()
-    config.rbrain.date.remain = config.rbrain.date.limit
-    console.log(chalk.white(`Reset API limit to ${config.rbrain.date.limit}/${config.rbrain.date.interval}.`))
-    config.rbrain.date.remain = config.rbrain.date.remain - 1
-    noon.save(CFILE, config)
-  }
-  if (config.rbrain.date.remain === 0) {
-    proceed = false
-  } else if (config.rbrain.date.remain < 0) {
-    proceed = false
-    config.rbrain.date.remain = 0
-    noon.save(CFILE, config)
-  } else {
-    proceed = true
-  }
+  const checkStamp = tools.limitRbrain(config)
+  config = checkStamp[0]
+  proceed = checkStamp[1]
+  reset = checkStamp[2]
   if (proceed) {
     const userConfig = {
       rbrain: {

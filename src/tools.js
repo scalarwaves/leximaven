@@ -81,6 +81,40 @@ exports.limitDmuse = (config) => {
 }
 
 /**
+  * Rhymebrain's API limit check
+  * @param  {Object} config The current config
+  * @return {Array} Updated config, proceed boolean, and reset boolean
+  */
+exports.limitRbrain = (config) => {
+  const c = config
+  let proceed = false
+  let reset = false
+  const stamp = new Date(c.rbrain.date.stamp)
+  const minutes = moment(new Date).diff(stamp, 'minutes')
+  if (minutes < 60) {
+    c.rbrain.date.remain = c.rbrain.date.remain - 1
+    noon.save(CFILE, c)
+  } else if (minutes >= 60) {
+    reset = true
+    c.rbrain.date.stamp = moment().format()
+    c.rbrain.date.remain = c.rbrain.date.limit
+    console.log(chalk.white(`Reset API limit to ${c.rbrain.date.limit}/${c.rbrain.date.interval}.`))
+    c.rbrain.date.remain = c.rbrain.date.remain - 1
+    noon.save(CFILE, c)
+  }
+  if (c.rbrain.date.remain === 0) {
+    proceed = false
+  } else if (c.rbrain.date.remain < 0) {
+    proceed = false
+    c.rbrain.date.remain = 0
+    noon.save(CFILE, c)
+  } else {
+    proceed = true
+  }
+  return [c, proceed, reset]
+}
+
+/**
   * Checks if a file exists
   * @private
   * @param {string} path The filename to check.
