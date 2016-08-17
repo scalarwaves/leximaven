@@ -42,30 +42,14 @@ exports.handler = (argv) => {
   tools.checkConfig(CFILE)
   let config = noon.load(CFILE)
   let proceed = false
+  let reset = false
   const stamp = new Date(config.dmuse.date.stamp)
   const hours = moment(new Date).diff(stamp, 'hours')
   const minutes = moment(new Date).diff(stamp, 'minutes')
-  let reset = false
-  if (hours < 24) {
-    config.dmuse.date.remain = config.dmuse.date.remain - 1
-    noon.save(CFILE, config)
-  } else if (hours >= 24) {
-    reset = true
-    config.dmuse.date.stamp = moment().format()
-    config.dmuse.date.remain = config.dmuse.date.limit
-    console.log(chalk.white(`Reset API limit to ${config.dmuse.date.limit}/${config.dmuse.date.interval}.`))
-    config.dmuse.date.remain = config.dmuse.date.remain - 1
-    noon.save(CFILE, config)
-  }
-  if (config.dmuse.date.remain === 0) {
-    proceed = false
-  } else if (config.dmuse.date.remain < 0) {
-    proceed = false
-    config.dmuse.date.remain = 0
-    noon.save(CFILE, config)
-  } else {
-    proceed = true
-  }
+  const checkStamp = tools.limitDmuse(config)
+  config = checkStamp[0]
+  proceed = checkStamp[1]
+  reset = checkStamp[2]
   if (proceed) {
     const userConfig = {
       dmuse: {

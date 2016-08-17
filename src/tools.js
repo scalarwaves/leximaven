@@ -47,6 +47,40 @@ exports.limitOnelook = (config) => {
 }
 
 /**
+  * Datamuse's API limit check
+  * @param  {Object} config The current config
+  * @return {Array} Updated config, proceed boolean, and reset boolean
+  */
+exports.limitDmuse = (config) => {
+  const c = config
+  let proceed = false
+  let reset = false
+  const stamp = new Date(c.dmuse.date.stamp)
+  const hours = moment(new Date).diff(stamp, 'hours')
+  if (hours < 24) {
+    c.dmuse.date.remain = c.dmuse.date.remain - 1
+    noon.save(CFILE, c)
+  } else if (hours >= 24) {
+    reset = true
+    c.dmuse.date.stamp = moment().format()
+    c.dmuse.date.remain = c.dmuse.date.limit
+    console.log(chalk.white(`Reset API limit to ${c.dmuse.date.limit}/${c.dmuse.date.interval}.`))
+    c.dmuse.date.remain = c.dmuse.date.remain - 1
+    noon.save(CFILE, c)
+  }
+  if (c.dmuse.date.remain === 0) {
+    proceed = false
+  } else if (c.dmuse.date.remain < 0) {
+    proceed = false
+    c.dmuse.date.remain = 0
+    noon.save(CFILE, c)
+  } else {
+    proceed = true
+  }
+  return [c, proceed, reset]
+}
+
+/**
   * Checks if a file exists
   * @private
   * @param {string} path The filename to check.
