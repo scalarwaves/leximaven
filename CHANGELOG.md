@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/drawnepicenter/leximaven/compare/v0.1.4...v1.0.0) (2016-08-17)
+
+
+### Bug Fixes
+
+* **CI:** don't test on 4.x or iojs ([7380d8c](https://github.com/drawnepicenter/leximaven/commit/7380d8c))
+* **CI:** theme dir gets set correctly ([194e123](https://github.com/drawnepicenter/leximaven/commit/194e123))
+* **onelook:** extract strings from arrays ([9e504d1](https://github.com/drawnepicenter/leximaven/commit/9e504d1)), closes [#4](https://github.com/drawnepicenter/leximaven/issues/4)
+* **themes:** undefined/connector printing with label ([af53971](https://github.com/drawnepicenter/leximaven/commit/af53971))
+* **urban:** addtl args don't include 'urban' ([ac11277](https://github.com/drawnepicenter/leximaven/commit/ac11277))
+* **urban-hyphen:** incorrect labelling ([9388081](https://github.com/drawnepicenter/leximaven/commit/9388081))
+
+
+### Features
+
+* **tools:** arrToStr function ([1f5ea44](https://github.com/drawnepicenter/leximaven/commit/1f5ea44))
+
+
+### BREAKING CHANGES
+
+* CI: All changes listed in #5
+
+
+
 <a name="0.1.4"></a>
 ## [0.1.4](https://github.com/drawnepicenter/leximaven/compare/v0.1.3...v0.1.4) (2016-08-03)
 
