@@ -115,6 +115,40 @@ exports.limitRbrain = (config) => {
 }
 
 /**
+  * Wordnik's API limit check
+  * @param  {Object} config The current config
+  * @return {Array} Updated config, proceed boolean, and reset boolean
+  */
+exports.limitWordnik = (config) => {
+  const c = config
+  let proceed = false
+  let reset = false
+  const stamp = new Date(c.wordnik.date.stamp)
+  const minutes = moment(new Date).diff(stamp, 'minutes')
+  if (minutes < 60) {
+    c.wordnik.date.remain = c.wordnik.date.remain - 1
+    noon.save(CFILE, c)
+  } else if (minutes >= 60) {
+    reset = true
+    c.wordnik.date.stamp = moment().format()
+    c.wordnik.date.remain = c.wordnik.date.limit
+    console.log(chalk.white(`Reset API limit to ${c.wordnik.date.limit}/${c.wordnik.date.interval}.`))
+    c.wordnik.date.remain = c.wordnik.date.remain - 1
+    noon.save(CFILE, c)
+  }
+  if (c.wordnik.date.remain === 0) {
+    proceed = false
+  } else if (c.wordnik.date.remain < 0) {
+    proceed = false
+    c.wordnik.date.remain = 0
+    noon.save(CFILE, c)
+  } else {
+    proceed = true
+  }
+  return [c, proceed, reset]
+}
+
+/**
   * Checks if a file exists
   * @private
   * @param {string} path The filename to check.

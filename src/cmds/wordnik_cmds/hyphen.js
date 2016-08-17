@@ -54,29 +54,13 @@ exports.handler = (argv) => {
   tools.checkConfig(CFILE)
   let config = noon.load(CFILE)
   let proceed = false
+  let reset = false
   const stamp = new Date(config.wordnik.date.stamp)
   const minutes = moment(new Date).diff(stamp, 'minutes')
-  let reset = false
-  if (minutes < 60) {
-    config.wordnik.date.remain = config.wordnik.date.remain - 1
-    noon.save(CFILE, config)
-  } else if (minutes >= 60) {
-    reset = true
-    config.wordnik.date.stamp = moment().format()
-    config.wordnik.date.remain = config.wordnik.date.limit
-    console.log(chalk.white(`Reset API limit to ${config.wordnik.date.limit}/${config.wordnik.date.interval}.`))
-    config.wordnik.date.remain = config.wordnik.date.remain - 1
-    noon.save(CFILE, config)
-  }
-  if (config.wordnik.date.remain === 0) {
-    proceed = false
-  } else if (config.wordnik.date.remain < 0) {
-    proceed = false
-    config.wordnik.date.remain = 0
-    noon.save(CFILE, config)
-  } else {
-    proceed = true
-  }
+  const checkStamp = tools.limitWordnik(config)
+  config = checkStamp[0]
+  proceed = checkStamp[1]
+  reset = checkStamp[2]
   if (proceed) {
     const userConfig = {
       wordnik: {
