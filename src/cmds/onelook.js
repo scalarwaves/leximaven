@@ -43,30 +43,14 @@ exports.handler = (argv) => {
   tools.checkConfig(CFILE)
   let config = noon.load(CFILE)
   let proceed = false
+  let reset = false
   const stamp = new Date(config.onelook.date.stamp)
   const hours = moment(new Date).diff(stamp, 'hours')
   const minutes = moment(new Date).diff(stamp, 'minutes')
-  let reset = false
-  if (hours < 24 || hours < 0) {
-    config.onelook.date.remain = config.onelook.date.remain - 1
-    noon.save(CFILE, config)
-  } else if (hours >= 24) {
-    reset = true
-    config.onelook.date.stamp = moment().format()
-    config.onelook.date.remain = config.onelook.date.limit
-    console.log(chalk.white(`Reset API limit to ${config.onelook.date.limit}/${config.onelook.date.interval}.`))
-    config.onelook.date.remain = config.onelook.date.remain - 1
-    noon.save(CFILE, config)
-  }
-  if (config.onelook.date.remain === 0) {
-    proceed = false
-  } else if (config.onelook.date.remain < 0) {
-    proceed = false
-    config.onelook.date.remain = 0
-    noon.save(CFILE, config)
-  } else {
-    proceed = true
-  }
+  const checkStamp = tools.limitOnelook(config)
+  config = checkStamp[0]
+  proceed = checkStamp[1]
+  reset = checkStamp[2]
   if (proceed) {
     const userConfig = {
       onelook: {

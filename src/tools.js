@@ -1,13 +1,50 @@
 /* eslint max-len: 0 */
 const chalk = require('chalk')
 const fs = require('fs')
+const moment = require('moment')
 const noon = require('noon')
 const xml2js = require('xml2js')
+
+const CFILE = `${process.env.HOME}/.leximaven.noon`
 
 /**
   * The tools module provides useful repetitive tasks
   * @module Utils
   */
+
+/**
+  * Onelook's API limit check
+  * @param  {Object} config The current config
+  * @return {Array} Updated config, proceed boolean, and reset boolean
+  */
+exports.limitOnelook = (config) => {
+  const c = config
+  let proceed = false
+  let reset = false
+  const stamp = new Date(c.onelook.date.stamp)
+  const hours = moment(new Date).diff(stamp, 'hours')
+  if (hours < 24 || hours < 0) {
+    c.onelook.date.remain = c.onelook.date.remain - 1
+    noon.save(CFILE, c)
+  } else if (hours >= 24) {
+    reset = true
+    c.onelook.date.stamp = moment().format()
+    c.onelook.date.remain = c.onelook.date.limit
+    console.log(chalk.white(`Reset API limit to ${c.onelook.date.limit}/${c.onelook.date.interval}.`))
+    c.onelook.date.remain = c.onelook.date.remain - 1
+    noon.save(CFILE, c)
+  }
+  if (c.onelook.date.remain === 0) {
+    proceed = false
+  } else if (c.onelook.date.remain < 0) {
+    proceed = false
+    c.onelook.date.remain = 0
+    noon.save(CFILE, c)
+  } else {
+    proceed = true
+  }
+  return [c, proceed, reset]
+}
 
 /**
   * Checks if a file exists
