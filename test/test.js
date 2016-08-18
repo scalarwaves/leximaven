@@ -11,7 +11,6 @@ var expect = require('chai').expect;
 var fs = require('fs-extra');
 var noon = require('noon');
 var sinon = require('sinon');
-var strip = require('strip-ansi');
 var version = require('../package.json').version;
 var xml2js = require('xml2js');
 

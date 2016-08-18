@@ -9,7 +9,6 @@ const expect = require('chai').expect
 const fs = require('fs-extra')
 const noon = require('noon')
 const sinon = require('sinon')
-const strip = require('strip-ansi')
 const version = require('../package.json').version
 const xml2js = require('xml2js')
 
