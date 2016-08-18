@@ -49,7 +49,7 @@ describe('tools', () => {
       tools.outFile('test/output/test.json', false, obj)
       expect(spy.calledWith(tools.outFile('test/output/test.json', false, obj2))).to.match(/[a-z\/,\-\. ]*/mig)
       const actual = fs.readJsonSync('test/output/test.json')
-      expect(JSON.stringify(actual)).to.equals(JSON.stringify(obj))
+      expect(actual).to.deep.equal(obj)
       fs.removeSync('test/output/test.json')
       done()
     })
@@ -107,7 +107,7 @@ describe('tools', () => {
     it('resets datamuse limit', (done) => {
       fs.copySync('test/test.config.noon', CFILE)
       const config = noon.load(CFILE)
-      config.dmuse.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '').replace(/2016/, '2015')
+      config.dmuse.date.stamp = new Date().toJSON().replace(/2016/, '2015')
       config.dmuse.date.remain = 99998
       const checkStamp = tools.limitDmuse(config)
       const c = checkStamp[0]
@@ -122,7 +122,7 @@ describe('tools', () => {
     it('decrements datamuse limit', (done) => {
       fs.copySync('test/test.config.noon', CFILE)
       const config = noon.load(CFILE)
-      config.dmuse.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+      config.dmuse.date.stamp = new Date().toJSON()
       config.dmuse.date.remain = 100000
       const checkStamp = tools.limitDmuse(config)
       const c = checkStamp[0]
@@ -136,7 +136,7 @@ describe('tools', () => {
     it('reaches datamuse limit', (done) => {
       fs.copySync('test/test.config.noon', CFILE)
       const config = noon.load(CFILE)
-      config.dmuse.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+      config.dmuse.date.stamp = new Date().toJSON()
       config.dmuse.date.remain = 0
       const checkStamp = tools.limitDmuse(config)
       const c = checkStamp[0]
@@ -150,7 +150,7 @@ describe('tools', () => {
     it('resets onelook limit', (done) => {
       fs.copySync('test/test.config.noon', CFILE)
       const config = noon.load(CFILE)
-      config.onelook.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '').replace(/2016/, '2015')
+      config.onelook.date.stamp = new Date().toJSON().replace(/2016/, '2015')
       config.onelook.date.remain = 9998
       const checkStamp = tools.limitOnelook(config)
       const c = checkStamp[0]
@@ -165,7 +165,7 @@ describe('tools', () => {
     it('decrements onelook limit', (done) => {
       fs.copySync('test/test.config.noon', CFILE)
       const config = noon.load(CFILE)
-      config.onelook.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+      config.onelook.date.stamp = new Date().toJSON()
       config.onelook.date.remain = 10000
       const checkStamp = tools.limitOnelook(config)
       const c = checkStamp[0]
@@ -179,7 +179,7 @@ describe('tools', () => {
     it('reaches onelook limit', (done) => {
       fs.copySync('test/test.config.noon', CFILE)
       const config = noon.load(CFILE)
-      config.onelook.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+      config.onelook.date.stamp = new Date().toJSON()
       config.onelook.date.remain = 0
       const checkStamp = tools.limitOnelook(config)
       const c = checkStamp[0]
@@ -193,7 +193,7 @@ describe('tools', () => {
     it('resets rhymebrain limit', (done) => {
       fs.copySync('test/test.config.noon', CFILE)
       const config = noon.load(CFILE)
-      config.rbrain.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '').replace(/2016/, '2015')
+      config.rbrain.date.stamp = new Date().toJSON().replace(/2016/, '2015')
       config.rbrain.date.remain = 348
       const checkStamp = tools.limitRbrain(config)
       const c = checkStamp[0]
@@ -208,7 +208,7 @@ describe('tools', () => {
     it('decrements rhymebrain limit', (done) => {
       fs.copySync('test/test.config.noon', CFILE)
       const config = noon.load(CFILE)
-      config.rbrain.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+      config.rbrain.date.stamp = new Date().toJSON()
       config.rbrain.date.remain = 350
       const checkStamp = tools.limitRbrain(config)
       const c = checkStamp[0]
@@ -222,7 +222,7 @@ describe('tools', () => {
     it('reaches rhymebrain limit', (done) => {
       fs.copySync('test/test.config.noon', CFILE)
       const config = noon.load(CFILE)
-      config.rbrain.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+      config.rbrain.date.stamp = new Date().toJSON()
       config.rbrain.date.remain = 0
       const checkStamp = tools.limitRbrain(config)
       const c = checkStamp[0]
@@ -236,7 +236,7 @@ describe('tools', () => {
     it('resets wordnik limit', (done) => {
       fs.copySync('test/test.config.noon', CFILE)
       const config = noon.load(CFILE)
-      config.wordnik.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '').replace(/2016/, '2015')
+      config.wordnik.date.stamp = new Date().toJSON().replace(/2016/, '2015')
       config.wordnik.date.remain = 14998
       const checkStamp = tools.limitWordnik(config)
       const c = checkStamp[0]
@@ -251,7 +251,7 @@ describe('tools', () => {
     it('decrements wordnik limit', (done) => {
       fs.copySync('test/test.config.noon', CFILE)
       const config = noon.load(CFILE)
-      config.wordnik.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+      config.wordnik.date.stamp = new Date().toJSON()
       config.wordnik.date.remain = 15000
       const checkStamp = tools.limitWordnik(config)
       const c = checkStamp[0]
@@ -265,7 +265,7 @@ describe('tools', () => {
     it('reaches wordnik limit', (done) => {
       fs.copySync('test/test.config.noon', CFILE)
       const config = noon.load(CFILE)
-      config.wordnik.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+      config.wordnik.date.stamp = new Date().toJSON()
       config.wordnik.date.remain = 0
       const checkStamp = tools.limitWordnik(config)
       const c = checkStamp[0]
@@ -284,45 +284,11 @@ describe('themes', () => {
     spy.reset()
   })
   after(() => spy.restore())
-  // describe('fallback', () => {
-  //   it('falls back to pkg dir', (done) => {
-  //     fs.copySync('./themes', './themes1')
-  //     fs.removeSync('./themes')
-  //     const list = themes.getThemes().sort()
-  //     const theme = themes.loadTheme('square')
-  //     const lobj = ['colonel', 'markup', 'square']
-  //     const tobj = {
-  //       prefix: {
-  //         str: '[',
-  //         style: 'bold.green',
-  //       },
-  //       text: {
-  //         style: 'bold.white',
-  //       },
-  //       content: {
-  //         style: 'white',
-  //       },
-  //       suffix: {
-  //         str: ']',
-  //         style: 'bold.green',
-  //       },
-  //       connector: {
-  //         str: '→',
-  //         style: 'bold.cyan',
-  //       },
-  //     }
-  //     expect(JSON.stringify(theme)).to.equals(JSON.stringify(tobj))
-  //     expect(JSON.stringify(list)).to.equals(JSON.stringify(lobj))
-  //     fs.copySync('./themes1', './themes')
-  //     fs.removeSync('./themes1')
-  //     done()
-  //   })
-  // })
   describe('get themes', () => {
     it('returns an array of theme names', (done) => {
       const list = themes.getThemes().sort()
       const obj = ['colonel', 'markup', 'square']
-      expect(JSON.stringify(list)).to.equals(JSON.stringify(obj))
+      expect(list).to.deep.equal(obj)
       done()
     })
   })
@@ -349,7 +315,7 @@ describe('themes', () => {
           style: 'bold.cyan',
         },
       }
-      expect(JSON.stringify(theme)).to.equals(JSON.stringify(obj))
+      expect(theme).to.deep.equal(obj)
       done()
     })
   })
@@ -522,7 +488,7 @@ describe('config commands', () => {
         config.wordnik.date.stamp = ''
         config.wordnik.date.remain = 15000
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/Created [a-z\/\.]*/mig)
-        expect(JSON.stringify(config, null, ' ')).to.equals(JSON.stringify(obj, null, ' '))
+        expect(config).to.deep.equal(obj)
         done(err)
       })
     })
@@ -549,10 +515,10 @@ describe('dmuse commands', () => {
     before((done) => {
       fs.mkdirpSync('test/output')
       const obj = noon.load(TFILE)
-      obj.dmuse.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
-      obj.onelook.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
-      obj.rbrain.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
-      obj.wordnik.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+      obj.dmuse.date.stamp = new Date().toJSON()
+      obj.onelook.date.stamp = new Date().toJSON()
+      obj.rbrain.date.stamp = new Date().toJSON()
+      obj.wordnik.date.stamp = new Date().toJSON()
       let fileExists = null
       try {
         fs.statSync(CFILE)
@@ -613,7 +579,7 @@ describe('dmuse commands', () => {
           }
           const json = fs.readJsonSync(`${process.cwd()}/test/output/dmuse.json`)
           expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z\[\]→\s,]*\/dmuse.json./mig)
-          expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
+          expect(json).to.deep.equal(obj)
           done(err)
         })
       })
@@ -633,10 +599,10 @@ describe('rbrain commands', () => {
   before((done) => {
     fs.mkdirpSync('test/output')
     const obj = noon.load(TFILE)
-    obj.dmuse.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
-    obj.onelook.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
-    obj.rbrain.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
-    obj.wordnik.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+    obj.dmuse.date.stamp = new Date().toJSON()
+    obj.onelook.date.stamp = new Date().toJSON()
+    obj.rbrain.date.stamp = new Date().toJSON()
+    obj.wordnik.date.stamp = new Date().toJSON()
     let fileExists = null
     try {
       fs.statSync(CFILE)
@@ -693,7 +659,7 @@ describe('rbrain commands', () => {
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/combine.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[\[\]a-z0-9,→ -\/\.]*/mig)
-        expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
+        expect(json).to.deep.equal(obj)
         done(err)
       })
     })
@@ -715,28 +681,24 @@ describe('rbrain commands', () => {
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/info.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[\[\]a-z0-9 -→ˈʌ\/\.,]*/mig)
-        expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
+        expect(json).to.deep.equal(obj)
         done(err)
       })
     })
   })
   describe('rhyme', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js rbrain rhyme -s -o ${process.cwd()}/test/output/rhyme.json ubiquity > test/output/rhyme.out`, (err) => {
+      child.exec(`node ${process.cwd()}/build/leximaven.js rbrain rhyme -s -m1 -o ${process.cwd()}/test/output/rhyme.json too > test/output/rhyme.out`, (err) => {
         const stdout = fs.readFileSync('test/output/rhyme.out', 'utf8')
         const obj = {
           type: 'rhyme',
           source: 'http://rhymebrain.com',
-          url: 'http://rhymebrain.com/talk?function=getRhymes&word=ubiquity&lang=en&maxResults=5&',
-          rhyme0: 'stability',
-          rhyme1: 'typically',
-          rhyme2: 'specifically',
-          rhyme3: 'respectively',
-          rhyme4: 'effectively',
+          url: 'http://rhymebrain.com/talk?function=getRhymes&word=too&lang=en&maxResults=1&',
+          rhyme0: 'to',
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/rhyme.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/\[Rhymes\]→[a-z*, ]*\sWrote data to [a-z\/\.]*\s\d*\/\d*[a-z0-9 ,\.]*/mig)
-        expect(JSON.stringify(json)).to.match(/[\{\}a-z0-9\s:\/\.",]*/mig)
+        expect(json).to.deep.equal(obj)
         done(err)
       })
     })
@@ -747,10 +709,10 @@ describe('wordnik commands', () => {
   before((done) => {
     fs.mkdirpSync('test/output')
     const obj = noon.load(TFILE)
-    obj.dmuse.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
-    obj.onelook.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
-    obj.rbrain.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
-    obj.wordnik.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+    obj.dmuse.date.stamp = new Date().toJSON()
+    obj.onelook.date.stamp = new Date().toJSON()
+    obj.rbrain.date.stamp = new Date().toJSON()
+    obj.wordnik.date.stamp = new Date().toJSON()
     let fileExists = null
     try {
       fs.statSync(CFILE)
@@ -808,7 +770,7 @@ describe('wordnik commands', () => {
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/define.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z\[\]→ ;:",\-\(\)\.\/”]*Wrote data to [a-z\/\.]*/mig)
-        expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
+        expect(json).to.deep.equal(obj)
         done(err)
       })
     })
@@ -825,7 +787,7 @@ describe('wordnik commands', () => {
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/example.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z0-9\[\] →:,\.]*\sWrote data to [a-z\/\.]*/mig)
-        expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
+        expect(json).to.deep.equal(obj)
         done(err)
       })
     })
@@ -845,7 +807,7 @@ describe('wordnik commands', () => {
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/hyphen.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/\[Hyphenation\]→[a-z\-]*\sWrote data to [a-z\/\.]*\s\d*\/\d*[a-z0-9 ,\.]*/mig)
-        expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
+        expect(json).to.deep.equal(obj)
         done(err)
       })
     })
@@ -863,7 +825,7 @@ describe('wordnik commands', () => {
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/origin.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z \[\]→\.,\(\):√©]*Wrote data to [a-z\/\.]*/mig)
-        expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
+        expect(json).to.deep.equal(obj)
         done(err)
       })
     })
@@ -881,7 +843,7 @@ describe('wordnik commands', () => {
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/phrase.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z\[\]\-\s]*Wrote data to [a-z\/\.]*/mig)
-        expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
+        expect(json).to.deep.equal(obj)
         done(err)
       })
     })
@@ -902,7 +864,7 @@ describe('wordnik commands', () => {
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/pronounce.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z0-9\[\]\(\) \-→ĭēˈ\so͞]*\sWrote data to [a-z\/\.]*/mig)
-        expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
+        expect(json).to.deep.equal(obj)
         done(err)
       })
     })
@@ -931,7 +893,7 @@ describe('wordnik commands', () => {
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/relate.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z \[\],\-→]*\sWrote data to [a-z\/\.]*/mig)
-        expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
+        expect(json).to.deep.equal(obj)
         done(err)
       })
     })
@@ -942,10 +904,10 @@ describe('root commands', () => {
   before((done) => {
     fs.mkdirpSync('test/output')
     const obj = noon.load(TFILE)
-    obj.dmuse.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
-    obj.onelook.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
-    obj.rbrain.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
-    obj.wordnik.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+    obj.dmuse.date.stamp = new Date().toJSON()
+    obj.onelook.date.stamp = new Date().toJSON()
+    obj.rbrain.date.stamp = new Date().toJSON()
+    obj.wordnik.date.stamp = new Date().toJSON()
     let fileExists = null
     try {
       fs.statSync(CFILE)
@@ -1015,7 +977,7 @@ describe('root commands', () => {
           DDC4: '387',
         }
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/Found \d* acronyms for [a-z]*:\s[a-z0-9\s-:\/\.|(|)]*Wrote data to [a-z\/]*.json./mig)
-        expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
+        expect(json).to.deep.equal(obj)
         done(err)
       })
     })
@@ -1042,7 +1004,7 @@ describe('root commands', () => {
           DDC4: '387',
         }
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/Found \d* acronyms for [a-z]*:\s[a-z0-9\s-:\/\.|(|)]*Overwrote [a-z\/\.]* with data./mig)
-        expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
+        expect(json).to.deep.equal(obj)
         done(err)
       })
     })
@@ -1086,7 +1048,7 @@ describe('root commands', () => {
           fixed.DDC2 = fixed.DDC2[0]
           fixed.DDC3 = fixed.DDC3[0]
           fixed.DDC4 = fixed.DDC4[0]
-          expect(JSON.stringify(fixed)).to.equals(JSON.stringify(obj))
+          expect(fixed).to.deep.equal(obj)
           done(err)
         })
       })
@@ -1131,7 +1093,7 @@ describe('root commands', () => {
           fixed.DDC2 = fixed.DDC2[0]
           fixed.DDC3 = fixed.DDC3[0]
           fixed.DDC4 = fixed.DDC4[0]
-          expect(JSON.stringify(fixed)).to.equals(JSON.stringify(obj))
+          expect(fixed).to.deep.equal(obj)
           done(err)
         })
       })
@@ -1154,7 +1116,7 @@ describe('root commands', () => {
           ],
         }
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[Anagrams\]\sAnagrams for: [a-z]*\s\d* found. Displaying all:\s[a-z\/\.\s]*/mig)
-        expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
+        expect(json).to.deep.equal(obj)
         done(err)
       })
     })
@@ -1223,7 +1185,7 @@ describe('root commands', () => {
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/onelook.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z0-9\[\]:\(\)→ \/\.,]*/mig)
-        expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
+        expect(json).to.deep.equal(obj)
         done(err)
       })
     })
@@ -1247,7 +1209,7 @@ describe('root commands', () => {
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/urban.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z0-9 \[\]→\.\/\s]*/mig)
-        expect(JSON.stringify(json)).to.equals(JSON.stringify(obj))
+        expect(json).to.deep.equal(obj)
         done(err)
       })
     })
