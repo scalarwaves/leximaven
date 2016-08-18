@@ -44,10 +44,10 @@ exports.handler = (argv) => {
       throw new Error('Package dir not found, set NODE_PATH per documentation.')
     }
   }
-  obj.dmuse.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
-  obj.onelook.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
-  obj.rbrain.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
-  obj.wordnik.date.stamp = JSON.stringify(new Date()).replace(/"/mig, '')
+  obj.dmuse.date.stamp = new Date().toJSON()
+  obj.onelook.date.stamp = new Date().toJSON()
+  obj.rbrain.date.stamp = new Date().toJSON()
+  obj.wordnik.date.stamp = new Date().toJSON()
   let fileExists = null
   try {
     fs.statSync(CFILE)
