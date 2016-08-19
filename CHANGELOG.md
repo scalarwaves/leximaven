@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.2"></a>
+## [1.0.2](https://github.com/drawnepicenter/leximaven/compare/v1.0.1...v1.0.2) (2016-08-19)
+
+
+### Bug Fixes
+
+* **CI:** remove strip-ansi require ([48efa39](https://github.com/drawnepicenter/leximaven/commit/48efa39))
+* **cli-tests:** stringify error ([9c9932d](https://github.com/drawnepicenter/leximaven/commit/9c9932d))
+* **config-init:** no more JSON stringify creating problems with babel-polyfill ([8a9dca8](https://github.com/drawnepicenter/leximaven/commit/8a9dca8)), closes [#6](https://github.com/drawnepicenter/leximaven/issues/6)
+
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://github.com/drawnepicenter/leximaven/compare/v1.0.0...v1.0.1) (2016-08-17)
 
