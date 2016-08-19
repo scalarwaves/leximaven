@@ -3,7 +3,6 @@ node_js:
 - '6'
 - '5'
 - '4'
-- 'iojs'
 before_script:
 - npm i -g leximaven
 - node build/leximaven.js config init
