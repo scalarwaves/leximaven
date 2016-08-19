@@ -35,7 +35,8 @@ exports.loadTheme = (theme) => {
   } catch (e) {
     if (e.code === 'ENOENT') dirExists = false
   }
-  dirExists ? load = noon.load(`themes/${theme}.noon`) : load = noon.load(`${TDIR}${theme}.noon`)
+  if (!dirExists) console.log(chalk.white(`${process.cwd()}/themes does not exist, falling back to ${process.env.NODE_PATH}/leximaven/themes.`))
+  load = noon.load(`${TDIR}${theme}.noon`)
   return load
 }
 
@@ -54,7 +55,8 @@ exports.getThemes = () => {
   } catch (e) {
     if (e.code === 'ENOENT') dirExists = false
   }
-  dirExists ? files = glob.sync('themes/*.noon') : files = glob.sync(`${TDIR}*.noon`)
+  if (!dirExists) console.log(chalk.white(`${process.cwd()}/themes does not exist, falling back to ${process.env.NODE_PATH}/leximaven/themes.`))
+  files = glob.sync(`${TDIR}*.noon`)
   _.each(files, (path) => {
     const name = path.replace(/[a-z0-9\/_\.]*themes\//, '').replace(/\.noon/, '')
     list.push(name)
