@@ -5,7 +5,6 @@ var themes = require('../../themes');
 var tools = require('../../tools');
 
 var _ = require('lodash');
-var chalk = require('chalk');
 var moment = require('moment');
 var http = require('good-guy-http')();
 var noon = require('noon');
@@ -84,9 +83,7 @@ exports.handler = function (argv) {
       var uri = '' + prefix + word + '/' + task + '?';
       var pcont = [];
       pcont.push('useCanonical=' + config.wordnik.relate.canon + '&');
-      if (config.wordnik.relate.type !== '') {
-        pcont.push('relationshipTypes=' + config.wordnik.relate.type + '&');
-      }
+      if (config.wordnik.relate.type !== '') pcont.push('relationshipTypes=' + config.wordnik.relate.type + '&');
       pcont.push('limitPerRelationshipType=' + config.wordnik.relate.limit + '&');
       pcont.push('api_key=' + apikey);
       var rest = pcont.join('');

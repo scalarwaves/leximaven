@@ -5,7 +5,6 @@ var themes = require('../../themes');
 var tools = require('../../tools');
 
 var _ = require('lodash');
-var chalk = require('chalk');
 var moment = require('moment');
 var http = require('good-guy-http')();
 var noon = require('noon');
@@ -86,11 +85,7 @@ exports.handler = function (argv) {
       pcont.push('useCanonical=' + config.wordnik.example.canon + '&');
       pcont.push('includeDuplicates=false&');
       pcont.push('limit=' + config.wordnik.example.limit + '&');
-      if (!config.wordnik.example.skip) {
-        pcont.push('skip=0&');
-      } else {
-        pcont.push('skip=' + config.wordnik.example.skip + '&');
-      }
+      !config.wordnik.example.skip ? pcont.push('skip=0&') : pcont.push('skip=' + config.wordnik.example.skip + '&');
       pcont.push('api_key=' + apikey);
       var rest = pcont.join('');
       var url = '' + uri + rest;

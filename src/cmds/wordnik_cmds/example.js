@@ -3,7 +3,6 @@ const themes = require('../../themes')
 const tools = require('../../tools')
 
 const _ = require('lodash')
-const chalk = require('chalk')
 const moment = require('moment')
 const http = require('good-guy-http')()
 const noon = require('noon')
@@ -83,11 +82,7 @@ exports.handler = (argv) => {
     pcont.push(`useCanonical=${config.wordnik.example.canon}&`)
     pcont.push('includeDuplicates=false&')
     pcont.push(`limit=${config.wordnik.example.limit}&`)
-    if (!config.wordnik.example.skip) {
-      pcont.push('skip=0&')
-    } else {
-      pcont.push(`skip=${config.wordnik.example.skip}&`)
-    }
+    !config.wordnik.example.skip ? pcont.push('skip=0&') : pcont.push(`skip=${config.wordnik.example.skip}&`)
     pcont.push(`api_key=${apikey}`)
     const rest = pcont.join('')
     let url = `${uri}${rest}`

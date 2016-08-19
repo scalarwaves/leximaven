@@ -5,7 +5,6 @@ var themes = require('../../themes');
 var tools = require('../../tools');
 
 var _ = require('lodash');
-var chalk = require('chalk');
 var moment = require('moment');
 var http = require('good-guy-http')();
 var noon = require('noon');

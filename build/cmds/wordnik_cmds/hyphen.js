@@ -112,9 +112,7 @@ exports.handler = function (argv) {
               hcont.push(ctstyle(item.text));
               tofile[['syllable' + i]] = item.text;
             }
-            if (i < list.length - 1) {
-              hcont.push(ctstyle('-'));
-            }
+            if (i < list.length - 1) hcont.push(ctstyle('-'));
           }
           themes.label(theme, 'right', 'Hyphenation', hcont.join(''));
           if (argv.o) tools.outFile(argv.o, argv.f, tofile);

@@ -1,5 +1,6 @@
 'use strict';
 
+/* eslint max-len: 0 */
 var themes = require('../themes');
 var tools = require('../tools');
 

@@ -1,3 +1,4 @@
+/* eslint max-len: 0 */
 const themes = require('../themes')
 const tools = require('../tools')
 

@@ -99,11 +99,7 @@ exports.handler = (argv) => {
         for (let j = 0; j <= lcont.length - 1; j++) {
           const item = lcont[j]
           rcont.push(ctstyle(item))
-          if (item.score >= 300) {
-            tofile[[`hiscore${j}`]] = item
-          } else {
-            tofile[[`rhyme${j}`]] = item
-          }
+          item.score >= 300 ? tofile[[`hiscore${j}`]] = item : tofile[[`rhyme${j}`]] = item
         }
         rcont.sort()
         themes.label(theme, 'right', task, rcont.join(', '))

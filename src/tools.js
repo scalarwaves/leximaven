@@ -204,11 +204,7 @@ exports.checkConfig = (file) => {
   */
 exports.arrToStr = (obj) => {
   let fixed = null
-  if (Array.isArray(obj) && obj.length === 1 && typeof obj[0] === 'string') {
-    fixed = obj[0]
-  } else {
-    fixed = obj
-  }
+  Array.isArray(obj) && obj.length === 1 && typeof obj[0] === 'string' ? fixed = obj[0] : fixed = obj
   return fixed
 }
 

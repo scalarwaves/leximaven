@@ -3,7 +3,6 @@ const themes = require('../../themes')
 const tools = require('../../tools')
 
 const _ = require('lodash')
-const chalk = require('chalk')
 const moment = require('moment')
 const http = require('good-guy-http')()
 const noon = require('noon')
@@ -81,9 +80,7 @@ exports.handler = (argv) => {
     const uri = `${prefix}${word}/${task}?`
     const pcont = []
     pcont.push(`useCanonical=${config.wordnik.relate.canon}&`)
-    if (config.wordnik.relate.type !== '') {
-      pcont.push(`relationshipTypes=${config.wordnik.relate.type}&`)
-    }
+    if (config.wordnik.relate.type !== '') pcont.push(`relationshipTypes=${config.wordnik.relate.type}&`)
     pcont.push(`limitPerRelationshipType=${config.wordnik.relate.limit}&`)
     pcont.push(`api_key=${apikey}`)
     const rest = pcont.join('')
