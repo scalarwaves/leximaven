@@ -26,14 +26,14 @@ exports.limitOnelook = function (config) {
   var stamp = new Date(c.onelook.date.stamp);
   var hours = moment(new Date()).diff(stamp, 'hours');
   if (hours < 24 || hours < 0) {
-    c.onelook.date.remain = c.onelook.date.remain - 1;
+    c.onelook.date.remain--;
     noon.save(CFILE, c);
   } else if (hours >= 24) {
     reset = true;
-    c.onelook.date.stamp = moment().format();
+    c.onelook.date.stamp = new Date().toJSON();
     c.onelook.date.remain = c.onelook.date.limit;
     console.log(chalk.white('Reset API limit to ' + c.onelook.date.limit + '/' + c.onelook.date.interval + '.'));
-    c.onelook.date.remain = c.onelook.date.remain - 1;
+    c.onelook.date.remain--;
     noon.save(CFILE, c);
   }
   if (c.onelook.date.remain === 0) {
@@ -60,14 +60,14 @@ exports.limitDmuse = function (config) {
   var stamp = new Date(c.dmuse.date.stamp);
   var hours = moment(new Date()).diff(stamp, 'hours');
   if (hours < 24) {
-    c.dmuse.date.remain = c.dmuse.date.remain - 1;
+    c.dmuse.date.remain--;
     noon.save(CFILE, c);
   } else if (hours >= 24) {
     reset = true;
-    c.dmuse.date.stamp = moment().format();
+    c.dmuse.date.stamp = new Date().toJSON();
     c.dmuse.date.remain = c.dmuse.date.limit;
     console.log(chalk.white('Reset API limit to ' + c.dmuse.date.limit + '/' + c.dmuse.date.interval + '.'));
-    c.dmuse.date.remain = c.dmuse.date.remain - 1;
+    c.dmuse.date.remain--;
     noon.save(CFILE, c);
   }
   if (c.dmuse.date.remain === 0) {
@@ -94,14 +94,14 @@ exports.limitRbrain = function (config) {
   var stamp = new Date(c.rbrain.date.stamp);
   var minutes = moment(new Date()).diff(stamp, 'minutes');
   if (minutes < 60) {
-    c.rbrain.date.remain = c.rbrain.date.remain - 1;
+    c.rbrain.date.remain--;
     noon.save(CFILE, c);
   } else if (minutes >= 60) {
     reset = true;
-    c.rbrain.date.stamp = moment().format();
+    c.rbrain.date.stamp = new Date().toJSON();
     c.rbrain.date.remain = c.rbrain.date.limit;
     console.log(chalk.white('Reset API limit to ' + c.rbrain.date.limit + '/' + c.rbrain.date.interval + '.'));
-    c.rbrain.date.remain = c.rbrain.date.remain - 1;
+    c.rbrain.date.remain--;
     noon.save(CFILE, c);
   }
   if (c.rbrain.date.remain === 0) {
@@ -128,14 +128,14 @@ exports.limitWordnik = function (config) {
   var stamp = new Date(c.wordnik.date.stamp);
   var minutes = moment(new Date()).diff(stamp, 'minutes');
   if (minutes < 60) {
-    c.wordnik.date.remain = c.wordnik.date.remain - 1;
+    c.wordnik.date.remain--;
     noon.save(CFILE, c);
   } else if (minutes >= 60) {
     reset = true;
-    c.wordnik.date.stamp = moment().format();
+    c.wordnik.date.stamp = new Date().toJSON();
     c.wordnik.date.remain = c.wordnik.date.limit;
     console.log(chalk.white('Reset API limit to ' + c.wordnik.date.limit + '/' + c.wordnik.date.interval + '.'));
-    c.wordnik.date.remain = c.wordnik.date.remain - 1;
+    c.wordnik.date.remain--;
     noon.save(CFILE, c);
   }
   if (c.wordnik.date.remain === 0) {
