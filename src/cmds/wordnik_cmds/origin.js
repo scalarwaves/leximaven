@@ -59,6 +59,8 @@ exports.handler = (argv) => {
       },
     }
     if (config.merge) config = _.merge({}, config, userConfig)
+    if (argv.s && config.merge) noon.save(CFILE, config)
+    if (argv.s && !config.merge) throw new Error("Can't save user config, set option merge to true.")
     const theme = themes.loadTheme(config.theme)
     if (config.verbose) themes.label(theme, 'down', 'Wordnik')
     const word = argv.word
@@ -93,8 +95,6 @@ exports.handler = (argv) => {
           tofile.origin = ets
         })
         if (argv.o) tools.outFile(argv.o, argv.f, tofile)
-        if (argv.s && config.merge) noon.save(CFILE, config)
-        if (argv.s && !config.merge) throw new Error("Can't save user config, set option merge to true.")
         if (reset) {
           console.log(`${config.wordnik.date.remain}/${config.wordnik.date.limit} requests remaining this hour.`)
         } else {
