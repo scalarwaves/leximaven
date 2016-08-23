@@ -44,13 +44,13 @@ exports.handler = (argv) => {
   let config = noon.load(CFILE)
   let proceed = false
   let reset = false
-  const stamp = new Date(config.onelook.date.stamp)
-  const hours = moment(new Date).diff(stamp, 'hours')
-  const minutes = moment(new Date).diff(stamp, 'minutes')
   const checkStamp = tools.limitOnelook(config)
   config = checkStamp[0]
   proceed = checkStamp[1]
   reset = checkStamp[2]
+  const stamp = new Date(config.onelook.date.stamp)
+  const hours = moment(new Date).diff(stamp, 'hours')
+  const minutes = moment(new Date).diff(stamp, 'minutes')
   if (proceed) {
     const userConfig = {
       onelook: {
@@ -72,6 +72,11 @@ exports.handler = (argv) => {
     const ctstyle = _.get(chalk, theme.content.style)
     http({ url }, (error, response) => {
       if (!error && response.statusCode === 200) {
+        if (response.headers['x-gg-state'] === 'cached') {
+          config.onelook.date.remain++
+          noon.save(CFILE, config)
+          if (config.usage) console.log('Cached response, not decrementing usage.')
+        }
         const body = response.body
         const parser = new xml2js.Parser()
         parser.parseString(body, (err, result) => {
@@ -118,17 +123,14 @@ exports.handler = (argv) => {
             }
           }
           if (argv.o) tools.outFile(argv.o, argv.f, tofile)
-          if (reset) {
-            console.log(`${config.onelook.date.remain}/${config.onelook.date.limit} requests remaining today.`)
-          } else {
-            if (config.usage) console.log(`${config.onelook.date.remain}/${config.onelook.date.limit} requests remaining today, will reset in ${23 - hours} hours, ${59 - minutes} minutes.`)
+          if (config.usage) {
+            if (reset) {
+              console.log('Timestamp expired, reset usage limits.')
+              console.log(`${config.onelook.date.remain}/${config.onelook.date.limit} requests remaining today.`)
+            } else console.log(`${config.onelook.date.remain}/${config.onelook.date.limit} requests remaining today, will reset in ${23 - hours} hours, ${59 - minutes} minutes.`)
           }
         })
-      } else {
-        throw new Error(`HTTP ${response.statusCode} ${error}`)
-      }
+      } else throw new Error(`HTTP ${response.statusCode}: ${error}`)
     })
-  } else {
-    throw new Error(`Reached today's usage limit of ${config.onelook.date.limit}.`)
-  }
+  } else throw new Error(`Reached today's usage limit of ${config.onelook.date.limit}.`)
 }
