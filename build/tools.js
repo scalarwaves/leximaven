@@ -25,20 +25,17 @@ exports.limitOnelook = function (config) {
   var reset = false;
   var stamp = new Date(c.onelook.date.stamp);
   var hours = moment(new Date()).diff(stamp, 'hours');
-  if (hours < 24 || hours < 0) {
+  if (hours < 24) {
     c.onelook.date.remain--;
     noon.save(CFILE, c);
   } else if (hours >= 24) {
     reset = true;
     c.onelook.date.stamp = new Date().toJSON();
     c.onelook.date.remain = c.onelook.date.limit;
-    console.log(chalk.white('Reset API limit to ' + c.onelook.date.limit + '/' + c.onelook.date.interval + '.'));
     c.onelook.date.remain--;
     noon.save(CFILE, c);
   }
-  if (c.onelook.date.remain === 0) {
-    proceed = false;
-  } else if (c.onelook.date.remain < 0) {
+  if (c.onelook.date.remain <= 0) {
     proceed = false;
     c.onelook.date.remain = 0;
     noon.save(CFILE, c);
