@@ -61,13 +61,10 @@ exports.limitDmuse = (config) => {
     reset = true
     c.dmuse.date.stamp = new Date().toJSON()
     c.dmuse.date.remain = c.dmuse.date.limit
-    console.log(chalk.white(`Reset API limit to ${c.dmuse.date.limit}/${c.dmuse.date.interval}.`))
     c.dmuse.date.remain--
     noon.save(CFILE, c)
   }
-  if (c.dmuse.date.remain === 0) {
-    proceed = false
-  } else if (c.dmuse.date.remain < 0) {
+  if (c.dmuse.date.remain <= 0) {
     proceed = false
     c.dmuse.date.remain = 0
     noon.save(CFILE, c)
