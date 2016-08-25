@@ -27,21 +27,14 @@ exports.limitOnelook = function (config) {
   var hours = moment(new Date()).diff(stamp, 'hours');
   if (hours < 24) {
     c.onelook.date.remain--;
-    noon.save(CFILE, c);
   } else if (hours >= 24) {
     reset = true;
     c.onelook.date.stamp = new Date().toJSON();
     c.onelook.date.remain = c.onelook.date.limit;
     c.onelook.date.remain--;
-    noon.save(CFILE, c);
   }
-  if (c.onelook.date.remain <= 0) {
-    proceed = false;
-    c.onelook.date.remain = 0;
-    noon.save(CFILE, c);
-  } else {
-    proceed = true;
-  }
+  c.onelook.date.remain <= 0 ? c.onelook.date.remain = 0 : proceed = true;
+  noon.save(CFILE, c);
   return [c, proceed, reset];
 };
 
@@ -58,21 +51,14 @@ exports.limitDmuse = function (config) {
   var hours = moment(new Date()).diff(stamp, 'hours');
   if (hours < 24) {
     c.dmuse.date.remain--;
-    noon.save(CFILE, c);
   } else if (hours >= 24) {
     reset = true;
     c.dmuse.date.stamp = new Date().toJSON();
     c.dmuse.date.remain = c.dmuse.date.limit;
     c.dmuse.date.remain--;
-    noon.save(CFILE, c);
   }
-  if (c.dmuse.date.remain <= 0) {
-    proceed = false;
-    c.dmuse.date.remain = 0;
-    noon.save(CFILE, c);
-  } else {
-    proceed = true;
-  }
+  c.dmuse.date.remain <= 0 ? c.dmuse.date.remain = 0 : proceed = true;
+  noon.save(CFILE, c);
   return [c, proceed, reset];
 };
 
@@ -89,24 +75,14 @@ exports.limitRbrain = function (config) {
   var minutes = moment(new Date()).diff(stamp, 'minutes');
   if (minutes < 60) {
     c.rbrain.date.remain--;
-    noon.save(CFILE, c);
   } else if (minutes >= 60) {
     reset = true;
     c.rbrain.date.stamp = new Date().toJSON();
     c.rbrain.date.remain = c.rbrain.date.limit;
-    console.log(chalk.white('Reset API limit to ' + c.rbrain.date.limit + '/' + c.rbrain.date.interval + '.'));
     c.rbrain.date.remain--;
-    noon.save(CFILE, c);
   }
-  if (c.rbrain.date.remain === 0) {
-    proceed = false;
-  } else if (c.rbrain.date.remain < 0) {
-    proceed = false;
-    c.rbrain.date.remain = 0;
-    noon.save(CFILE, c);
-  } else {
-    proceed = true;
-  }
+  c.rbrain.date.remain <= 0 ? c.rbrain.date.remain = 0 : proceed = true;
+  noon.save(CFILE, c);
   return [c, proceed, reset];
 };
 
@@ -123,24 +99,14 @@ exports.limitWordnik = function (config) {
   var minutes = moment(new Date()).diff(stamp, 'minutes');
   if (minutes < 60) {
     c.wordnik.date.remain--;
-    noon.save(CFILE, c);
   } else if (minutes >= 60) {
     reset = true;
     c.wordnik.date.stamp = new Date().toJSON();
     c.wordnik.date.remain = c.wordnik.date.limit;
-    console.log(chalk.white('Reset API limit to ' + c.wordnik.date.limit + '/' + c.wordnik.date.interval + '.'));
     c.wordnik.date.remain--;
-    noon.save(CFILE, c);
   }
-  if (c.wordnik.date.remain === 0) {
-    proceed = false;
-  } else if (c.wordnik.date.remain < 0) {
-    proceed = false;
-    c.wordnik.date.remain = 0;
-    noon.save(CFILE, c);
-  } else {
-    proceed = true;
-  }
+  c.wordnik.date.remain <= 0 ? c.wordnik.date.remain = 0 : proceed = true;
+  noon.save(CFILE, c);
   return [c, proceed, reset];
 };
 
@@ -156,9 +122,7 @@ function checkOutfile(path) {
     fs.statSync(path);
     fileExists = true;
   } catch (e) {
-    if (e.code === 'ENOENT') {
-      fileExists = false;
-    }
+    if (e.code === 'ENOENT') fileExists = false;
   }
   return fileExists;
 }
@@ -185,9 +149,7 @@ exports.checkConfig = function (file) {
   try {
     fs.statSync(file);
   } catch (e) {
-    if (e.code === 'ENOENT') {
-      throw new Error('No config found at ' + file + ', run: \'leximaven config init\'');
-    }
+    if (e.code === 'ENOENT') throw new Error('No config found at ' + file + ', run: \'leximaven config init\'');
   }
   return true;
 };
@@ -223,9 +185,7 @@ exports.outFile = function (path, force, tofile) {
         fs.writeSync(fd, xml);
         fs.closeSync(fd);
         console.log(chalk.white('Overwrote ' + path + ' with data.'));
-      } else {
-        console.log(chalk.white(path + ' exists, use -f to force overwrite.'));
-      }
+      } else console.log(chalk.white(path + ' exists, use -f to force overwrite.'));
     } else {
       var _xml = builder.buildObject(tofile);
       var _fd = fs.openSync(path, 'w+');
@@ -238,9 +198,7 @@ exports.outFile = function (path, force, tofile) {
       if (force) {
         noon.save(path, tofile);
         console.log(chalk.white('Overwrote ' + path + ' with data.'));
-      } else {
-        console.log(chalk.white(path + ' exists, use -f to force overwrite.'));
-      }
+      } else console.log(chalk.white(path + ' exists, use -f to force overwrite.'));
     } else {
       noon.save(path, tofile);
       console.log(chalk.white('Wrote data to ' + path + '.'));

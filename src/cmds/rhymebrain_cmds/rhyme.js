@@ -87,11 +87,14 @@ exports.handler = (argv) => {
     const ctstyle = _.get(chalk, theme.content.style)
     http({ url }, (error, response) => {
       if (!error && response.statusCode === 200) {
+        if (response.headers['x-gg-state'] === 'cached') {
+          config.rbrain.date.remain++
+          noon.save(CFILE, config)
+          if (config.usage) console.log('Cached response, not decrementing usage.')
+        }
         const list = JSON.parse(response.body)
         const lcont = []
-        _.each(list, (item) => {
-          lcont.push(item.word)
-        })
+        _.each(list, (item) => lcont.push(item.word))
         lcont.sort((a, b) => {
           if (a < b) return -1
           if (a > b) return 1
@@ -106,16 +109,8 @@ exports.handler = (argv) => {
         rcont.sort()
         themes.label(theme, 'right', task, rcont.join(', '))
         if (argv.o) tools.outFile(argv.o, argv.f, tofile)
-        if (reset) {
-          console.log(`${config.rbrain.date.remain}/${config.rbrain.date.limit} requests remaining this hour.`)
-        } else {
-          if (config.usage) console.log(`${config.rbrain.date.remain}/${config.rbrain.date.limit} requests remaining this hour, will reset in ${59 - minutes} minutes.`)
-        }
-      } else {
-        throw new Error(`HTTP ${response.statusCode}: ${error}`)
-      }
+        if (config.usage) reset ? console.log(`${config.rbrain.date.remain}/${config.rbrain.date.limit} requests remaining this hour.`) : console.log(`${config.rbrain.date.remain}/${config.rbrain.date.limit} requests remaining this hour, will reset in ${59 - minutes} minutes.`)
+      } else throw new Error(`HTTP ${response.statusCode}: ${error}`)
     })
-  } else {
-    throw new Error(`Reached this hour's usage limit of ${config.rbrain.date.limit}.`)
-  }
+  } else throw new Error(`Reached this hour's usage limit of ${config.rbrain.date.limit}.`)
 }

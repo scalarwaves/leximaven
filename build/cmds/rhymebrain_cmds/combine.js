@@ -89,6 +89,11 @@ exports.handler = function (argv) {
       };
       http({ url: url }, function (error, response) {
         if (!error && response.statusCode === 200) {
+          if (response.headers['x-gg-state'] === 'cached') {
+            config.rbrain.date.remain++;
+            noon.save(CFILE, config);
+            if (config.usage) console.log('Cached response, not decrementing usage.');
+          }
           var list = JSON.parse(response.body);
           for (var i = 0; i <= list.length - 1; i++) {
             var item = list[i];
@@ -97,17 +102,9 @@ exports.handler = function (argv) {
             tofile[['portmanteau' + i]] = item.combined;
           }
           if (argv.o) tools.outFile(argv.o, argv.f, tofile);
-          if (reset) {
-            console.log(config.rbrain.date.remain + '/' + config.rbrain.date.limit + ' requests remaining this hour.');
-          } else {
-            if (config.usage) console.log(config.rbrain.date.remain + '/' + config.rbrain.date.limit + ' requests remaining this hour, will reset in ' + (59 - minutes) + ' minutes.');
-          }
-        } else {
-          throw new Error('HTTP ' + response.statusCode + ': ' + error);
-        }
+          if (config.usage) reset ? console.log('Timestamp expired, reset usage limits.\n' + config.rbrain.date.remain + '/' + config.rbrain.date.limit + ' requests remaining this hour.') : console.log(config.rbrain.date.remain + '/' + config.rbrain.date.limit + ' requests remaining this hour, will reset in ' + (59 - minutes) + ' minutes.');
+        } else throw new Error('HTTP ' + response.statusCode + ': ' + error);
       });
     })();
-  } else {
-    throw new Error('Reached this hour\'s usage limit of ' + config.rbrain.date.limit + '.');
-  }
+  } else throw new Error('Reached this hour\'s usage limit of ' + config.rbrain.date.limit + '.');
 };
