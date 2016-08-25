@@ -105,27 +105,14 @@ exports.handler = (argv) => {
               if (j === item.tags.length - 1) {
                 process.stdout.write(ctstyle(`${tags[item.tags[j]]}`))
                 tofile[[`tags${j}`]] = tags[item.tags[j]]
-              } else {
-                process.stdout.write(ctstyle(`${tags[item.tags[j]]}, `))
-              }
+              } else process.stdout.write(ctstyle(`${tags[item.tags[j]]}, `))
             }
             console.log('')
           }
         }
         if (argv.o) tools.outFile(argv.o, argv.f, tofile)
-        if (config.usage) {
-          if (reset) {
-            console.log('Timestamp expired, reset usage limits.')
-            console.log(`${config.dmuse.date.remain}/${config.dmuse.date.limit} requests remaining today.`)
-          } else {
-            console.log(`${config.dmuse.date.remain}/${config.dmuse.date.limit} requests remaining today, will reset in ${23 - hours} hours, ${59 - minutes} minutes.`)
-          }
-        }
-      } else {
-        throw new Error(`HTTP ${response.statusCode}: ${error}`)
-      }
+        if (config.usage) reset ? console.log(`Timestamp expired, reset usage limits.\n${config.dmuse.date.remain}/${config.dmuse.date.limit} requests remaining today.`) : console.log(`${config.dmuse.date.remain}/${config.dmuse.date.limit} requests remaining today, will reset in ${23 - hours} hours, ${59 - minutes} minutes.`)
+      } else throw new Error(`HTTP ${response.statusCode}: ${error}`)
     })
-  } else {
-    throw new Error(`Reached today's usage limit of ${config.dmuse.date.limit}.`)
-  }
+  } else throw new Error(`Reached today's usage limit of ${config.dmuse.date.limit}.`)
 }
