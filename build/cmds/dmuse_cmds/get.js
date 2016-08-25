@@ -92,6 +92,11 @@ exports.handler = function (argv) {
       var ctstyle = _.get(chalk, theme.content.style);
       http({ url: url }, function (error, response) {
         if (!error && response.statusCode === 200) {
+          if (response.headers['x-gg-state'] === 'cached') {
+            config.dmuse.date.remain++;
+            noon.save(CFILE, config);
+            if (config.usage) console.log('Cached response, not decrementing usage.');
+          }
           var resp = JSON.parse(response.body);
           for (var i = 0; i <= resp.length - 1; i++) {
             var item = resp[i];
@@ -111,10 +116,13 @@ exports.handler = function (argv) {
             }
           }
           if (argv.o) tools.outFile(argv.o, argv.f, tofile);
-          if (reset) {
-            console.log(config.dmuse.date.remain + '/' + config.dmuse.date.limit + ' requests remaining today.');
-          } else {
-            if (config.usage) console.log(config.dmuse.date.remain + '/' + config.dmuse.date.limit + ' requests remaining today, will reset in ' + (23 - hours) + ' hours, ' + (59 - minutes) + ' minutes.');
+          if (config.usage) {
+            if (reset) {
+              console.log('Timestamp expired, reset usage limits.');
+              console.log(config.dmuse.date.remain + '/' + config.dmuse.date.limit + ' requests remaining today.');
+            } else {
+              console.log(config.dmuse.date.remain + '/' + config.dmuse.date.limit + ' requests remaining today, will reset in ' + (23 - hours) + ' hours, ' + (59 - minutes) + ' minutes.');
+            }
           }
         } else {
           throw new Error('HTTP ' + response.statusCode + ': ' + error);
