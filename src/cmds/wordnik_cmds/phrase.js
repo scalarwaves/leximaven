@@ -50,6 +50,7 @@ exports.builder = {
   },
 }
 exports.handler = (argv) => {
+  if (process.env.WORDNIK === undefined) throw new Error('Put an API key in environment variable WORDNIK per documentation.')
   tools.checkConfig(CFILE)
   let config = noon.load(CFILE)
   let proceed = false

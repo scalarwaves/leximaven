@@ -42,6 +42,7 @@ exports.builder = {
   }
 };
 exports.handler = function (argv) {
+  if (process.env.WORDNIK === undefined) throw new Error('Put an API key in environment variable WORDNIK per documentation.');
   tools.checkConfig(CFILE);
   var config = noon.load(CFILE);
   var proceed = false;
