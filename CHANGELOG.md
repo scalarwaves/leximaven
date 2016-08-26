@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/drawnepicenter/leximaven/compare/v1.1.0...v1.2.0) (2016-08-26)
+
+
+### Bug Fixes
+
+* **wordnik:** remove url from outfile ([2dac4dc](https://github.com/drawnepicenter/leximaven/commit/2dac4dc)), closes [#8](https://github.com/drawnepicenter/leximaven/issues/8)
+
+
+### Features
+
+* **wordnik:** check for API key ([bbf9dab](https://github.com/drawnepicenter/leximaven/commit/bbf9dab))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/drawnepicenter/leximaven/compare/v1.0.2...v1.1.0) (2016-08-26)
 
