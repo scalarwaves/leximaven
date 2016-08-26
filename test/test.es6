@@ -1120,7 +1120,7 @@ describe('root commands', () => {
       })
     })
     it('handles no found anagrams', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js anagram bcdfghjklmnpqrstvwxz > test/output/anagram.out`, (err) => {
+      child.exec(`node ${process.cwd()}/build/leximaven.js anagram bcdfghjklmnp > test/output/anagram.out`, (err) => {
         const stdout = fs.readFileSync('test/output/anagram.out', 'utf8')
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/No anagrams found\./mig)
         done(err)

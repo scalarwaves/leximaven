@@ -1121,7 +1121,7 @@ describe('root commands', function () {
       });
     });
     it('handles no found anagrams', function (done) {
-      child.exec('node ' + process.cwd() + '/build/leximaven.js anagram bcdfghjklmnpqrstvwxz > test/output/anagram.out', function (err) {
+      child.exec('node ' + process.cwd() + '/build/leximaven.js anagram bcdfghjklmnp > test/output/anagram.out', function (err) {
         var stdout = fs.readFileSync('test/output/anagram.out', 'utf8');
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/No anagrams found\./mig);
         done(err);
