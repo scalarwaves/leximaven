@@ -762,7 +762,6 @@ describe('wordnik commands', () => {
         const obj = {
           type: 'definition',
           source: 'http://www.wordnik.com',
-          url: `http://api.wordnik.com:80/v4/word.json/ubiquity/definitions?useCanonical=false&sourceDictionaries=all&includeRelated=false&includeTags=false&limit=1&partOfSpeech=&api_key=${process.env.WORDNIK}`,
           text0: 'Existence or apparent existence everywhere at the same time; omnipresence: "the repetitiveness, the selfsameness, and the ubiquity of modern mass culture”  ( Theodor Adorno ). ',
           deftype0: 'noun',
           source0: 'ahd-legacy',
@@ -781,7 +780,6 @@ describe('wordnik commands', () => {
         const obj = {
           type: 'example',
           source: 'http://www.wordnik.com',
-          url: `http://api.wordnik.com:80/v4/word.json/ubiquity/examples?useCanonical=false&includeDuplicates=false&limit=1&skip=0&api_key=${process.env.WORDNIK}`,
           example0: 'Both are characterized by their ubiquity and their antiquity: No known human culture lacks them, and musical instruments are among the oldest human artifacts, dating to the Late Pleistocene about 50,000 years ago.',
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/example.json`)
@@ -798,7 +796,6 @@ describe('wordnik commands', () => {
         const obj = {
           type: 'hyphenation',
           source: 'http://www.wordnik.com',
-          url: `http://api.wordnik.com:80/v4/word.json/ubiquity/hyphenation?useCanonical=false&limit=5&api_key=${process.env.WORDNIK}`,
           syllable0: 'u',
           stress1: 'biq',
           syllable2: 'ui',
@@ -818,7 +815,6 @@ describe('wordnik commands', () => {
         const obj = {
           type: 'etymology',
           source: 'http://www.wordnik.com',
-          url: `http://api.wordnik.com:80/v4/word.json/ubiquity/etymologies?useCanonical=false&api_key=${process.env.WORDNIK}`,
           etymology: '[L.  everywhere, fr.  where, perhaps for ,  (cf.  anywhere), and if so akin to E. : cf. F. .]',
           origin: 'ubique, ubi, cubi, quobi, alicubi, who, ubiquit√©',
         }
@@ -836,7 +832,6 @@ describe('wordnik commands', () => {
         const obj = {
           type: 'phrase',
           source: 'http://www.wordnik.com',
-          url: `http://api.wordnik.com:80/v4/word.json/ubiquitous/phrases?useCanonical=false&limit=1&wlmi=13&api_key=${process.env.WORDNIK}`,
           agram0: 'ubiquitous',
           bgram0: 'amoeba',
         }
@@ -854,7 +849,6 @@ describe('wordnik commands', () => {
         const obj = {
           type: 'pronunciation',
           source: 'http://www.wordnik.com',
-          url: `http://api.wordnik.com:80/v4/word.json/ubiquity/pronunciations?useCanonical=false&limit=5&api_key=${process.env.WORDNIK}`,
           word: 'ubiquity',
           pronunciation0: '(yo͞o-bĭkˈwĭ-tē)',
           type0: 'ahd-legacy',
@@ -875,7 +869,6 @@ describe('wordnik commands', () => {
         const obj = {
           type: 'related words',
           source: 'http://www.wordnik.com',
-          url: `http://api.wordnik.com:80/v4/word.json/ubiquity/relatedWords?useCanonical=false&limitPerRelationshipType=1&api_key=${process.env.WORDNIK}`,
           word: 'ubiquity',
           type0: 'antonym',
           words0: 'uniquity',

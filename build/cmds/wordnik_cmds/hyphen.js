@@ -94,8 +94,7 @@ exports.handler = function (argv) {
       url = encodeURI(url);
       var tofile = {
         type: 'hyphenation',
-        source: 'http://www.wordnik.com',
-        url: url
+        source: 'http://www.wordnik.com'
       };
       var ctstyle = _.get(chalk, theme.content.style);
       http({ url: url }, function (error, response) {

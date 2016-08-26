@@ -92,7 +92,6 @@ exports.handler = (argv) => {
     const tofile = {
       type: 'hyphenation',
       source: 'http://www.wordnik.com',
-      url,
     }
     const ctstyle = _.get(chalk, theme.content.style)
     http({ url }, (error, response) => {

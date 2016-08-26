@@ -80,8 +80,7 @@ exports.handler = function (argv) {
       var parser = new xml2js.Parser();
       var tofile = {
         type: 'etymology',
-        source: 'http://www.wordnik.com',
-        url: url
+        source: 'http://www.wordnik.com'
       };
       var ctstyle = _.get(chalk, theme.content.style);
       http({ url: url }, function (error, response) {

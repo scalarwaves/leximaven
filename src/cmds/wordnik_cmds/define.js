@@ -102,7 +102,6 @@ exports.handler = (argv) => {
     const tofile = {
       type: 'definition',
       source: 'http://www.wordnik.com',
-      url,
     }
     const cstyle = _.get(chalk, theme.connector.style)
     const ctstyle = _.get(chalk, theme.content.style)

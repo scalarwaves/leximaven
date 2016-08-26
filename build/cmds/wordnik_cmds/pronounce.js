@@ -102,8 +102,7 @@ exports.handler = function (argv) {
       themes.label(theme, 'down', 'Pronunciations');
       var tofile = {
         type: 'pronunciation',
-        source: 'http://www.wordnik.com',
-        url: url
+        source: 'http://www.wordnik.com'
       };
       tofile.word = word;
       http({ url: url }, function (error, response) {

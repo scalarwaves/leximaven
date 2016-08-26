@@ -100,7 +100,6 @@ exports.handler = (argv) => {
     const tofile = {
       type: 'pronunciation',
       source: 'http://www.wordnik.com',
-      url,
     }
     tofile.word = word
     http({ url }, (error, response) => {

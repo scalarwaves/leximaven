@@ -104,8 +104,7 @@ exports.handler = function (argv) {
       url = encodeURI(url);
       var tofile = {
         type: 'definition',
-        source: 'http://www.wordnik.com',
-        url: url
+        source: 'http://www.wordnik.com'
       };
       var cstyle = _.get(chalk, theme.connector.style);
       var ctstyle = _.get(chalk, theme.content.style);

@@ -94,8 +94,7 @@ exports.handler = function (argv) {
       themes.label(theme, 'down', 'Bi-gram phrases');
       var tofile = {
         type: 'phrase',
-        source: 'http://www.wordnik.com',
-        url: url
+        source: 'http://www.wordnik.com'
       };
       http({ url: url }, function (error, response) {
         if (!error && response.statusCode === 200) {

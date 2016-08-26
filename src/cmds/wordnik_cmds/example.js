@@ -92,7 +92,6 @@ exports.handler = (argv) => {
     const tofile = {
       type: 'example',
       source: 'http://www.wordnik.com',
-      url,
     }
     http({ url }, (error, response) => {
       if (!error && response.statusCode === 200) {

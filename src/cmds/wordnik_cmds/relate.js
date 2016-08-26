@@ -92,7 +92,6 @@ exports.handler = (argv) => {
     const tofile = {
       type: 'related words',
       source: 'http://www.wordnik.com',
-      url,
     }
     tofile.word = word
     http({ url }, (error, response) => {

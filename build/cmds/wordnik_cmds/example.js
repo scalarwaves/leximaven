@@ -94,8 +94,7 @@ exports.handler = function (argv) {
       url = encodeURI(url);
       var tofile = {
         type: 'example',
-        source: 'http://www.wordnik.com',
-        url: url
+        source: 'http://www.wordnik.com'
       };
       http({ url: url }, function (error, response) {
         if (!error && response.statusCode === 200) {
