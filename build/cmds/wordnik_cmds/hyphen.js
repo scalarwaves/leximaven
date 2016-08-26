@@ -100,6 +100,11 @@ exports.handler = function (argv) {
       var ctstyle = _.get(chalk, theme.content.style);
       http({ url: url }, function (error, response) {
         if (!error && response.statusCode === 200) {
+          if (response.headers['x-gg-state'] === 'cached') {
+            config.wordnik.date.remain++;
+            noon.save(CFILE, config);
+            if (config.usage) console.log('Cached response, not decrementing usage.');
+          }
           var list = JSON.parse(response.body);
           var hcont = [];
           for (var i = 0; i <= list.length - 1; i++) {
@@ -118,17 +123,9 @@ exports.handler = function (argv) {
           }
           themes.label(theme, 'right', 'Hyphenation', hcont.join(''));
           if (argv.o) tools.outFile(argv.o, argv.f, tofile);
-          if (reset) {
-            console.log(config.wordnik.date.remain + '/' + config.wordnik.date.limit + ' requests remaining this hour.');
-          } else {
-            if (config.usage) console.log(config.wordnik.date.remain + '/' + config.wordnik.date.limit + ' requests remaining this hour, will reset in ' + (59 - minutes) + ' minutes.');
-          }
-        } else {
-          throw new Error('HTTP ' + response.statusCode + ': ' + error);
-        }
+          if (config.usage) reset ? console.log('Timestamp expired, not decrementing usage.\n' + config.wordnik.date.remain + '/' + config.wordnik.date.limit + ' requests remaining this hour.') : console.log(config.wordnik.date.remain + '/' + config.wordnik.date.limit + ' requests remaining this hour, will reset in ' + (59 - minutes) + ' minutes.');
+        } else throw new Error('HTTP ' + response.statusCode + ': ' + error);
       });
     })();
-  } else {
-    throw new Error('Reached this hour\'s usage limit of ' + config.wordnik.date.limit + '.');
-  }
+  } else throw new Error('Reached this hour\'s usage limit of ' + config.wordnik.date.limit + '.');
 };
