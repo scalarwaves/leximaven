@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/drawnepicenter/leximaven/compare/v1.0.2...v1.1.0) (2016-08-26)
+
+
+### Bug Fixes
+
+* **rbrain:** Add timestamp expired msg to usage info ([422df3c](https://github.com/drawnepicenter/leximaven/commit/422df3c))
+
+
+### Features
+
+* **dmuse:** cached response won't decrement usage ([3973511](https://github.com/drawnepicenter/leximaven/commit/3973511))
+* **onelook:** cached response won't decrement usage ([01bd9f0](https://github.com/drawnepicenter/leximaven/commit/01bd9f0))
+* **rbrain:** cached response won't decrement usage ([613be73](https://github.com/drawnepicenter/leximaven/commit/613be73))
+* **wordnik:** cached response won't decrement usage ([9783ea8](https://github.com/drawnepicenter/leximaven/commit/9783ea8))
+
+
+
 <a name="1.0.2"></a>
 ## [1.0.2](https://github.com/drawnepicenter/leximaven/compare/v1.0.1...v1.0.2) (2016-08-19)
 
