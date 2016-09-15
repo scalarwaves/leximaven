@@ -1,7 +1,6 @@
 {
-  "presets": ["es2015"],
-  "plugins": ["lodash", "transform-runtime"],
-  "sourceMaps": false,
+  "presets": ["latest"],
+  "plugins": ["lodash"],
   "env": {
     "test": {
       "plugins": []
