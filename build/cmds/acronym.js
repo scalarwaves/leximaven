@@ -75,7 +75,7 @@ exports.handler = function (argv) {
         }
       });
     } else {
-      throw new Error('HTTP ' + response.statusCode + ': ' + error);
+      throw new Error('HTTP ' + error.statusCode + ': ' + error.reponse.body);
     }
   });
 };

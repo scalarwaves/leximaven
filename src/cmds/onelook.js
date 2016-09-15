@@ -130,7 +130,7 @@ exports.handler = (argv) => {
             } else console.log(`${config.onelook.date.remain}/${config.onelook.date.limit} requests remaining today, will reset in ${23 - hours} hours, ${59 - minutes} minutes.`)
           }
         })
-      } else throw new Error(`HTTP ${response.statusCode}: ${error}`)
+      } else throw new Error(`HTTP ${error.statusCode}: ${error.reponse.body}`)
     })
   } else throw new Error(`Reached today's usage limit of ${config.onelook.date.limit}.`)
 }

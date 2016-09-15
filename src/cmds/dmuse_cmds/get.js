@@ -112,7 +112,7 @@ exports.handler = (argv) => {
         }
         if (argv.o) tools.outFile(argv.o, argv.f, tofile)
         if (config.usage) reset ? console.log(`Timestamp expired, reset usage limits.\n${config.dmuse.date.remain}/${config.dmuse.date.limit} requests remaining today.`) : console.log(`${config.dmuse.date.remain}/${config.dmuse.date.limit} requests remaining today, will reset in ${23 - hours} hours, ${59 - minutes} minutes.`)
-      } else throw new Error(`HTTP ${response.statusCode}: ${error}`)
+      } else throw new Error(`HTTP ${error.statusCode}: ${error.reponse.body}`)
     })
   } else throw new Error(`Reached today's usage limit of ${config.dmuse.date.limit}.`)
 }

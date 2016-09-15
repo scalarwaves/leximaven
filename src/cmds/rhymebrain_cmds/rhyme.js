@@ -110,7 +110,7 @@ exports.handler = (argv) => {
         themes.label(theme, 'right', task, rcont.join(', '))
         if (argv.o) tools.outFile(argv.o, argv.f, tofile)
         if (config.usage) reset ? console.log(`Timestamp expired, reset usage limits.\n${config.rbrain.date.remain}/${config.rbrain.date.limit} requests remaining this hour.`) : console.log(`${config.rbrain.date.remain}/${config.rbrain.date.limit} requests remaining this hour, will reset in ${59 - minutes} minutes.`)
-      } else throw new Error(`HTTP ${response.statusCode}: ${error}`)
+      } else throw new Error(`HTTP ${error.statusCode}: ${error.reponse.body}`)
     })
   } else throw new Error(`Reached this hour's usage limit of ${config.rbrain.date.limit}.`)
 }

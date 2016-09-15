@@ -83,7 +83,7 @@ exports.handler = function (argv) {
       }
       if (argv.o) tools.outFile(argv.o, argv.f, tofile);
     } else {
-      throw new Error('HTTP ' + response.statusCode + ': ' + error);
+      throw new Error('HTTP ' + error.statusCode + ': ' + error.reponse.body);
     }
   });
 };

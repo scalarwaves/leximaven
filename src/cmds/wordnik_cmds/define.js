@@ -130,7 +130,7 @@ exports.handler = (argv) => {
         }
         if (argv.o) tools.outFile(argv.o, argv.f, tofile)
         if (config.usage) reset ? console.log(`Timestamp expired, not decrementing usage.\n${config.wordnik.date.remain}/${config.wordnik.date.limit} requests remaining this hour.`) : console.log(`${config.wordnik.date.remain}/${config.wordnik.date.limit} requests remaining this hour, will reset in ${59 - minutes} minutes.`)
-      } else throw new Error(`HTTP ${response.statusCode}: ${error}`)
+      } else throw new Error(`HTTP ${error.statusCode}: ${error.reponse.body}`)
     })
   } else throw new Error(`Reached this hour's usage limit of ${config.wordnik.date.limit}.`)
 }

@@ -30,7 +30,7 @@ exports.handler = function (argv) {
       console.log(chalk.white('Latency (/words): ' + Math.round(wordf.value * 100000) / 100.0 + ' ms (median), ' + Math.round(wordn.value * 100000) / 100.0 + ' ms (99 %ile)'));
       console.log(chalk.white('Latency (/sug): ' + Math.round(sugf.value * 100000) / 100.0 + ' ms (median), ' + Math.round(sugn.value * 100000) / 100.0 + ' ms (99 %ile)'));
     } else {
-      throw new Error('HTTP ' + response.statusCode + ': ' + error);
+      throw new Error('HTTP ' + error.statusCode + ': ' + error.reponse.body);
     }
   });
   var limit = config.dmuse.date.limit;
