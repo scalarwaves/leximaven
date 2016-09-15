@@ -40,7 +40,7 @@ exports.handler = function (argv) {
   if (config.verbose) themes.label(theme, 'down', 'Wordmap');
   var word = argv.word;
   var l = argv.l;
-  var bin = process.cwd() + '/build/leximaven.js';
+  var bin = process.cwd() + '/bin/leximaven.js';
   child.spawnSync('node', [bin, 'rbrain', 'combine', '-m' + l, '' + word], { stdio: 'inherit' });
   child.spawnSync('node', [bin, 'rbrain', 'info', '' + word], { stdio: 'inherit' });
   child.spawnSync('node', [bin, 'rbrain', 'rhyme', '-m' + l, '' + word], { stdio: 'inherit' });

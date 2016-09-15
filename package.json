@@ -9,9 +9,9 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "main": "build/leximaven.js",
+  "main": "bin/leximaven.js",
   "bin": {
-    "leximaven": "build/leximaven.js"
+    "leximaven": "bin/leximaven.js"
   },
   "scripts": {
     "release": "standard-version",

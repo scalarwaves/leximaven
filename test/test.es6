@@ -359,7 +359,7 @@ describe('config commands', () => {
   })
   describe('get', () => {
     it('shows value of option onelook.links', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js config get onelook.links > test/output/config-get.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js config get onelook.links > test/output/config-get.out`, (err) => {
         const stdout = fs.readFileSync('test/output/config-get.out', 'utf8')
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/Option onelook.links is (true|false)\./mig)
         done(err)
@@ -372,7 +372,7 @@ describe('config commands', () => {
       done()
     })
     it('creates the config file', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js config init > test/output/config-init.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js config init > test/output/config-init.out`, (err) => {
         const stdout = fs.readFileSync('test/output/config-init.out', 'utf8')
         const config = noon.load(CFILE)
         const obj = {
@@ -492,7 +492,7 @@ describe('config commands', () => {
       })
     })
     it('force overwrites existing and prints config', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js config init -f -v > test/output/config-init.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js config init -f -v > test/output/config-init.out`, (err) => {
         const stdout = fs.readFileSync('test/output/config-init.out', 'utf8')
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z0-9 \/\.\[\]:\-\s|]*/mig)
         done(err)
@@ -501,7 +501,7 @@ describe('config commands', () => {
   })
   describe('set', () => {
     it('sets value of option onelook.links to false', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js config set onelook.links false > test/output/config-set.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js config set onelook.links false > test/output/config-set.out`, (err) => {
         const stdout = fs.readFileSync('test/output/config-set.out', 'utf8')
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/Set option onelook.links to (true|false)\./mig)
         done(err)
@@ -563,7 +563,7 @@ describe('dmuse commands', () => {
     })
     describe('get', () => {
       it('shows output', (done) => {
-        child.exec(`node ${process.cwd()}/build/leximaven.js dmuse get -s -o ${process.cwd()}/test/output/dmuse.json ml=ubiquity > test/output/dmuse-get.out`, (err) => {
+        child.exec(`node ${process.cwd()}/bin/leximaven.js dmuse get -s -o ${process.cwd()}/test/output/dmuse.json ml=ubiquity > test/output/dmuse-get.out`, (err) => {
           const stdout = fs.readFileSync('test/output/dmuse-get.out', 'utf8')
           const obj = {
             type: 'datamuse',
@@ -585,7 +585,7 @@ describe('dmuse commands', () => {
     })
     describe('info', () => {
       it('shows metrics', (done) => {
-        child.exec(`node ${process.cwd()}/build/leximaven.js dmuse info > test/output/dmuse-info.out`, err => {
+        child.exec(`node ${process.cwd()}/bin/leximaven.js dmuse info > test/output/dmuse-info.out`, err => {
           const stdout = fs.readFileSync('test/output/dmuse-info.out', 'utf8')
           expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z0-9\/ ,\.]*\s[\w ]*\(v\d\): \d*.\d*\s[\w \(\/\):\.,%]*\s[\w \(\/\):\.,%]*/)
           done(err)
@@ -647,7 +647,7 @@ describe('rbrain commands', () => {
   })
   describe('combine', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js rbrain combine -s -m1 -o ${process.cwd()}/test/output/combine.json value > test/output/combine.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js rbrain combine -s -m1 -o ${process.cwd()}/test/output/combine.json value > test/output/combine.out`, (err) => {
         const stdout = fs.readFileSync('test/output/combine.out', 'utf8')
         const obj = {
           type: 'portmanteau',
@@ -665,7 +665,7 @@ describe('rbrain commands', () => {
   })
   describe('info', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js rbrain info -s -o ${process.cwd()}/test/output/info.json fuck > test/output/info.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js rbrain info -s -o ${process.cwd()}/test/output/info.json fuck > test/output/info.out`, (err) => {
         const stdout = fs.readFileSync('test/output/info.out', 'utf8')
         const obj = {
           type: 'word info',
@@ -687,7 +687,7 @@ describe('rbrain commands', () => {
   })
   describe('rhyme', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js rbrain rhyme -s -m1 -o ${process.cwd()}/test/output/rhyme.json too > test/output/rhyme.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js rbrain rhyme -s -m1 -o ${process.cwd()}/test/output/rhyme.json too > test/output/rhyme.out`, (err) => {
         const stdout = fs.readFileSync('test/output/rhyme.out', 'utf8')
         const obj = {
           type: 'rhyme',
@@ -757,7 +757,7 @@ describe('wordnik commands', () => {
   })
   describe('define', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik define -s -l1 -o ${process.cwd()}/test/output/define.json ubiquity > test/output/define.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js wordnik define -s -l1 -o ${process.cwd()}/test/output/define.json ubiquity > test/output/define.out`, (err) => {
         const stdout = fs.readFileSync('test/output/define.out', 'utf8')
         const obj = {
           type: 'definition',
@@ -775,7 +775,7 @@ describe('wordnik commands', () => {
   })
   describe('example', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik example -s -l1 -o ${process.cwd()}/test/output/example.json ubiquity > test/output/example.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js wordnik example -s -l1 -o ${process.cwd()}/test/output/example.json ubiquity > test/output/example.out`, (err) => {
         const stdout = fs.readFileSync('test/output/example.out', 'utf8')
         const obj = {
           type: 'example',
@@ -791,7 +791,7 @@ describe('wordnik commands', () => {
   })
   describe('hyphen', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik hyphen -s -o ${process.cwd()}/test/output/hyphen.json ubiquity > test/output/hyphen.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js wordnik hyphen -s -o ${process.cwd()}/test/output/hyphen.json ubiquity > test/output/hyphen.out`, (err) => {
         const stdout = fs.readFileSync('test/output/hyphen.out', 'utf8')
         const obj = {
           type: 'hyphenation',
@@ -810,7 +810,7 @@ describe('wordnik commands', () => {
   })
   describe('origin', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik origin -s -o ${process.cwd()}/test/output/origin.json ubiquity > test/output/origin.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js wordnik origin -s -o ${process.cwd()}/test/output/origin.json ubiquity > test/output/origin.out`, (err) => {
         const stdout = fs.readFileSync('test/output/origin.out', 'utf8')
         const obj = {
           type: 'etymology',
@@ -827,7 +827,7 @@ describe('wordnik commands', () => {
   })
   describe('phrase', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik phrase -s -l1 -o ${process.cwd()}/test/output/phrase.json ubiquitous > test/output/phrase.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js wordnik phrase -s -l1 -o ${process.cwd()}/test/output/phrase.json ubiquitous > test/output/phrase.out`, (err) => {
         const stdout = fs.readFileSync('test/output/phrase.out', 'utf8')
         const obj = {
           type: 'phrase',
@@ -844,7 +844,7 @@ describe('wordnik commands', () => {
   })
   describe('pronounce', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik pronounce -s -o ${process.cwd()}/test/output/pronounce.json ubiquity > test/output/pronounce.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js wordnik pronounce -s -o ${process.cwd()}/test/output/pronounce.json ubiquity > test/output/pronounce.out`, (err) => {
         const stdout = fs.readFileSync('test/output/pronounce.out', 'utf8')
         const obj = {
           type: 'pronunciation',
@@ -864,7 +864,7 @@ describe('wordnik commands', () => {
   })
   describe('relate', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js wordnik relate -s -l1 -o ${process.cwd()}/test/output/relate.json ubiquity > test/output/relate.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js wordnik relate -s -l1 -o ${process.cwd()}/test/output/relate.json ubiquity > test/output/relate.out`, (err) => {
         const stdout = fs.readFileSync('test/output/relate.out', 'utf8')
         const obj = {
           type: 'related words',
@@ -947,7 +947,7 @@ describe('root commands', () => {
   })
   describe('acronym', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js acronym -o ${process.cwd()}/test/output/acronym.json DDC > test/output/acronym.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js acronym -o ${process.cwd()}/test/output/acronym.json DDC > test/output/acronym.out`, (err) => {
         const stdout = fs.readFileSync('test/output/acronym.out', 'utf8')
         const json = fs.readJsonSync(`${process.cwd()}/test/output/acronym.json`)
         const obj = {
@@ -974,7 +974,7 @@ describe('root commands', () => {
       })
     })
     it('forces writing json', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js acronym -f -o ${process.cwd()}/test/output/acronym.json DDC > test/output/acronym.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js acronym -f -o ${process.cwd()}/test/output/acronym.json DDC > test/output/acronym.out`, (err) => {
         const stdout = fs.readFileSync('test/output/acronym.out', 'utf8')
         const json = fs.readJsonSync(`${process.cwd()}/test/output/acronym.json`)
         const obj = {
@@ -1001,7 +1001,7 @@ describe('root commands', () => {
       })
     })
     it('writes xml', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js acronym -o ${process.cwd()}/test/output/acronym.xml DDC`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js acronym -o ${process.cwd()}/test/output/acronym.xml DDC`, (err) => {
         const obj = {
           type: 'acronym',
           source: 'http://acronyms.silmaril.ie',
@@ -1046,7 +1046,7 @@ describe('root commands', () => {
       })
     })
     it('forces writing xml', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js acronym -f -o ${process.cwd()}/test/output/acronym.xml DDC`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js acronym -f -o ${process.cwd()}/test/output/acronym.xml DDC`, (err) => {
         const obj = {
           type: 'acronym',
           source: 'http://acronyms.silmaril.ie',
@@ -1093,7 +1093,7 @@ describe('root commands', () => {
   })
   describe('anagram', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js anagram -s -o ${process.cwd()}/test/output/anagram.json ubiquity > test/output/anagram.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js anagram -s -o ${process.cwd()}/test/output/anagram.json ubiquity > test/output/anagram.out`, (err) => {
         const stdout = fs.readFileSync('test/output/anagram.out', 'utf8')
         const json = fs.readJsonSync(`${process.cwd()}/test/output/anagram.json`)
         const obj = {
@@ -1113,14 +1113,14 @@ describe('root commands', () => {
       })
     })
     it('handles too long input', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js anagram johnjacobjingleheimerschmidtthatsmynametoo > test/output/anagram.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js anagram johnjacobjingleheimerschmidtthatsmynametoo > test/output/anagram.out`, (err) => {
         const stdout = fs.readFileSync('test/output/anagram.out', 'utf8')
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/Input[a-z0-9 \(\)\.']*\s[a-z \.]*/mig)
         done(err)
       })
     })
     it('handles no found anagrams', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js anagram bcdfghjklmnp > test/output/anagram.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js anagram bcdfghjklmnp > test/output/anagram.out`, (err) => {
         const stdout = fs.readFileSync('test/output/anagram.out', 'utf8')
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/No anagrams found\./mig)
         done(err)
@@ -1129,7 +1129,7 @@ describe('root commands', () => {
   })
   describe('comp', () => {
     it('outputs shell completion script', (done) => {
-      child.exec(`node ${__dirname}/../build/leximaven.js comp > test/output/comp.out`, (err) => {
+      child.exec(`node ${__dirname}/../bin/leximaven.js comp > test/output/comp.out`, (err) => {
         const stdout = fs.readFileSync('test/output/comp.out', 'utf8')
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[#\-a-z0-9\.\s:\/>~_\(\)\{\}\[\]="$@,;]*/mig)
         done(err)
@@ -1138,7 +1138,7 @@ describe('root commands', () => {
   })
   describe('help', () => {
     it('shows usage', (done) => {
-      child.exec(`node ${__dirname}/../build/leximaven.js --help > test/output/help.out`, (err) => {
+      child.exec(`node ${__dirname}/../bin/leximaven.js --help > test/output/help.out`, (err) => {
         const stdout = fs.readFileSync('test/output/help.out', 'utf8')
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[_ \/\(\)\-\\'`|,\s]*\s*Usage:\s[a-z \/\.<>\[\]]*\s*Commands:\s[ a-z<>\s]*:\s[ \-a-z,\[\]\s]*\[boolean\]\s*/mig)
         done(err)
@@ -1147,7 +1147,7 @@ describe('root commands', () => {
   })
   describe('ls', () => {
     it('demonstrates installed themes', (done) => {
-      child.exec(`node ${__dirname}/../build/leximaven.js ls > test/output/ls.out`, (err) => {
+      child.exec(`node ${__dirname}/../bin/leximaven.js ls > test/output/ls.out`, (err) => {
         const stdout = fs.readFileSync('test/output/ls.out', 'utf8')
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z :|,.<>\-\[\]→]*/mig)
         done(err)
@@ -1156,7 +1156,7 @@ describe('root commands', () => {
   })
   describe('map', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js map -s ubiquity > test/output/map.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js map -s ubiquity > test/output/map.out`, (err) => {
         const stdout = fs.readFileSync('test/output/map.out', 'utf8')
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z0-9\[\],→ ;:'\?"\(\)-…\/\.√©ĭēˈɪ”]*/mig)
         done(err)
@@ -1165,7 +1165,7 @@ describe('root commands', () => {
   })
   describe('onelook', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js onelook -s -o ${process.cwd()}/test/output/onelook.json ubiquity > test/output/onelook.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js onelook -s -o ${process.cwd()}/test/output/onelook.json ubiquity > test/output/onelook.out`, (err) => {
         const stdout = fs.readFileSync('test/output/onelook.out', 'utf8')
         const obj = {
           type: 'onelook',
@@ -1182,7 +1182,7 @@ describe('root commands', () => {
       })
     })
     it('provides resource links', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js onelook -l ubiquity > test/output/onelook.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js onelook -l ubiquity > test/output/onelook.out`, (err) => {
         const stdout = fs.readFileSync('test/output/onelook.out', 'utf8')
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z0-9\[\]:\(\)→ \/\.,]*\s\[Resources\]\s[a-z0-9 \s\[\]→:\/\._#\?=\-',&%\(\)\+]*/mig)
         done(err)
@@ -1191,7 +1191,7 @@ describe('root commands', () => {
   })
   describe('urban', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js urban -s -l1 -o ${process.cwd()}/test/output/urban.json flip the bird > test/output/urban.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js urban -s -l1 -o ${process.cwd()}/test/output/urban.json flip the bird > test/output/urban.out`, (err) => {
         const stdout = fs.readFileSync('test/output/urban.out', 'utf8')
         const obj = {
           type: 'urban',
@@ -1208,7 +1208,7 @@ describe('root commands', () => {
   })
   describe('version', () => {
     it('prints the version number', (done) => {
-      child.exec(`node ${process.cwd()}/build/leximaven.js --version`, (err, stdout) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js --version`, (err, stdout) => {
         expect(stdout).to.contain(version)
         done(err)
       })

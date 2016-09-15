@@ -1,9 +1,9 @@
 'use strict';
 
 /* eslint no-unused-vars: 0 */
-exports.command = 'wordnik <command>';
-exports.desc = 'Wordnik tasks';
+exports.command = 'rbrain <command>';
+exports.desc = 'Rhymebrain operations';
 exports.builder = function (yargs) {
-  return yargs.commandDir('wordnik_cmds');
+  return yargs.commandDir('rbrain');
 };
 exports.handler = function (argv) {};

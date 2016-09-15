@@ -1,11 +1,12 @@
 language: node_js
 node_js:
 - '6'
-- '5.12.0'
-- '4.5.0'
+- '5'
+- '4'
+- '0.12'
 before_script:
 - npm i -g leximaven
-- node build/leximaven.js config init
+- node bin/leximaven.js config init
 after_success:
 - npm run cover
 - npm run climate
