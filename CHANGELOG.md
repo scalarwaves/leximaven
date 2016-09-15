@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/drawnepicenter/leximaven/compare/v1.2.0...v2.0.0) (2016-09-15)
+
+
+### Bug Fixes
+
+* **project:** proper HTTP error msg ([9eef640](https://github.com/drawnepicenter/leximaven/commit/9eef640))
+
+
+### Features
+
+* **project:** rename build dir to bin, simplify gulpfile, simplify command file and dir names ([208250e](https://github.com/drawnepicenter/leximaven/commit/208250e))
+
+
+### BREAKING CHANGES
+
+* project: See items listed in #12
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/drawnepicenter/leximaven/compare/v1.1.0...v1.2.0) (2016-08-26)
 
