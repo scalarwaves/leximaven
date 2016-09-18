@@ -73,8 +73,10 @@ The following links can help you use Leximaven or perform related tasks.
 - [ARPABET](http://en.wikipedia.org/wiki/Arpabet) phoneme list and [IPA](http://en.wikipedia.org/wiki/Help:IPA_for_English) equivalents
 - [Dewey Decimal Classes](http://en.wikipedia.org/wiki/List_of_Dewey_Decimal_classes) for acronyms
 - Browse Datamuse's Onelook [dictionaries](http://www.onelook.com/?d=all_gen), use its [dictionary lookup](http://www.onelook.com/), [thesaurus/reverse lookup](http://www.onelook.com/thesaurus/), and [RhymeZone](http://www.rhymezone.com/)
+- [alex](https://github.com/wooorm/alex) Checks your writing for words or phrasings that might offend someone.
 - [proselint](https://github.com/amperser/proselint) checks your writing style and has plugins for multiple editors
-- [write-good](https://github.com/btford/write-good) Naive linter for English prose for developers who can't write good and wanna learn to do other stuff good too.
+- [retext](https://github.com/wooorm/retext) is a framework for natural language processing
+- [write-good](https://github.com/btford/write-good) Naive linter for English prose for developers who can't write good and wanna learn to do other stuff good too
 
 ## Contributing
 
