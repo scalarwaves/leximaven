@@ -1,20 +1,25 @@
 {
   "ecmaVersion": 6,
-  "libs": [],
+  "libs": ["chai"],
+  "loadEagerly": [
+    "src/**/*.js",
+    "test/*.es6",
+    "gulpfile.js"
+  ],
+  "dontLoad": ["node_modules/**/*"],
   "plugins": {
     "doc_comment": {
       "fullDocs": true
     },
-    "complete_strings": {},
+    "complete_strings": {
+      "maxLength": 25
+    },
     "modules": {},
     "es_modules": {},
     "eslint": {
       "config": {
         "env": {
           "browser": false
-        },
-        "rules": {
-          "no-unused-vars": 2
         }
       }
     }
