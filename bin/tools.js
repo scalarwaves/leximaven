@@ -1,4 +1,4 @@
-'use strict';/* eslint max-len: 0 */var chalk=require('chalk');var fs=require('fs');var moment=require('moment');var noon=require('noon');var xml2js=require('xml2js');var CFILE=process.env.HOME+'/.leximaven.noon';/**
+'use strict';/* eslint max-len: 0 */var chalk=require('chalk');var fs=require('fs-extra');var moment=require('moment');var noon=require('noon');var ts=require('term-size');var wrap=require('wrap-ansi');var xml2js=require('xml2js');var CFILE=process.env.HOME+'/.leximaven.noon';/**
   * The tools module provides useful repetitive tasks
   * @module Utils
   *//**
@@ -28,6 +28,10 @@
   * @param {string} value
   * @return {boolean} v
   */exports.checkBoolean=function(value){var v=value;if(v==='true')v=true;if(v==='false')v=false;return v;};/**
+ * Converts a boolean to a 0 or 1
+ * @param  {boolean} value A boolean value
+ * @return {integer} 0 or 1
+ */exports.boolToBin=function(value){var r=null;value?r=1:r=0;return r;};/**
   * Checks if config exists. If not, prints init message and exits with error code.
   * @public
   * @param {string} file Configuration filepath
@@ -37,6 +41,17 @@
   * @param {Object} obj Any object
   * @return {Object} Original object or extracted string
   */exports.arrToStr=function(obj){var fixed=null;Array.isArray(obj)&&obj.length===1&&typeof obj[0]==='string'?fixed=obj[0]:fixed=obj;return fixed;};/**
+  * Strips HTML from a string
+  * @public
+  * @param  {string} string Text with HTML tags
+  * @return {string} Plain text string
+  */exports.stripHTML=function(string){return string.replace(/(<([^>]+)>)/ig,'');};/**
+  * Wraps blocks of text
+  * @param  {string} str Long string
+  * @param  {boolean} hard true, soft false
+  * @param  {boolean} wwrap true, column wrap false
+  * @return {string} ANSI-wrapped string
+  */exports.wrapStr=function(str,hard,wwrap){var termsize=ts();return wrap(str,termsize.columns,hard,wwrap);};/**
   * Handles data export to file. Supports cson, json, noon, plist, xml, yaml.
   * @public
   * @param {string} path The desired filepath and extension

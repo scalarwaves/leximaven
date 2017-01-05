@@ -58,7 +58,7 @@ exports.getThemes = () => {
   if (!dirExists) console.log(chalk.white(`${process.cwd()}/themes does not exist, falling back to ${process.env.NODE_PATH}/leximaven/themes.`))
   files = glob.sync(`${TDIR}*.noon`)
   _.each(files, (path) => {
-    const name = path.replace(/[a-z0-9\/_\.]*themes\//, '').replace(/\.noon/, '')
+    const name = path.replace(/[a-z0-9/_.]*themes\//, '').replace(/\.noon/, '')
     list.push(name)
   })
   return list
