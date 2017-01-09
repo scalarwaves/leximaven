@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/drawnepicenter/leximaven/compare/v2.0.0...v2.1.0) (2017-01-09)
+
+
+### Bug Fixes
+
+* **tools:** move fs-extra to runtime deps ([95067ab](https://github.com/drawnepicenter/leximaven/commit/95067ab))
+
+
+### Features
+
+* **tools:** add functions from iloa ([35ceabd](https://github.com/drawnepicenter/leximaven/commit/35ceabd))
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/drawnepicenter/leximaven/compare/v1.2.0...v2.0.0) (2016-09-15)
 
