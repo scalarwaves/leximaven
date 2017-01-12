@@ -8,7 +8,7 @@
 
 ## Introduction
 
-Leximaven is a powerful tool for searching word-related APIs from the command line. It can fetch acronyms, anagrams, bi-gram phrases, definitions, etymologies, example uses, hyphenation, offensive word flags, portmanteaus, pronunciations (Arpabet & IPA), related words, rhymes, slang, syllable stress and count, and more. See the [wiki](https://github.com/drawnepicenter/leximaven/wiki) for more info. Leximaven goes great with [iloa](https://github.com/drawnepicenter/iloa).
+Leximaven is a powerful tool for searching word-related APIs from the command line. It can fetch acronyms, anagrams, bi-gram phrases, definitions, etymologies, example uses, hyphenation, offensive word flags, portmanteaus, pronunciations (Arpabet & IPA), related words, rhymes, slang, syllable stress and count, and more. See the [wiki](https://github.com/drawnepicenter/leximaven/wiki) for more info.
 
 ## Platform
 
@@ -89,3 +89,7 @@ Many thanks to all contributors to the libraries used in this project! And thank
 ## Prose
 
 For fun, read some of my [prose](https://github.com/drawnepicenter/prose#readme)...
+
+### Take Command
+
+See [take-command](https://github.com/drawnepicenter/take-command).
