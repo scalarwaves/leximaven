@@ -11,6 +11,7 @@ const noon = require('noon')
 const CFILE = `${process.env.HOME}/.leximaven.noon`
 
 exports.command = 'hyphen <word>'
+exports.aliases = ['hyphenate', 'hy']
 exports.desc = 'Wordnik hyphenations'
 exports.builder = {
   out: {

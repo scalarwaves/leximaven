@@ -10,6 +10,7 @@ const noon = require('noon')
 const CFILE = `${process.env.HOME}/.leximaven.noon`
 
 exports.command = 'pronounce <word>'
+exports.aliases = ['pr']
 exports.desc = 'Wordnik pronunciations'
 exports.builder = {
   out: {

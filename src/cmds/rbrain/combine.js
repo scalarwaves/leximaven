@@ -10,6 +10,7 @@ const noon = require('noon')
 const CFILE = `${process.env.HOME}/.leximaven.noon`
 
 exports.command = 'combine <query>'
+exports.aliases = ['comb', 'portmanteau']
 exports.desc = 'Rhymebrain portmanteaus'
 exports.builder = {
   out: {

@@ -12,6 +12,7 @@ const xml2js = require('xml2js')
 const CFILE = `${process.env.HOME}/.leximaven.noon`
 
 exports.command = 'onelook <word>'
+exports.aliases = ['one', 'ol']
 exports.desc = 'Onelook definitions'
 exports.builder = {
   out: {

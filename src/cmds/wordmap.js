@@ -7,7 +7,8 @@ const noon = require('noon')
 
 const CFILE = `${process.env.HOME}/.leximaven.noon`
 
-exports.command = 'map <word>'
+exports.command = 'wordmap <word>'
+exports.aliases = ['map', 'wm']
 exports.desc = 'Maps of word info'
 exports.builder = {
   limit: {

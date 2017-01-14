@@ -9,6 +9,7 @@ const yargonaut = require('yargonaut')
   .style('bold.yellow', 'string')
   .style('bold.magenta', 'number')
   .style('bold.blue', 'default:')
+  .style('bold.green', 'aliases:')
 const yargs = require('yargs')
 yargs
   .commandDir('cmds')

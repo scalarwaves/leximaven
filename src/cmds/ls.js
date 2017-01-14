@@ -5,7 +5,8 @@ const _ = require('lodash')
 
 const sample = 'Morbi ornare pulvinar metus, non faucibus arcu ultricies non.'
 
-exports.command = 'ls'
+exports.command = 'list'
+exports.aliases = ['ls', 'themes']
 exports.desc = 'Get a list of installed themes'
 exports.builder = {}
 exports.handler = (argv) => {

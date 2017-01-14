@@ -1,4 +1,4 @@
-/* eslint max-len: 0 */
+/* eslint max-len: 0, no-useless-escape: 0 */
 const themes = require('../themes')
 const tools = require('../tools')
 
@@ -10,19 +10,20 @@ const xray = require('x-ray')
 
 const CFILE = `${process.env.HOME}/.leximaven.noon`
 const langs = ['english',
-'english-obscure',
-'german',
-'spanish',
-'esperanto',
-'french',
-'italian',
-'latin',
-'dutch',
-'portuguese',
-'swedish',
-'names']
+  'english-obscure',
+  'german',
+  'spanish',
+  'esperanto',
+  'french',
+  'italian',
+  'latin',
+  'dutch',
+  'portuguese',
+  'swedish',
+  'names']
 
 exports.command = 'anagram <query>'
+exports.aliases = ['an']
 exports.desc = 'Wordsmith anagrams'
 exports.builder = {
   out: {

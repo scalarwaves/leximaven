@@ -11,6 +11,7 @@ const noon = require('noon')
 const CFILE = `${process.env.HOME}/.leximaven.noon`
 
 exports.command = 'rhyme <word>'
+exports.aliases = ['rh']
 exports.desc = 'Rhymebrain rhymes'
 exports.builder = {
   out: {

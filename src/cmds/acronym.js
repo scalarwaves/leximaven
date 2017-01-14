@@ -10,6 +10,7 @@ const xml2js = require('xml2js')
 const CFILE = `${process.env.HOME}/.leximaven.noon`
 
 exports.command = 'acronym <acronym>'
+exports.aliases = ['ac']
 exports.desc = 'Acronyms'
 exports.builder = {
   out: {

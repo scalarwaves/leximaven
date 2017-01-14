@@ -11,6 +11,7 @@ const noon = require('noon')
 const CFILE = `${process.env.HOME}/.leximaven.noon`
 
 exports.command = 'define <word>'
+exports.aliases = ['def']
 exports.desc = 'Wordnik definitions'
 exports.builder = {
   out: {

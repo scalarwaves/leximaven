@@ -9,6 +9,7 @@ const noon = require('noon')
 const CFILE = `${process.env.HOME}/.leximaven.noon`
 
 exports.command = 'urban <query>'
+exports.aliases = ['urb', 'slang']
 exports.desc = 'Urban Dictionary definitions'
 exports.builder = {
   out: {

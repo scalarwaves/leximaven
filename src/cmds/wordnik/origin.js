@@ -12,6 +12,7 @@ const xml2js = require('xml2js')
 const CFILE = `${process.env.HOME}/.leximaven.noon`
 
 exports.command = 'origin <word>'
+exports.aliases = ['or', 'etymology']
 exports.desc = 'Wordnik etymologies'
 exports.builder = {
   out: {
