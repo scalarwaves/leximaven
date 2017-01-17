@@ -44,7 +44,7 @@ Here are some examples:
     leximaven wordnik origin special
 
     // Get words that sound like 'blue'
-    leximaven dmuse get sl=blue
+    leximaven datamuse get sl=blue
 
     // Get slang/colloquialisms for 'diesel'
     leximaven urban diesel
@@ -54,7 +54,7 @@ Here are some examples:
     leximaven anagram -n2 -w3 -o anagrams.json toomanysecrets
 
     // Get a wordmap for 'ubiquity'
-    leximaven map ubiquity
+    leximaven wordmap ubiquity
 
 See the [tests](https://github.com/drawnepicenter/leximaven/blob/master/test/test.es6) for more.
 
@@ -79,7 +79,9 @@ See [CONTRIBUTING](https://github.com/drawnepicenter/leximaven/blob/master/CONTR
 
 Many thanks to all contributors to the libraries used in this project! And thanks to the creators and maintainers of the APIs that this tool consumes. Acronym Server, Datamuse, Onelook, Rhymebrain, Urban Dictionary, Wordnik, and Wordsmith are awesome!
 
-## Prose
+## Extras
+
+### Prose
 
 For fun, read some of my [prose](https://github.com/drawnepicenter/prose#readme)...
 
