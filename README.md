@@ -19,8 +19,11 @@ To initialize the config file and load themes, your NODE_PATH environment variab
     export LP="${BP}lib/node_modules"
     export NODE_PATH="$LP"
 
-This should work for a system installation of Node.js and [nvm](https://github.com/creationix/nvm). You'll also need to get a [Wordnik API key](http://developer.wordnik.com/) and put it in an environment variable WORDNIK. Add all of this to .bashrc, .zshrc, etc.
-Then run:
+Provided these lines are towards the end of the shell initialization file (at least after any NVM stuff) this should work for a system installation of Node.js and [nvm](https://github.com/creationix/nvm). 
+
+-   Put your [Wordnik API key](http://developer.wordnik.com/) into an environment variable **WORDNIK**
+
+Add all of this to .bashrc, .zshrc, etc. then:
 
     npm install -g leximaven
     leximaven config init
