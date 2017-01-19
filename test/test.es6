@@ -864,7 +864,7 @@ describe('wordnik commands', () => {
   })
   describe('relate', () => {
     it('shows output', (done) => {
-      child.exec(`node ${process.cwd()}/bin/leximaven.js wordnik relate -s -l1 -o ${process.cwd()}/test/output/relate.json ubiquity > test/output/relate.out`, (err) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js wordnik related -s -l1 -o ${process.cwd()}/test/output/relate.json ubiquity > test/output/relate.out`, (err) => {
         const stdout = fs.readFileSync('test/output/relate.out', 'utf8')
         const obj = {
           type: 'related words',
@@ -1140,7 +1140,7 @@ describe('root commands', () => {
     it('shows usage', (done) => {
       child.exec(`node ${__dirname}/../bin/leximaven.js --help > test/output/help.out`, (err) => {
         const stdout = fs.readFileSync('test/output/help.out', 'utf8')
-        expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[_ \/\(\)\-\\'`|,\s]*\s*Usage:\s[a-z \/\.<>\[\]]*\s*Commands:\s[ a-z<>\s]*:\s[ \-a-z,\[\]\s]*\[boolean\]\s*/mig)
+        expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[\/\\_\(\) '-|]+\sUsage:\s[a-z\/\.]* <command> \[options\]\s*Commands:\s*[a-z \<\>\[\]:\s,]*Options:\s*[a-z \-,\[\]\s]*/mig)
         done(err)
       })
     })
