@@ -1,0 +1,1 @@
+'use strict';/* eslint no-unused-vars: 0 */exports.command='configuration <command>';exports.aliases=['conf','config'];exports.desc='Configuration tasks';exports.builder=function(yargs){return yargs.commandDir('configuration');};exports.handler=function(argv){};
