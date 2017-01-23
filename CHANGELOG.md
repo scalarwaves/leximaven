@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.3.0"></a>
+# [2.3.0](https://github.com/drawnepicenter/leximaven/compare/v2.2.0...v2.3.0) (2017-01-23)
+
+
+### Features
+
+* **project:** add random word command ([4d782be](https://github.com/drawnepicenter/leximaven/commit/4d782be)), closes [#14](https://github.com/drawnepicenter/leximaven/issues/14)
+
+
+
 <a name="2.2.0"></a>
 # [2.2.0](https://github.com/drawnepicenter/leximaven/compare/v2.1.0...v2.2.0) (2017-01-21)
 
