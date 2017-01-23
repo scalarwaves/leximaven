@@ -1,0 +1,1 @@
+'use strict';var rand=require('random-word');exports.command='random';exports.aliases=['rand','rw'];exports.desc='Get a random word';exports.builder={};exports.handler=function(argv){console.log(rand());};
