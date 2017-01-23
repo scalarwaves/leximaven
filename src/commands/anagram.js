@@ -114,6 +114,12 @@ exports.builder = {
 exports.handler = (argv) => {
   tools.checkConfig(CFILE)
   let config = noon.load(CFILE)
+  const spinner = ora({
+    text: `${chalk.bold.cyan('Loading anagrams...')}`,
+    spinner: 'dots8',
+    color: 'yellow'
+  })
+  spinner.start()
   const userConfig = {
     anagram: {
       case: argv.c,
@@ -160,31 +166,29 @@ exports.handler = (argv) => {
     url
   }
   const ctstyle = _.get(chalk, theme.content.style)
-  const spinner = ora({
-    text: `${chalk.bold.cyan('Loading anagrams...')}`,
-    spinner: 'dots8',
-    color: 'yellow'
-  })
-  spinner.start()
   const x = xray()
   x(url, {
     p: '.p402_premium'
   })((err, block) => {
     if (!err) {
-      spinner.stop()
-      spinner.clear()
       if (/Input[a-z0-9 \(\)\.']*/i.test(block.p)) {
         const data = block.p.match(/(Input[a-z0-9 \(\)\.']*)/i)
         let msg = data[1]
+        spinner.stop()
+        spinner.clear()
         msg = msg.replace(/letters\.Please/i, 'letters.\nPlease')
         console.log(chalk.red(msg))
       } else if (/No anagrams found/i.test(block.p)) {
+        spinner.stop()
+        spinner.clear()
         console.log(ctstyle('No anagrams found.'))
       } else {
         const data = block.p.match(/(\d*) found\. Displaying ([a-z0-9 ]*):([a-z\s]*)document/i)
         const found = data[1]
         const show = data[2]
         const alist = data[3].trim()
+        spinner.stop()
+        spinner.clear()
         themes.label(theme, 'down', 'Anagrams')
         console.log(ctstyle(`Anagrams for: ${query}\n${found} found. Displaying ${show}:`))
         console.log(ctstyle(alist))

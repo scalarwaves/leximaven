@@ -7,6 +7,7 @@ const chalk = require('chalk')
 const moment = require('moment')
 const http = require('good-guy-http')()
 const noon = require('noon')
+const ora = require('ora')
 
 const CFILE = `${process.env.HOME}/.leximaven.noon`
 
@@ -87,6 +88,11 @@ exports.handler = (argv) => {
       url
     }
     const ctstyle = _.get(chalk, theme.content.style)
+    const spinner = ora({
+      text: `${chalk.bold.cyan('Loading results...')}`,
+      spinner: 'dots8',
+      color: 'yellow'
+    })
     http({ url }, (error, response) => {
       if (!error && response.statusCode === 200) {
         if (response.headers['x-gg-state'] === 'cached') {
@@ -95,6 +101,8 @@ exports.handler = (argv) => {
           if (config.usage) console.log('Cached response, not decrementing usage.')
         }
         const resp = JSON.parse(response.body)
+        spinner.stop()
+        spinner.clear()
         for (let i = 0; i <= resp.length - 1; i++) {
           const item = resp[i]
           themes.label(theme, 'right', 'Match', `${item.word} `)
