@@ -1,9 +1,7 @@
-/* eslint max-len: 0 */
+/* eslint max-len: 0, no-undef: 0, no-useless-escape: 0, handle-callback-err: 0 */
 const themes = require('../src/themes')
 const tools = require('../src/tools')
 
-const _ = require('lodash')
-const chalk = require('chalk')
 const child = require('child_process')
 const expect = require('chai').expect
 const fs = require('fs-extra')
@@ -297,22 +295,22 @@ describe('themes', () => {
       const obj = {
         prefix: {
           str: '[',
-          style: 'bold.green',
+          style: 'bold.green'
         },
         text: {
-          style: 'bold.white',
+          style: 'bold.white'
         },
         content: {
-          style: 'white',
+          style: 'white'
         },
         suffix: {
           str: ']',
-          style: 'bold.green',
+          style: 'bold.green'
         },
         connector: {
           str: '→',
-          style: 'bold.cyan',
-        },
+          style: 'bold.cyan'
+        }
       }
       expect(theme).to.deep.equal(obj)
       done()
@@ -385,16 +383,16 @@ describe('config commands', () => {
             maxletter: 50,
             maxword: 10,
             minletter: 1,
-            repeat: false,
+            repeat: false
           },
           dmuse: {
             date: {
               interval: 'day',
               limit: 100000,
               remain: 100000,
-              stamp: '',
+              stamp: ''
             },
-            max: 5,
+            max: 5
           },
           merge: true,
           onelook: {
@@ -402,81 +400,81 @@ describe('config commands', () => {
               interval: 'day',
               limit: 10000,
               remain: 10000,
-              stamp: '',
+              stamp: ''
             },
-            links: false,
+            links: false
           },
           rbrain: {
             combine: {
               lang: 'en',
-              max: 5,
+              max: 5
             },
             date: {
               interval: 'hour',
               limit: 350,
               remain: 350,
-              stamp: '',
+              stamp: ''
             },
             info: {
-              lang: 'en',
+              lang: 'en'
             },
             rhyme: {
               lang: 'en',
-              max: 50,
-            },
+              max: 50
+            }
           },
           theme: 'square',
           urban: {
-            limit: 5,
+            limit: 5
           },
           usage: true,
           verbose: false,
           wordmap: {
-            limit: 1,
+            limit: 1
           },
           wordnik: {
             date: {
               interval: 'hour',
               limit: 15000,
               remain: 15000,
-              stamp: '',
+              stamp: ''
             },
             define: {
               canon: false,
               defdict: 'all',
               limit: 5,
-              part: '',
+              part: ''
             },
             example: {
               canon: false,
               limit: 5,
-              skip: 0,
+              skip: 0
             },
             hyphen: {
               canon: false,
               dict: 'all',
-              limit: 5,
+              limit: 5
             },
             origin: {
-              canon: false,
+              canon: false
             },
             phrase: {
               canon: false,
               limit: 5,
-              weight: 13,
+              weight: 13
             },
             pronounce: {
               canon: false,
               dict: '',
               limit: 5,
-              type: '',
+              type: ''
             },
             relate: {
               canon: false,
               limit: 10,
-              type: '',
-            },
-          },
+              type: ''
+            }
+          }
         }
         config.dmuse.date.stamp = ''
         config.dmuse.date.remain = 100000
@@ -510,91 +508,91 @@ describe('config commands', () => {
   })
 })
 
-describe('dmuse commands', () => {
-    before((done) => {
-      fs.mkdirpSync('test/output')
-      const obj = noon.load(TFILE)
-      obj.dmuse.date.stamp = new Date().toJSON()
-      obj.onelook.date.stamp = new Date().toJSON()
-      obj.rbrain.date.stamp = new Date().toJSON()
-      obj.wordnik.date.stamp = new Date().toJSON()
-      let fileExists = null
-      try {
-        fs.statSync(CFILE)
-        fileExists = true
-      } catch (e) {
-        if (e.code === 'ENOENT') {
-          fileExists = false
+describe('datamuse commands', () => {
+  before((done) => {
+    fs.mkdirpSync('test/output')
+    const obj = noon.load(TFILE)
+    obj.dmuse.date.stamp = new Date().toJSON()
+    obj.onelook.date.stamp = new Date().toJSON()
+    obj.rbrain.date.stamp = new Date().toJSON()
+    obj.wordnik.date.stamp = new Date().toJSON()
+    let fileExists = null
+    try {
+      fs.statSync(CFILE)
+      fileExists = true
+    } catch (e) {
+      if (e.code === 'ENOENT') {
+        fileExists = false
+      }
+    }
+    if (fileExists) {
+      const config = noon.load(CFILE)
+      obj.dmuse.date.stamp = config.dmuse.date.stamp
+      obj.dmuse.date.remain = config.dmuse.date.remain
+      obj.onelook.date.stamp = config.onelook.date.stamp
+      obj.onelook.date.remain = config.onelook.date.remain
+      obj.rbrain.date.stamp = config.rbrain.date.stamp
+      obj.rbrain.date.remain = config.rbrain.date.remain
+      obj.wordnik.date.stamp = config.wordnik.date.stamp
+      obj.wordnik.date.remain = config.wordnik.date.remain
+      fs.copySync(CFILE, 'test/output/saved.config.noon')
+    }
+    noon.save(CFILE, obj)
+    done()
+  })
+  after((done) => {
+    let fileExists = null
+    try {
+      fs.statSync('test/output/saved.config.noon')
+      fileExists = true
+    } catch (e) {
+      if (e.code === 'ENOENT') {
+        fileExists = false
+      }
+    }
+    if (fileExists) {
+      fs.removeSync(CFILE)
+      fs.copySync('test/output/saved.config.noon', CFILE)
+    } else {
+      fs.removeSync(CFILE)
+    }
+    fs.removeSync('test/output')
+    done()
+  })
+  describe('get', () => {
+    it('shows output', (done) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js datamuse get -s -o ${process.cwd()}/test/output/dmuse.json ml=ubiquity > test/output/dmuse-get.out`, (err) => {
+        const stdout = fs.readFileSync('test/output/dmuse-get.out', 'utf8')
+        const obj = {
+          type: 'datamuse',
+          source: 'http://datamuse.com/api',
+          url: 'http://api.datamuse.com/words?max=5&&ml=ubiquity',
+          match0: 'ubiquitousness',
+          tags1: 'noun',
+          match1: 'omnipresence',
+          match2: 'pervasiveness',
+          tags0: 'noun',
+          match3: 'prevalence'
         }
-      }
-      if (fileExists) {
-        const config = noon.load(CFILE)
-        obj.dmuse.date.stamp = config.dmuse.date.stamp
-        obj.dmuse.date.remain = config.dmuse.date.remain
-        obj.onelook.date.stamp = config.onelook.date.stamp
-        obj.onelook.date.remain = config.onelook.date.remain
-        obj.rbrain.date.stamp = config.rbrain.date.stamp
-        obj.rbrain.date.remain = config.rbrain.date.remain
-        obj.wordnik.date.stamp = config.wordnik.date.stamp
-        obj.wordnik.date.remain = config.wordnik.date.remain
-        fs.copySync(CFILE, 'test/output/saved.config.noon')
-      }
-      noon.save(CFILE, obj)
-      done()
-    })
-    after((done) => {
-      let fileExists = null
-      try {
-        fs.statSync('test/output/saved.config.noon')
-        fileExists = true
-      } catch (e) {
-        if (e.code === 'ENOENT') {
-          fileExists = false
-        }
-      }
-      if (fileExists) {
-        fs.removeSync(CFILE)
-        fs.copySync('test/output/saved.config.noon', CFILE)
-      } else {
-        fs.removeSync(CFILE)
-      }
-      fs.removeSync('test/output')
-      done()
-    })
-    describe('get', () => {
-      it('shows output', (done) => {
-        child.exec(`node ${process.cwd()}/bin/leximaven.js dmuse get -s -o ${process.cwd()}/test/output/dmuse.json ml=ubiquity > test/output/dmuse-get.out`, (err) => {
-          const stdout = fs.readFileSync('test/output/dmuse-get.out', 'utf8')
-          const obj = {
-            type: 'datamuse',
-            source: 'http://datamuse.com/api',
-            url: 'http://api.datamuse.com/words?max=5&&ml=ubiquity&dmuse&get',
-            match0: 'ubiquitousness',
-            tags1: 'noun',
-            match1: 'omnipresence',
-            match2: 'pervasiveness',
-            tags0: 'noun',
-            match3: 'prevalence',
-          }
-          const json = fs.readJsonSync(`${process.cwd()}/test/output/dmuse.json`)
-          expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z\[\]→\s,]*\/dmuse.json./mig)
-          expect(json).to.deep.equal(obj)
-          done(err)
-        })
+        const json = fs.readJsonSync(`${process.cwd()}/test/output/dmuse.json`)
+        expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z\[\]→\s,]*\/dmuse.json./mig)
+        expect(json).to.deep.equal(obj)
+        done(err)
       })
     })
-    describe('info', () => {
-      it('shows metrics', (done) => {
-        child.exec(`node ${process.cwd()}/bin/leximaven.js dmuse info > test/output/dmuse-info.out`, err => {
-          const stdout = fs.readFileSync('test/output/dmuse-info.out', 'utf8')
-          expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/\d+\/\d+[a-z0-9 ,\.\s\(\):\/%]*/)
-          done(err)
-        })
+  })
+  describe('info', () => {
+    it('shows metrics', (done) => {
+      child.exec(`node ${process.cwd()}/bin/leximaven.js dmuse info > test/output/dmuse-info.out`, err => {
+        const stdout = fs.readFileSync('test/output/dmuse-info.out', 'utf8')
+        expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/\d+\/\d+[a-z0-9 ,\.\s\(\):\/%]*/)
+        done(err)
       })
     })
+  })
 })
 
-describe('rbrain commands', () => {
+describe('rhymebrain commands', () => {
   before((done) => {
     fs.mkdirpSync('test/output')
     const obj = noon.load(TFILE)
@@ -654,7 +652,7 @@ describe('rbrain commands', () => {
           source: 'http://rhymebrain.com',
           url: 'http://rhymebrain.com/talk?function=getPortmanteaus&word=value&lang=en&maxResults=1&',
           set0: 'value,unique',
-          portmanteau0: 'valunique',
+          portmanteau0: 'valunique'
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/combine.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[\[\]a-z0-9,→ -\/\.]*/mig)
@@ -676,7 +674,7 @@ describe('rbrain commands', () => {
           syllables: '1',
           offensive: true,
           dict: true,
-          trusted: true,
+          trusted: true
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/info.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[\[\]a-z0-9 -→ˈʌ\/\.,]*/mig)
@@ -693,7 +691,7 @@ describe('rbrain commands', () => {
           type: 'rhyme',
           source: 'http://rhymebrain.com',
           url: 'http://rhymebrain.com/talk?function=getRhymes&word=too&lang=en&maxResults=1&',
-          rhyme0: 'to',
+          rhyme0: 'to'
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/rhyme.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/\[Rhymes\]→[a-z*, ]*\sWrote data to [a-z\/\.]*\s\d*\/\d*[a-z0-9 ,\.]*/mig)
@@ -764,7 +762,7 @@ describe('wordnik commands', () => {
           source: 'http://www.wordnik.com',
           text0: 'Existence or apparent existence everywhere at the same time; omnipresence: "the repetitiveness, the selfsameness, and the ubiquity of modern mass culture”  ( Theodor Adorno ). ',
           deftype0: 'noun',
-          source0: 'ahd-legacy',
+          source0: 'ahd-legacy'
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/define.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z\[\]→ ;:",\-\(\)\.\/”]*Wrote data to [a-z\/\.]*/mig)
@@ -780,7 +778,7 @@ describe('wordnik commands', () => {
         const obj = {
           type: 'example',
           source: 'http://www.wordnik.com',
-          example0: 'Both are characterized by their ubiquity and their antiquity: No known human culture lacks them, and musical instruments are among the oldest human artifacts, dating to the Late Pleistocene about 50,000 years ago.',
+          example0: 'Both are characterized by their ubiquity and their antiquity: No known human culture lacks them, and musical instruments are among the oldest human artifacts, dating to the Late Pleistocene about 50,000 years ago.'
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/example.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z0-9\[\] →:,\.]*\sWrote data to [a-z\/\.]*/mig)
@@ -799,7 +797,7 @@ describe('wordnik commands', () => {
           syllable0: 'u',
           stress1: 'biq',
           syllable2: 'ui',
-          syllable3: 'ty',
+          syllable3: 'ty'
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/hyphen.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/\[Hyphenation\]→[a-z\-]*\sWrote data to [a-z\/\.]*\s\d*\/\d*[a-z0-9 ,\.]*/mig)
@@ -816,7 +814,7 @@ describe('wordnik commands', () => {
           type: 'etymology',
           source: 'http://www.wordnik.com',
           etymology: '[L.  everywhere, fr.  where, perhaps for ,  (cf.  anywhere), and if so akin to E. : cf. F. .]',
-          origin: 'ubique, ubi, cubi, quobi, alicubi, who, ubiquit√©',
+          origin: 'ubique, ubi, cubi, quobi, alicubi, who, ubiquit√©'
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/origin.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z \[\]→\.,\(\):√©]*Wrote data to [a-z\/\.]*/mig)
@@ -833,7 +831,7 @@ describe('wordnik commands', () => {
           type: 'phrase',
           source: 'http://www.wordnik.com',
           agram0: 'ubiquitous',
-          bgram0: 'amoeba',
+          bgram0: 'amoeba'
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/phrase.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z\[\]\-\s]*Wrote data to [a-z\/\.]*/mig)
@@ -853,7 +851,7 @@ describe('wordnik commands', () => {
           pronunciation0: '(yo͞o-bĭkˈwĭ-tē)',
           type0: 'ahd-legacy',
           pronunciation1: 'Y UW0 B IH1 K W IH0 T IY0',
-          type1: 'arpabet',
+          type1: 'arpabet'
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/pronounce.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z0-9\[\]\(\) \-→ĭēˈ\so͞]*\sWrote data to [a-z\/\.]*/mig)
@@ -966,7 +964,7 @@ describe('root commands', () => {
           DDC3: '040',
           expansion4: 'Dodge City Municipal airport (code)',
           comment4: 'United States',
-          DDC4: '387',
+          DDC4: '387'
         }
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/Found \d* acronyms for [a-z]*:\s[a-z0-9\s-:\/\.|(|)]*Wrote data to [a-z\/]*.json./mig)
         expect(json).to.deep.equal(obj)
@@ -993,7 +991,7 @@ describe('root commands', () => {
           DDC3: '040',
           expansion4: 'Dodge City Municipal airport (code)',
           comment4: 'United States',
-          DDC4: '387',
+          DDC4: '387'
         }
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/Found \d* acronyms for [a-z]*:\s[a-z0-9\s-:\/\.|(|)]*Overwrote [a-z\/\.]* with data./mig)
         expect(json).to.deep.equal(obj)
@@ -1018,7 +1016,7 @@ describe('root commands', () => {
           DDC3: '040',
           expansion4: 'Dodge City Municipal airport (code)',
           comment4: 'United States',
-          DDC4: '387',
+          DDC4: '387'
         }
         const xml = fs.readFileSync(`${process.cwd()}/test/output/acronym.xml`, 'utf8')
         const parser = new xml2js.Parser()
@@ -1063,7 +1061,7 @@ describe('root commands', () => {
           DDC3: '040',
           expansion4: 'Dodge City Municipal airport (code)',
           comment4: 'United States',
-          DDC4: '387',
+          DDC4: '387'
         }
         const xml = fs.readFileSync(`${process.cwd()}/test/output/acronym.xml`, 'utf8')
         const parser = new xml2js.Parser()
@@ -1104,8 +1102,8 @@ describe('root commands', () => {
           show: 'all',
           alist: [
             'Ubiquity',
-            'Buy I Quit',
-          ],
+            'Buy I Quit'
+          ]
         }
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[Anagrams\]\sAnagrams for: [a-z]*\s\d* found. Displaying all:\s[a-z\/\.\s]*/mig)
         expect(json).to.deep.equal(obj)
@@ -1173,7 +1171,7 @@ describe('root commands', () => {
           url: 'http://onelook.com/?xml=1&w=ubiquity',
           definition: 'noun: the state of being everywhere at once (or seeming to be everywhere at once)',
           phrase: 'ubiquity records',
-          sim: 'omnipresence,ubiquitousness',
+          sim: 'omnipresence,ubiquitousness'
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/onelook.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z0-9\[\]:\(\)→ \/\.,]*/mig)
@@ -1197,7 +1195,7 @@ describe('root commands', () => {
           type: 'urban',
           source: 'http://www.urbandictionary.com',
           url: 'http://api.urbandictionary.com/v0/define?term=flip+the+bird',
-          definition0: '1. The act of rotating an avian creature through more than 90 degrees.\r\n\r\n2. The act of extending the central digit of the hand with the intent to cause offense.',
+          definition0: '1. The act of rotating an avian creature through more than 90 degrees.\r\n\r\n2. The act of extending the central digit of the hand with the intent to cause offense.'
         }
         const json = fs.readJsonSync(`${process.cwd()}/test/output/urban.json`)
         expect(stdout.replace(/(\r\n|\n|\r)\s?/gm, '\n')).to.match(/[a-z0-9 \[\]→\.\/\s]*/mig)

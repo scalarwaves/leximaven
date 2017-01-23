@@ -9,8 +9,8 @@ const noon = require('noon')
 
 const CFILE = `${process.env.HOME}/.leximaven.noon`
 
-exports.command = 'related <word>'
-exports.aliases = ['rel']
+exports.command = 'relate <word>'
+exports.aliases = ['related', 'rel']
 exports.desc = 'Wordnik related words'
 exports.builder = {
   out: {

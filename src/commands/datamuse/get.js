@@ -64,15 +64,15 @@ exports.handler = (argv) => {
     const ccont = []
     ccont.push(argv.condition)
     if (argv._.length > 1) {
-      _.each(argv._, (value) => {
-        ccont.push(value)
-      })
+      for (let i = 0; i <= argv._.length - 1; i++) {
+        if (argv._[i] !== 'datamuse' && argv._[i] !== 'dmuse' && argv._[i] !== 'dm' && argv._[i] !== 'get') {
+          ccont.push(argv._[i])
+        }
+      }
     }
     const prefix = 'http://api.datamuse.com/words?'
     let conditions = `max=${config.dmuse.max}&`
-    _.each(ccont, (value) => {
-      conditions = `${conditions}&${value}`
-    })
+    for (let i = 0; i <= ccont.length - 1; i++) { conditions = `${conditions}&${ccont[i]}` }
     let url = `${prefix}${conditions}`
     url = encodeURI(url)
     const tags = {

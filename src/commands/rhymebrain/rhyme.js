@@ -95,7 +95,9 @@ exports.handler = (argv) => {
         }
         const list = JSON.parse(response.body)
         const lcont = []
-        _.each(list, (item) => lcont.push(item.word))
+        for (let i = 0; i <= list.length - 1; i++) {
+          lcont.push(list[i].word)
+        }
         lcont.sort((a, b) => {
           if (a < b) return -1
           if (a > b) return 1

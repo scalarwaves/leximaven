@@ -10,7 +10,7 @@ const noon = require('noon')
 const CFILE = `${process.env.HOME}/.leximaven.noon`
 
 exports.command = 'phrase <word>'
-exports.aliases = ['ph', 'bigram']
+exports.aliases = ['ph', 'ngram']
 exports.desc = 'Wordnik bi-gram phrases'
 exports.builder = {
   out: {

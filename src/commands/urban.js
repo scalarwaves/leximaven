@@ -53,9 +53,9 @@ exports.handler = (argv) => {
   const ucont = []
   ucont.push(argv.query)
   if (argv._.length > 1) {
-    _.each(argv._, (value) => {
-      if (value !== 'urban') ucont.push(value)
-    })
+    for (let i = 0; i <= argv._.length - 1; i++) {
+      if (argv._[i] !== 'urban') ucont.push(argv._[i])
+    }
   }
   let words = ''
   if (ucont.length > 1) {
