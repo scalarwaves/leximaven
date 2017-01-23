@@ -54,7 +54,7 @@ exports.handler = (argv) => {
   ucont.push(argv.query)
   if (argv._.length > 1) {
     for (let i = 0; i <= argv._.length - 1; i++) {
-      if (argv._[i] !== 'urban') ucont.push(argv._[i])
+      if (argv._[i] !== 'urban' && argv._[i] !== 'urb' && argv._[i] !== 'slang') ucont.push(argv._[i])
     }
   }
   let words = ''

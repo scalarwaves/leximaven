@@ -63,7 +63,14 @@ exports.handler = (argv) => {
     if (argv.s && !config.merge) throw new Error("Can't save user config, set option merge to true.")
     const theme = themes.loadTheme(config.theme)
     if (config.verbose) themes.label(theme, 'down', 'Onelook')
-    let url = `http://onelook.com/?xml=1&w=${argv.word}`
+    const acont = []
+    acont.push(argv.word)
+    if (argv._.length > 1) {
+      for (let i = 0; i <= argv._.length - 1; i++) {
+        if (argv._[i] !== 'onelook' && argv._[i] !== 'one' && argv._[i] !== 'ol') acont.push(argv._[i])
+      }
+    }
+    let url = `http://onelook.com/?xml=1&w=${acont.join('+')}`
     url = encodeURI(url)
     const tofile = {
       type: 'onelook',
