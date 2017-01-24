@@ -12,7 +12,7 @@ leximaven is a powerful tool for searching word-related APIs from the command li
 
 ## Platform
 
-Looking for testers on OSX. Well tested on Linux. Will test on Windows.
+Looking for testers on OSX. Developed and tested on Linux. Works on Windows, see [Windows](#windows-installation) below.
 Supported Node.js versions:
 
 - 7.x
@@ -20,9 +20,11 @@ Supported Node.js versions:
 - 5.x
 - 4.x - Works but it's really slow
 
-## Installation
+## Install
 
-To initialize the config file and load themes, your NODE_PATH environment variable must point to the **lib/node_modules** directory of the Node.js installation. You can set this path automatically like this:
+### Linux installation
+
+To initialize the config file and load themes, your NODE_PATH environment variable must point to the **node_modules** directory of the Node.js installation. You can set this path automatically like this:
 
     export NP=$(which node)
     export BP=${NP%bin/node} #this replaces the string '/bin/node'
@@ -37,6 +39,12 @@ Add all of this to .bashrc, .zshrc, etc. then:
 
     npm install -g leximaven
     leximaven config init
+
+### Windows installation
+
+I highly recommend using [nodist](https://github.com/marcelklehr/nodist) to install Node.js on Windows. It automatically sets %NODE_PATH% for you, though you may have to edit it to make sure it doesn't contain itself (i.e. C:\...\...\node_modules;%NODE_PATH%). If you install Node.js manually, `npm install --global leximaven` will install the package in C:\Users\username\AppData\Roaming\npm\node_modules. And if you just do `npm install leximaven` then it will install the package to a subfolder of the Node.js installation, but that won't be the NODE_PATH folder unless you manually set it. Either way, you're going to have to mess around with Windows environment variables to get it to work. And don't forget to put your [Wordnik API key](http://developer.wordnik.com/) into an environment variable **WORDNIK**
+
+As for getting the ANSI color escape codes to work, [Cmder](http://cmder.net/) seems to be the easiest way. It doesn't install a full linux environment like Cygwin, but you can still use some linux commands like **which**, **cat**, and **ls**. 
 
 ## Usage
 
