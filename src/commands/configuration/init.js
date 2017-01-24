@@ -3,6 +3,7 @@ const themes = require('../../themes')
 const chalk = require('chalk')
 const fs = require('fs')
 const noon = require('noon')
+const os = require('os')
 
 const CFILE = `${process.env.HOME}/.leximaven.noon`
 const PKGDIR = `${process.env.NODE_PATH}/leximaven/`
@@ -79,6 +80,7 @@ exports.handler = (argv) => {
   }
   const config = noon.load(CFILE)
   const theme = themes.loadTheme(config.theme)
+  if (os.platform() === 'windows') themes.label(theme, 'right', 'Notice', 'Please see the README for best user experience on Windows.')
   if (argv.v) {
     themes.label(theme, 'down', 'Configuration')
     console.log('Your current configuration is:')
