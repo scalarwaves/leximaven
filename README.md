@@ -10,6 +10,16 @@
 
 leximaven is a powerful tool for searching word-related APIs from the command line. It can fetch acronyms, anagrams, bi-gram phrases, definitions, etymologies, example uses, hyphenation, offensive word flags, portmanteaus, pronunciations (Arpabet & IPA), related words, rhymes, slang, syllable stress and count, and more. See the [wiki](https://github.com/drawnepicenter/leximaven/wiki) for more info.
 
+## Platform
+
+Looking for testers on OSX. Well tested on Linux. Will test on Windows.
+Supported Node.js versions:
+
+- 7.x
+- 6.x
+- 5.x
+- 4.x - Works but it's really slow
+
 ## Installation
 
 To initialize the config file and load themes, your NODE_PATH environment variable must point to the **lib/node_modules** directory of the Node.js installation. You can set this path automatically like this:
