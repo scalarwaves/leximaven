@@ -5,9 +5,6 @@ const fs = require('fs')
 const glob = require('glob')
 const noon = require('noon')
 
-const CFILE = `${process.env.HOME}/.leximaven.noon`
-const config = noon.load(CFILE)
-
 let TDIR = null
 let themeDirExists = null
 try {
@@ -38,6 +35,8 @@ exports.loadTheme = (theme) => {
   } catch (e) {
     if (e.code === 'ENOENT') dirExists = false
   }
+  const CFILE = `${process.env.HOME}/.leximaven.noon`
+  const config = noon.load(CFILE)
   if (!dirExists && config.verbose) console.log(chalk.white(`${process.cwd()}/themes does not exist, falling back to ${process.env.NODE_PATH}/leximaven/themes.`))
   load = noon.load(`${TDIR}${theme}.noon`)
   return load
@@ -58,6 +57,8 @@ exports.getThemes = () => {
   } catch (e) {
     if (e.code === 'ENOENT') dirExists = false
   }
+  const CFILE = `${process.env.HOME}/.leximaven.noon`
+  const config = noon.load(CFILE)
   if (!dirExists && config.verbose) console.log(chalk.white(`${process.cwd()}/themes does not exist, falling back to ${process.env.NODE_PATH}/leximaven/themes.`))
   files = glob.sync(`${TDIR}*.noon`)
   for (let i = 0; i <= files.length - 1; i++) {
