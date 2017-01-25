@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.3.1"></a>
+## [2.3.1](https://github.com/drawnepicenter/leximaven/compare/v2.3.0...v2.3.1) (2017-01-25)
+
+
+### Bug Fixes
+
+* **project:** config init error ([8b0bfa1](https://github.com/drawnepicenter/leximaven/commit/8b0bfa1))
+* **themes:** control fallback msg with verbose ([9e3de72](https://github.com/drawnepicenter/leximaven/commit/9e3de72)), closes [#16](https://github.com/drawnepicenter/leximaven/issues/16)
+
+
+
 <a name="2.3.0"></a>
 # [2.3.0](https://github.com/drawnepicenter/leximaven/compare/v2.2.0...v2.3.0) (2017-01-23)
 
