@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.3.2"></a>
+## [2.3.2](https://github.com/drawnepicenter/leximaven/compare/v2.3.1...v2.3.2) (2017-01-29)
+
+
+### Bug Fixes
+
+* **wordmap:** mapping doesn't work in other directories as a package ([17b01e1](https://github.com/drawnepicenter/leximaven/commit/17b01e1))
+
+
+
 <a name="2.3.1"></a>
 ## [2.3.1](https://github.com/drawnepicenter/leximaven/compare/v2.3.0...v2.3.1) (2017-01-25)
 

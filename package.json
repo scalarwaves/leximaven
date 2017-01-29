@@ -1,6 +1,6 @@
 {
   "name": "leximaven",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "description": "A command line tool for searching word-related APIs.",
   "author": "Andrew Prentice",
   "license": "MIT",
