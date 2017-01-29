@@ -9,6 +9,7 @@ const CFILE = `${process.env.HOME}/.leximaven.noon`
 const PKGDIR = `${process.env.NODE_PATH}/leximaven/`
 
 exports.command = 'init'
+exports.aliases = ['i']
 exports.desc = 'Initialize config file'
 exports.builder = {
   force: {

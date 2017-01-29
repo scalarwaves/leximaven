@@ -8,6 +8,7 @@ const noon = require('noon')
 const CFILE = `${process.env.HOME}/.leximaven.noon`
 
 exports.command = 'get <key>'
+exports.aliases = ['g']
 exports.desc = 'Retrieve a config value'
 exports.builder = {}
 exports.handler = (argv) => {
