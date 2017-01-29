@@ -39,7 +39,15 @@ exports.handler = (argv) => {
   if (config.verbose) themes.label(theme, 'down', 'Wordmap')
   const word = argv.word
   const l = argv.l
-  const bin = `${process.cwd()}/bin/leximaven.js`
+  let bin = ''
+  let dirExists = null
+  try {
+    fs.statSync('bin/leximaven.js')
+    dirExists = true
+  } catch (e) {
+    if (e.code === 'ENOENT') dirExists = false
+  }
+  dirExists ? bin = 'bin/leximaven.js' : bin = `${process.env.NODE_PATH}/leximaven/bin/leximaven.js`
   child.spawnSync('node', [bin, 'rbrain', 'combine', `-m${l}`, `${word}`], { stdio: 'inherit' })
   child.spawnSync('node', [bin, 'rbrain', 'info', `${word}`], { stdio: 'inherit' })
   child.spawnSync('node', [bin, 'rbrain', 'rhyme', `-m${l}`, `${word}`], { stdio: 'inherit' })
