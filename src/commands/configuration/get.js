@@ -2,7 +2,7 @@ const themes = require('../../themes')
 const tools = require('../../tools')
 
 const chalk = require('chalk')
-const dot = require('dotty')
+const dot = require('dot-prop')
 const noon = require('noon')
 
 const CFILE = `${process.env.HOME}/.leximaven.noon`
@@ -18,7 +18,7 @@ exports.handler = (argv) => {
   const config = noon.load(CFILE)
   const theme = themes.loadTheme(config.theme)
   if (config.verbose) themes.label(theme, 'down', 'Configuration')
-  if (dot.exists(config, key)) {
+  if (dot.has(config, key)) {
     value = /\./i.test(key) ? dot.get(config, key) : config[key]
   } else {
     throw new Error(`Option ${key} not found.`)

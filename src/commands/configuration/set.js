@@ -2,7 +2,7 @@ const themes = require('../../themes')
 const tools = require('../../tools')
 
 const chalk = require('chalk')
-const dot = require('dotty')
+const dot = require('dot-prop')
 const noon = require('noon')
 
 const CFILE = `${process.env.HOME}/.leximaven.noon`
@@ -19,12 +19,12 @@ exports.handler = (argv) => {
   const config = noon.load(CFILE)
   const theme = themes.loadTheme(config.theme)
   if (config.verbose) themes.label(theme, 'down', 'Configuration')
-  if (dot.exists(config, key)) {
+  if (dot.has(config, key)) {
     if (/\./i.test(key)) {
       if (/^\w*\.date/i.test(key)) {
         throw new Error("API limits hardcoded, can't set this key.")
       } else {
-        dot.put(config, key, value)
+        dot.set(config, key, value)
       }
     } else {
       config[key] = value

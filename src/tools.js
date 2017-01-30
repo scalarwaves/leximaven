@@ -1,7 +1,7 @@
 /* eslint max-len: 0 */
 const chalk = require('chalk')
+const df = require('date-fns')
 const fs = require('fs-extra')
-const moment = require('moment')
 const noon = require('noon')
 const ts = require('term-size')
 const wrap = require('wrap-ansi')
@@ -24,7 +24,7 @@ exports.limitOnelook = (config) => {
   let proceed = false
   let reset = false
   const stamp = new Date(c.onelook.date.stamp)
-  const hours = moment(new Date()).diff(stamp, 'hours')
+  const hours = df.differenceInHours(new Date(), stamp)
   if (hours < 24) {
     c.onelook.date.remain--
   } else if (hours >= 24) {
@@ -48,7 +48,7 @@ exports.limitDmuse = (config) => {
   let proceed = false
   let reset = false
   const stamp = new Date(c.dmuse.date.stamp)
-  const hours = moment(new Date()).diff(stamp, 'hours')
+  const hours = df.differenceInHours(new Date(), stamp)
   if (hours < 24) {
     c.dmuse.date.remain--
   } else if (hours >= 24) {
@@ -72,7 +72,7 @@ exports.limitRbrain = (config) => {
   let proceed = false
   let reset = false
   const stamp = new Date(c.rbrain.date.stamp)
-  const minutes = moment(new Date()).diff(stamp, 'minutes')
+  const minutes = df.differenceInMinutes(new Date(), stamp)
   if (minutes < 60) {
     c.rbrain.date.remain--
   } else if (minutes >= 60) {
@@ -96,7 +96,7 @@ exports.limitWordnik = (config) => {
   let proceed = false
   let reset = false
   const stamp = new Date(c.wordnik.date.stamp)
-  const minutes = moment(new Date()).diff(stamp, 'minutes')
+  const minutes = df.differenceInMinutes(new Date(), stamp)
   if (minutes < 60) {
     c.wordnik.date.remain--
   } else if (minutes >= 60) {
