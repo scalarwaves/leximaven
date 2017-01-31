@@ -3,8 +3,8 @@ const themes = require('../themes')
 const tools = require('../tools')
 
 const _ = require('lodash')
+const df = require('date-fns')
 const chalk = require('chalk')
-const moment = require('moment')
 const http = require('good-guy-http')()
 const noon = require('noon')
 const xml2js = require('xml2js')
@@ -50,8 +50,8 @@ exports.handler = (argv) => {
   proceed = checkStamp[1]
   reset = checkStamp[2]
   const stamp = new Date(config.onelook.date.stamp)
-  const hours = moment(new Date()).diff(stamp, 'hours')
-  const minutes = moment(new Date()).diff(stamp, 'minutes')
+  const hours = df.differenceInHours(new Date(), stamp)
+  const minutes = df.differenceInMinutes(new Date(), stamp)
   if (proceed) {
     const userConfig = {
       onelook: {

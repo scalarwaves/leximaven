@@ -1,23 +1,23 @@
-'use strict';/* eslint max-len: 0 */var chalk=require('chalk');var fs=require('fs-extra');var moment=require('moment');var noon=require('noon');var ts=require('term-size');var wrap=require('wrap-ansi');var xml2js=require('xml2js');var CFILE=process.env.HOME+'/.leximaven.noon';/**
+'use strict';/* eslint max-len: 0 */var chalk=require('chalk');var df=require('date-fns');var fs=require('fs-extra');var noon=require('noon');var ts=require('term-size');var wrap=require('wrap-ansi');var xml2js=require('xml2js');var CFILE=process.env.HOME+'/.leximaven.noon';/**
   * The tools module provides useful repetitive tasks
   * @module Utils
   *//**
   * Onelook's API limit check
   * @param  {Object} config The current config
   * @return {Array} Updated config, proceed boolean, and reset boolean
-  */exports.limitOnelook=function(config){var c=config;var proceed=false;var reset=false;var stamp=new Date(c.onelook.date.stamp);var hours=moment(new Date()).diff(stamp,'hours');if(hours<24){c.onelook.date.remain--;}else if(hours>=24){reset=true;c.onelook.date.stamp=new Date().toJSON();c.onelook.date.remain=c.onelook.date.limit;c.onelook.date.remain--;}c.onelook.date.remain<=0?c.onelook.date.remain=0:proceed=true;noon.save(CFILE,c);return[c,proceed,reset];};/**
+  */exports.limitOnelook=function(config){var c=config;var proceed=false;var reset=false;var stamp=new Date(c.onelook.date.stamp);var hours=df.differenceInHours(new Date(),stamp);if(hours<24){c.onelook.date.remain--;}else if(hours>=24){reset=true;c.onelook.date.stamp=new Date().toJSON();c.onelook.date.remain=c.onelook.date.limit;c.onelook.date.remain--;}c.onelook.date.remain<=0?c.onelook.date.remain=0:proceed=true;noon.save(CFILE,c);return[c,proceed,reset];};/**
   * Datamuse's API limit check
   * @param  {Object} config The current config
   * @return {Array} Updated config, proceed boolean, and reset boolean
-  */exports.limitDmuse=function(config){var c=config;var proceed=false;var reset=false;var stamp=new Date(c.dmuse.date.stamp);var hours=moment(new Date()).diff(stamp,'hours');if(hours<24){c.dmuse.date.remain--;}else if(hours>=24){reset=true;c.dmuse.date.stamp=new Date().toJSON();c.dmuse.date.remain=c.dmuse.date.limit;c.dmuse.date.remain--;}c.dmuse.date.remain<=0?c.dmuse.date.remain=0:proceed=true;noon.save(CFILE,c);return[c,proceed,reset];};/**
+  */exports.limitDmuse=function(config){var c=config;var proceed=false;var reset=false;var stamp=new Date(c.dmuse.date.stamp);var hours=df.differenceInHours(new Date(),stamp);if(hours<24){c.dmuse.date.remain--;}else if(hours>=24){reset=true;c.dmuse.date.stamp=new Date().toJSON();c.dmuse.date.remain=c.dmuse.date.limit;c.dmuse.date.remain--;}c.dmuse.date.remain<=0?c.dmuse.date.remain=0:proceed=true;noon.save(CFILE,c);return[c,proceed,reset];};/**
   * Rhymebrain's API limit check
   * @param  {Object} config The current config
   * @return {Array} Updated config, proceed boolean, and reset boolean
-  */exports.limitRbrain=function(config){var c=config;var proceed=false;var reset=false;var stamp=new Date(c.rbrain.date.stamp);var minutes=moment(new Date()).diff(stamp,'minutes');if(minutes<60){c.rbrain.date.remain--;}else if(minutes>=60){reset=true;c.rbrain.date.stamp=new Date().toJSON();c.rbrain.date.remain=c.rbrain.date.limit;c.rbrain.date.remain--;}c.rbrain.date.remain<=0?c.rbrain.date.remain=0:proceed=true;noon.save(CFILE,c);return[c,proceed,reset];};/**
+  */exports.limitRbrain=function(config){var c=config;var proceed=false;var reset=false;var stamp=new Date(c.rbrain.date.stamp);var minutes=df.differenceInMinutes(new Date(),stamp);if(minutes<60){c.rbrain.date.remain--;}else if(minutes>=60){reset=true;c.rbrain.date.stamp=new Date().toJSON();c.rbrain.date.remain=c.rbrain.date.limit;c.rbrain.date.remain--;}c.rbrain.date.remain<=0?c.rbrain.date.remain=0:proceed=true;noon.save(CFILE,c);return[c,proceed,reset];};/**
   * Wordnik's API limit check
   * @param  {Object} config The current config
   * @return {Array} Updated config, proceed boolean, and reset boolean
-  */exports.limitWordnik=function(config){var c=config;var proceed=false;var reset=false;var stamp=new Date(c.wordnik.date.stamp);var minutes=moment(new Date()).diff(stamp,'minutes');if(minutes<60){c.wordnik.date.remain--;}else if(minutes>=60){reset=true;c.wordnik.date.stamp=new Date().toJSON();c.wordnik.date.remain=c.wordnik.date.limit;c.wordnik.date.remain--;}c.wordnik.date.remain<=0?c.wordnik.date.remain=0:proceed=true;noon.save(CFILE,c);return[c,proceed,reset];};/**
+  */exports.limitWordnik=function(config){var c=config;var proceed=false;var reset=false;var stamp=new Date(c.wordnik.date.stamp);var minutes=df.differenceInMinutes(new Date(),stamp);if(minutes<60){c.wordnik.date.remain--;}else if(minutes>=60){reset=true;c.wordnik.date.stamp=new Date().toJSON();c.wordnik.date.remain=c.wordnik.date.limit;c.wordnik.date.remain--;}c.wordnik.date.remain<=0?c.wordnik.date.remain=0:proceed=true;noon.save(CFILE,c);return[c,proceed,reset];};/**
   * Checks if a file exists
   * @private
   * @param {string} path The filename to check.

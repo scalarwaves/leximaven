@@ -2,7 +2,7 @@
 const tools = require('../../tools')
 
 const chalk = require('chalk')
-const moment = require('moment')
+const df = require('date-fns')
 const http = require('good-guy-http')()
 const noon = require('noon')
 
@@ -34,7 +34,7 @@ exports.handler = (argv) => {
   const limit = config.dmuse.date.limit
   const remain = config.dmuse.date.remain
   const stamp = new Date(config.dmuse.date.stamp)
-  const hours = moment(new Date()).diff(stamp, 'hours')
-  const minutes = moment(new Date()).diff(stamp, 'minutes')
+  const hours = df.differenceInHours(new Date(), stamp)
+  const minutes = df.differenceInMinutes(new Date(), stamp)
   console.log(chalk.white(`${remain}/${limit} requests remain today, will reset in ${23 - hours} hours, ${59 - minutes} minutes.`))
 }

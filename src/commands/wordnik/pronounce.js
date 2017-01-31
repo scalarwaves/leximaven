@@ -3,7 +3,7 @@ const themes = require('../../themes')
 const tools = require('../../tools')
 
 const _ = require('lodash')
-const moment = require('moment')
+const df = require('date-fns')
 const http = require('good-guy-http')()
 const noon = require('noon')
 
@@ -63,7 +63,7 @@ exports.handler = (argv) => {
   let proceed = false
   let reset = false
   const stamp = new Date(config.wordnik.date.stamp)
-  const minutes = moment(new Date()).diff(stamp, 'minutes')
+  const minutes = df.differenceInMinutes(new Date(), stamp)
   const checkStamp = tools.limitWordnik(config)
   config = checkStamp[0]
   proceed = checkStamp[1]

@@ -3,8 +3,8 @@ const themes = require('../../themes')
 const tools = require('../../tools')
 
 const _ = require('lodash')
+const df = require('date-fns')
 const chalk = require('chalk')
-const moment = require('moment')
 const http = require('good-guy-http')()
 const noon = require('noon')
 const ora = require('ora')
@@ -45,8 +45,8 @@ exports.handler = (argv) => {
   let proceed = false
   let reset = false
   const stamp = new Date(config.dmuse.date.stamp)
-  const hours = moment(new Date()).diff(stamp, 'hours')
-  const minutes = moment(new Date()).diff(stamp, 'minutes')
+  const hours = df.differenceInHours(new Date(), stamp)
+  const minutes = df.differenceInMinutes(new Date(), stamp)
   const checkStamp = tools.limitDmuse(config)
   config = checkStamp[0]
   proceed = checkStamp[1]
