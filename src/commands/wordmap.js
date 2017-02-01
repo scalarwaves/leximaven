@@ -3,6 +3,7 @@ const tools = require('../tools')
 
 const _ = require('lodash')
 const child = require('child_process')
+const fs = require('fs')
 const noon = require('noon')
 
 const CFILE = `${process.env.HOME}/.leximaven.noon`
