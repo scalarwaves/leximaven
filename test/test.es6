@@ -1,4 +1,4 @@
-/* eslint max-len: 0, no-undef: 0, no-useless-escape: 0, handle-callback-err: 0, no-empty-label:0, no-unused-expressions: 0 */
+/* eslint max-len: 0, no-undef: 0, no-useless-escape: 0, handle-callback-err: 0, no-empty-label:0, no-unused-expressions: 0, no-unused-vars: 0 */
 const themes = require('../src/themes')
 const tools = require('../src/tools')
 
