@@ -3,20 +3,10 @@ engines:
     enabled: true
     channel: "eslint-2"
     config:
-      config: test/.eslintrc
-    checks:
-      max-statements:
-        enabled: false
-      no-empty-label:
-        enabled: false
-      comma-dangle:
-        enabled: false
-      no-unused-expressions:
-        enabled: false
+      config: .eslintrc
 ratings:
   paths:
     - "src/**/*"
     - "**.js"
 exclude_paths:
   - "test/**/*"
-  - "gulpfile.js"
