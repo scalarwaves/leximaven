@@ -5,7 +5,7 @@ node_js:
 - '5'
 before_script:
 - node bin/leximaven.js config init
-- npm run cover
+- npm run instrument
 after_success:
-- npm run lcov
+- npm run report
 - npm run climate

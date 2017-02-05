@@ -14,3 +14,5 @@ TODO.md
 jsdoc.conf.json
 json
 .nvmrc
+.syncthing*
+lcov.info
