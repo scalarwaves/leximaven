@@ -1155,7 +1155,7 @@ describe('config commands', () => {
             source: 'http://www.onelook.com',
             url: 'http://onelook.com/?xml=1&w=ubiquity',
             definition: 'noun: the state of being everywhere at once (or seeming to be everywhere at once)',
-            phrase: 'ubiquity records',
+            phrase: 'ubiquity records,ubiquity theatre company',
             sim: 'omnipresence,ubiquitousness'
           }
           const json = fs.readJsonSync(`${process.cwd()}/test/output/onelook.json`)
