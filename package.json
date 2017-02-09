@@ -59,7 +59,7 @@
   "devDependencies": {
     "babel-cli": "^6.22.2",
     "babel-core": "^6.22.1",
-    "babel-plugin-istanbul": "^3.1.2",
+    "babel-plugin-istanbul": "^4.0.0",
     "babel-plugin-lodash": "^3.2.11",
     "babel-preset-latest": "^6.22.0",
     "babel-register": "^6.22.0",
@@ -72,7 +72,7 @@
     "nyc": "^10.1.2",
     "rimraf": "^2.5.4",
     "sinon": "^1.17.7",
-    "standard": "^8.6.0",
+    "standard": "^9.0.0-beta.0",
     "standard-version": "^4.0.0"
   },
   "repository": {
