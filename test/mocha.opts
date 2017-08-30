@@ -1,5 +1,0 @@
--t 500000
--R spec
--u bdd
--b
---use_strict

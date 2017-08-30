@@ -3,8 +3,7 @@
   "libs": ["chai"],
   "loadEagerly": [
     "src/**/*.js",
-    "test/*.es6",
-    "gulpfile.js"
+    "test/*.es6"
   ],
   "dontLoad": ["node_modules/**/*"],
   "plugins": {

@@ -1,10 +1,7 @@
 language: node_js
 node_js:
+- '8'
 - '7'
 - '6'
 before_script:
 - node bin/leximaven.js config init
-- npm run instrument
-after_success:
-- npm run report
-- npm run climate

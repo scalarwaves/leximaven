@@ -3,6 +3,7 @@ logs
 coverage
 .nyc_output
 node_modules
+package-lock.json
 
 # Project specific
 .sync
@@ -16,3 +17,8 @@ json
 .nvmrc
 .syncthing*
 lcov.info
+.babelrc
+.eslintignore
+.eslintrc
+.languagebabel
+.tern-project
