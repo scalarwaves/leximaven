@@ -16,27 +16,11 @@
   "scripts": {
     "bin": "cross-env BABEL_ENV=dev babel src -d bin",
     "bump": "git push origin master --tags && npm publish",
-    "clean": "rimraf bin coverage .nyc_output test/output",
-    "climate": "codeclimate-test-reporter < lcov.info",
     "instrument": "cross-env BABEL_ENV=test babel src -d bin",
     "lint": "standard --fix src",
-    "pretest": "cross-env BABEL_ENV=test babel test/test.es6 -o test/test.js",
     "release": "standard-version",
-    "report": "nyc report -r text-lcov > lcov.info && nyc report -r html",
-    "reset": "npm run clean && npm run bin",
-    "test": "cross-env NODE_ENV=test nyc _mocha test/test.js",
+    "test": "echo 'No tests.'",
     "watch": "babel -w src -d bin"
-  },
-  "nyc": {
-    "cache": true,
-    "include": [
-      "src/**/*"
-    ],
-    "require": [
-      "babel-register"
-    ],
-    "sourceMap": false,
-    "instrument": false
   },
   "dependencies": {
     "chalk": "^2.1.0",

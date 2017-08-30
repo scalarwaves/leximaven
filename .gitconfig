@@ -1,0 +1,5 @@
+# drawnepicenter
+Host drawnepicenter.github.com
+    HostName github.com
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/de_rsa
