@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/drawnepicenter/leximaven/compare/v2.3.4...v3.0.0) (2017-08-30)
+
+
+### Features
+
+* **project:** BREAKING_CHANGES:remove tests ([0113744](https://github.com/drawnepicenter/leximaven/commit/0113744))
+
+
+### BREAKING CHANGES
+
+* **project:** remove tests
+
+
+
 <a name="2.3.4"></a>
 ## [2.3.4](https://github.com/drawnepicenter/leximaven/compare/v2.3.3...v2.3.4) (2017-02-05)
 
