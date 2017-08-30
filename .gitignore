@@ -21,6 +21,7 @@ coverage
 .nyc_output
 node_modules
 package-lock.json
+.gitconfig
 
 # Project specific
 .sync

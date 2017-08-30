@@ -11,10 +11,9 @@ leximaven is a powerful tool for searching word-related APIs from the command li
 Looking for testers on OSX. Developed and tested on Linux. Works on Windows, see [Windows](#windows-installation) below.
 Supported Node.js versions:
 
+- 8.x
 - 7.x
 - 6.x
-- 5.x
-- 4.x - Works but it's really slow
 
 ## Install
 
@@ -72,8 +71,6 @@ Here are some examples:
 
     // Get a wordmap for 'ubiquity'
     leximaven wordmap ubiquity
-
-See the [tests](https://github.com/drawnepicenter/leximaven/blob/master/test/test.es6) for more.
 
 ## Resources
 
