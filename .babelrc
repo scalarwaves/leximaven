@@ -1,5 +1,5 @@
 {
-  "presets": ["latest"],
+  "presets": ["env"],
   "compact": true,
   "env": {
     "dev": {
