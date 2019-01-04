@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/drawnepicenter/leximaven/compare/v3.0.0...v4.0.0) (2019-01-04)
+
+
+### Features
+
+* **project:** resurrect ([793e1e4](https://github.com/drawnepicenter/leximaven/commit/793e1e4)), closes [#25](https://github.com/drawnepicenter/leximaven/issues/25) [#26](https://github.com/drawnepicenter/leximaven/issues/26)
+
+
+### BREAKING CHANGES
+
+* **project:** Right now anagrams are disabled. I'm effectively removing this feature for now
+
+
+
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/drawnepicenter/leximaven/compare/v2.3.4...v3.0.0) (2017-08-30)
 
