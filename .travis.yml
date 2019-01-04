@@ -4,5 +4,6 @@ node_js:
 - '10'
 - '8'
 before_script:
-- node bin/leximaven.js config init
-- ./test.sh
+- npm i -g leximaven
+- leximaven config init
+script: ./test.sh
