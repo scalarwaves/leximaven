@@ -4,7 +4,7 @@
 
 ## Introduction
 
-leximaven is a powerful tool for searching word-related APIs from the command line. It can fetch acronyms, anagrams, bi-gram phrases, definitions, etymologies, example uses, hyphenation, offensive word flags, portmanteaus, pronunciations (Arpabet & IPA), related words, rhymes, slang, syllable stress and count, and more. See the [wiki](https://github.com/drawnepicenter/leximaven/wiki) for more info.
+leximaven is a powerful tool for searching word-related APIs from the command line. It can fetch acronyms, bi-gram phrases, definitions, etymologies, example uses, hyphenation, offensive word flags, portmanteaus, pronunciations (Arpabet & IPA), related words, rhymes, slang, syllable stress and count, and more. See the [wiki](https://github.com/drawnepicenter/leximaven/wiki) for more info.
 
 ## Platform
 
@@ -94,11 +94,11 @@ See [CONTRIBUTING](https://github.com/drawnepicenter/leximaven/blob/master/CONTR
 
 ## License
 
-MIT :copyright: 2017 Andrew Prentice
+MIT :copyright: 2017-2019 Andrew Prentice
 
 ## Powered by
 
-Acronym Server, Datamuse, Onelook, Rhymebrain, Urban Dictionary, Wordnik, and Wordsmith
+Acronym Server, Datamuse, Onelook, Rhymebrain, Urban Dictionary, and Wordnik
 
 ## Extras
 
