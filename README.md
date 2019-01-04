@@ -1,19 +1,22 @@
 # leximaven
 
-[![Build Status](https://travis-ci.org/drawnepicenter/leximaven.svg?branch=master)](https://travis-ci.org/drawnepicenter/leximaven) [![Dependency Status](https://gemnasium.com/badges/github.com/drawnepicenter/leximaven.svg)](https://gemnasium.com/github.com/drawnepicenter/leximaven) [![npm version](https://badge.fury.io/js/leximaven.svg)](https://badge.fury.io/js/leximaven) [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+[![Build Status](https://travis-ci.org/drawnepicenter/leximaven.svg?branch=master)](https://travis-ci.org/drawnepicenter/leximaven) [![npm version](https://badge.fury.io/js/leximaven.svg)](https://badge.fury.io/js/leximaven) [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 ## Introduction
 
-leximaven is a powerful tool for searching word-related APIs from the command line. It can fetch acronyms, anagrams, bi-gram phrases, definitions, etymologies, example uses, hyphenation, offensive word flags, portmanteaus, pronunciations (Arpabet & IPA), related words, rhymes, slang, syllable stress and count, and more. See the [wiki](https://github.com/drawnepicenter/leximaven/wiki) for more info.
+leximaven is a powerful tool for searching word-related APIs from the command line. It can fetch acronyms, bi-gram phrases, definitions, etymologies, example uses, hyphenation, offensive word flags, portmanteaus, pronunciations (Arpabet & IPA), related words, rhymes, slang, syllable stress and count, and more. See the [wiki](https://github.com/drawnepicenter/leximaven/wiki) for more info.
 
 ## Platform
 
-Looking for testers on OSX. Developed and tested on Linux. Works on Windows, see [Windows](#windows-installation) below.
+Looking for testers on other platforms. Developed and tested on Linux. Works on Windows, see [Windows](#windows-installation) below.
+
 Supported Node.js versions:
 
+- Typescript
+- 12.x
+- 11.x
+- 10.x
 - 8.x
-- 7.x
-- 6.x
 
 ## Install
 
@@ -91,11 +94,11 @@ See [CONTRIBUTING](https://github.com/drawnepicenter/leximaven/blob/master/CONTR
 
 ## License
 
-MIT :copyright: 2017 Andrew Prentice
+MIT :copyright: 2017-2019 Andrew Prentice
 
 ## Powered by
 
-Acronym Server, Datamuse, Onelook, Rhymebrain, Urban Dictionary, Wordnik, and Wordsmith
+Acronym Server, Datamuse, Onelook, Rhymebrain, Urban Dictionary, and Wordnik
 
 ## Extras
 
