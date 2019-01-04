@@ -1,7 +1,8 @@
 language: node_js
 node_js:
+- '11'
+- '10'
 - '8'
-- '7'
-- '6'
 before_script:
 - node bin/leximaven.js config init
+- ./test.sh

@@ -63,5 +63,5 @@ exports.handler = (argv) => {
   child.spawnSync('node', [bin, 'dmuse', `-m${l}`, `ml=${word}`], { stdio: 'inherit' })
   child.spawnSync('node', [bin, 'onelook', `${word}`], { stdio: 'inherit' })
   child.spawnSync('node', [bin, 'urban', `-l${l}`, `${word}`], { stdio: 'inherit' })
-  child.spawnSync('node', [bin, 'anagram', `-t${l}`, `${word}`], { stdio: 'inherit' })
+  // child.spawnSync('node', [bin, 'anagram', `-t${l}`, `${word}`], { stdio: 'inherit' })
 }
