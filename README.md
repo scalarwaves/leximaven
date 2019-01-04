@@ -1,6 +1,6 @@
 # leximaven
 
-[![Build Status](https://travis-ci.org/drawnepicenter/leximaven.svg?branch=master)](https://travis-ci.org/drawnepicenter/leximaven) [![Dependency Status](https://gemnasium.com/badges/github.com/drawnepicenter/leximaven.svg)](https://gemnasium.com/github.com/drawnepicenter/leximaven) [![npm version](https://badge.fury.io/js/leximaven.svg)](https://badge.fury.io/js/leximaven) [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+[![Build Status](https://travis-ci.org/drawnepicenter/leximaven.svg?branch=master)](https://travis-ci.org/drawnepicenter/leximaven) [![npm version](https://badge.fury.io/js/leximaven.svg)](https://badge.fury.io/js/leximaven) [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 ## Introduction
 
@@ -8,12 +8,15 @@ leximaven is a powerful tool for searching word-related APIs from the command li
 
 ## Platform
 
-Looking for testers on OSX. Developed and tested on Linux. Works on Windows, see [Windows](#windows-installation) below.
+Looking for testers on other platforms. Developed and tested on Linux. Works on Windows, see [Windows](#windows-installation) below.
+
 Supported Node.js versions:
 
+- Typescript
+- 12.x
+- 11.x
+- 10.x
 - 8.x
-- 7.x
-- 6.x
 
 ## Install
 
