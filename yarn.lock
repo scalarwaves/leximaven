@@ -3946,7 +3946,7 @@ sax@>=0.6.0, sax@^1.1.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
-scrape-it@^5.1.4:
+scrape-it@5.1.4:
   version "5.1.4"
   resolved "https://registry.yarnpkg.com/scrape-it/-/scrape-it-5.1.4.tgz#380cf245e69cfb15094d2321ee67e80ee28cc7de"
   integrity sha512-vLXSl8xjMs/DZ55IA8Mazk8qY/AYVYhbLIz8WIfRrw7d9hL+dOt+Av/4QRVyL3CVWDb8Bhqx0Cj/64/FanPMJg==
@@ -4151,8 +4151,9 @@ string_decoder@~1.0.3:
     safe-buffer "~5.1.0"
 
 stringstream@~0.0.4:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/stringstream/-/stringstream-0.0.5.tgz#4e484cd4de5a0bbbee18e46307710a8a81621878"
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/stringstream/-/stringstream-0.0.6.tgz#7880225b0d4ad10e30927d167a1d6f2fd3b33a72"
+  integrity sha512-87GEBAkegbBcweToUrdzf3eLhWNg06FJTebl4BVJz/JgWy8CvEr9dRtX5qWphiynMSQlxxi+QqN0z5T32SLlhA==
 
 strip-ansi@^3.0.0, strip-ansi@^3.0.1:
   version "3.0.1"
