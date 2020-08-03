@@ -40,3 +40,6 @@ lcov.info
 .eslintrc
 .languagebabel
 .tern-project
+*.code-workspace
+package-lock.json
+yarn.lock
