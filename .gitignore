@@ -43,3 +43,4 @@ lcov.info
 *.code-workspace
 package-lock.json
 yarn.lock
+ptags.fish
