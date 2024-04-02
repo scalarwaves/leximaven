@@ -40,6 +40,5 @@ lcov.info
 .languagebabel
 .tern-project
 *.code-workspace
-package-lock.json
 yarn.lock
 ptags.fish
